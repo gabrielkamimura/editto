@@ -68,4 +68,7 @@ function botao(icone, tpo, opcoes) {
         };
     };
     
+    this.setAction = function(acao) {
+    };
+    
 }

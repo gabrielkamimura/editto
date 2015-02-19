@@ -1,7 +1,7 @@
 function documentoEditor( textid ) {
     
     this.textarea = document.getElementById(textid);
-    var editBox = $("<iframe class='editorDocumento' id='" + 't' + textid + "'></iframe>");
+    var editBox = $("<iframe contenteditable='true' class='editorDocumento' id='" + 't' + textid + "'></iframe>");
     editBox.insertAfter($(this.textarea));
     this.textarea.style.display = "none";
     
@@ -12,12 +12,22 @@ function documentoEditor( textid ) {
      * @returns {Node.frames.document|document.frames.document|HTMLDocument.frames.document|Document.frames.document|Element.contentDocument}
      */
     this.getIframeDocument = function(aID) {
+        if (document.getElementById(aID).contentWindow) {
+            return document.getElementById(aID).contentWindow.document;
+
+        } else {
       // se contentDocument existe
-      if (document.getElementById(aID).contentDocument){
-        return document.getElementById(aID).contentDocument;
-      } else {
-        // IE
-        return document.frames[aID].document;
+          if (document.getElementById(aID).contentDocument) {
+            return document.getElementById(aID).contentDocument;
+          } else {
+            if (document.frames[aID].document) {
+                // IE
+                return document.frames[aID].document;
+            }
+            else {
+                return null;
+            };
+          } 
       }
     };
     
@@ -64,7 +74,7 @@ function documentoEditor( textid ) {
     this.getSelectedText = function() {
         if (this.frame.getSelection) {
             txt = this.frame.getSelection();
-        } else if (this.frame.getSelection) {
+        } else if (this.frame.getSelection()) {
             txt = this.frame.getSelection();
         } else if (this.frame.selection) {
             txt = this.frame.selection.createRange().text;
@@ -72,13 +82,24 @@ function documentoEditor( textid ) {
         return txt;  
     };
     
-    this.frame = this.getIframeDocument('t' + textid);
-    console.log(this.frame);
-    this.getValue();
-    this.frame.designMode = 'on';
-    console.log(this.frame);
     
+    
+
+    this.permitirEdicao = function() {
+        this.frame.focus;
+        this.frame.designMode = 'On';
+        console.log(this.frame.designMode);
+        this.frame.focus    ;    
+    };
+        
     var $this = this;
+
+    $( '#t' + textid ).ready(function() {
+        $this.frame = $this.getIframeDocument('t' + textid);
+
+        $this.getValue();
+    });
+
     $(this.getIframe('t' + textid)).on('keydown keypress select focus change blur click submit', function() {
         $this.setValue();
     });
