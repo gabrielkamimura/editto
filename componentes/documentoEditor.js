@@ -1,7 +1,22 @@
 function documentoEditor( textid ) {
     
     this.textarea = document.getElementById(textid);
+
+ editBox = document.createElement('iframe');
+  //editBox.className = 'editorDocumento';
+  //editBox.id = 't' + textid;
+
+  //  var teste = document.getElementById('teste');
+  // teste.insertBefore( editBox, teste.childNodes[0] );
+  //editBox.contentDocument.designMode = 'on';
     var editBox = $("<iframe contenteditable='true' class='editorDocumento' id='" + 't' + textid + "'></iframe>");
+
+    var $this = this;
+    $('#btn-ligar').click(function() {
+        $this.frame = $this.getIframeDocument('t' + textid);
+        $this.permitirEdicao();
+    });
+
     editBox.insertAfter($(this.textarea));
     this.textarea.style.display = "none";
     
@@ -65,7 +80,9 @@ function documentoEditor( textid ) {
         this.textarea.value = this.frame.body.innerHTML;
     };
     
-    
+
+    this.frame = this.getIframeDocument('t' + textid);
+
     /**
      * 
      * @description Função que retorna a seleção 
@@ -86,10 +103,9 @@ function documentoEditor( textid ) {
     
 
     this.permitirEdicao = function() {
-        this.frame.focus;
         this.frame.designMode = 'On';
-        console.log(this.frame.designMode);
-        this.frame.focus    ;    
+        this.getIframe('t' + textid).focus();
+        this.getValue
     };
         
     var $this = this;

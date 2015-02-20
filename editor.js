@@ -108,9 +108,6 @@ function editor(textid) {
                                     btnAtivacao[i].botao.verificaAtivacao(documento, btnAtivacao[i].acao);
                                 };
                             });
-
-                            if (document.getElementById('ttextExample').contentDocument.designMode != 'on')_
-                                document.getElementById('ttextExample').contentDocument.designMode = 'on';
                         });
                     });
                 });
