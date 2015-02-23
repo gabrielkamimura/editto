@@ -25,21 +25,21 @@ function editor(textid) {
     
     var $this = this;
     
-    var btnNegrito = new botao("bold");
+    var btnNegrito = new botao("bold", "Negrito");
     btnNegrito.getButton().onclick = function() {
         $this.adicionarBotaoVerificacao(btnNegrito, 'bold');
         documento.formatar('bold');
         verificarBotoes();
     };
 
-    var btnItalico = new botao("italic");
+    var btnItalico = new botao("italic", "Itálico");
     btnAtivacao.push({botao: btnItalico, acao: 'italic'});
     btnItalico.getButton().onclick = function() {
         documento.formatar('italic');
         verificarBotoes();
     };
 
-    var btnUnderline = new botao('underline'); 
+    var btnUnderline = new botao('underline', "Sublinhado"); 
     $this.adicionarBotaoVerificacao(btnUnderline, 'underline');
     btnUnderline.getButton().onclick = function() {
         documento.formatar('underline');
@@ -51,20 +51,20 @@ function editor(textid) {
         {texto: 'Azul', valor: "#2196F3"}, 
         {texto: 'Vermelho', valor: "#F44336"}
     ];
-    var btnCor = new botao("Fonte", 2, cores);
+    var btnCor = new botao("Fonte",'', 2, cores);
     $this.adicionarBotaoVerificacao(btnCor, 'forecolor');
     btnCor.getButton().onclick = function() {   
         documento.formatar('forecolor', btnCor.getValue());
     };
 
     var fonts = [{texto: 'Arial', valor: "arial"}, {texto: 'Courier', valor: "courier"}];
-    var btnFont = new botao("Fonte", 2, fonts);
+    var btnFont = new botao("Fonte",'', 2, fonts);
     $this.adicionarBotaoVerificacao(btnFont, 'fontname');
     btnFont.getButton().onclick = function() {
         documento.formatar('fontname', btnFont.getValue());
     };
 
-    var btnEsquerda = new botao('align-left');
+    var btnEsquerda = new botao('align-left', "Alinhar à Esquerda");
     $this.adicionarBotaoVerificacao(btnEsquerda, 'justifyleft');
     btnEsquerda.getButton().onclick = function() {
         documento.formatar('justifyleft');
@@ -72,35 +72,35 @@ function editor(textid) {
     };
 
 
-    var btnCentraliza = new botao('align-center');
+    var btnCentraliza = new botao('align-center', "Centralizar");
     $this.adicionarBotaoVerificacao(btnCentraliza, 'justifycenter');
     btnCentraliza.getButton().onclick = function() {
         documento.formatar('justifycenter');
         verificarBotoes();
     };
 
-    var btnDireita = new botao('align-right');
+    var btnDireita = new botao('align-right', "Alinhar à direita");
     $this.adicionarBotaoVerificacao(btnDireita, 'justifyright');
     btnDireita.getButton().onclick = function() {
         documento.formatar('justifyright');
         verificarBotoes();
     };
 
-    var btnNum = new botao('list-ol');
+    var btnNum = new botao('list-ol', "Lista Numérica");
     $this.adicionarBotaoVerificacao(btnNum, 'insertorderedlist');
     btnNum.getButton().onclick = function() {
       documento.formatar('insertorderedlist');
       verificarBotoes();
     };
 
-    var btnLst = new botao('list-ul');
+    var btnLst = new botao('list-ul', "Lista");
     $this.adicionarBotaoVerificacao(btnLst, 'insertunorderedlist');
     btnLst.getButton().onclick = function() {
       documento.formatar('insertunorderedlist');
       verificarBotoes();
     };
 
-    var btnLnk = new botao('link');
+    var btnLnk = new botao('link', "link");
     btnLnk.getButton().onclick = function() {
         var sLnk = prompt('Digite a URL do link: ', 'http:\/\/');
         if (sLnk && sLnk != '' && sLnk != 'http://') {
@@ -108,10 +108,15 @@ function editor(textid) {
         };
     };
 
-    var btnUlk = new botao('unlink');
+    var btnUlk = new botao('unlink', "Remover Link");
     btnUlk.getButton().onclick = function() {
       documento.formatar('unlink');
     }
+
+    var btnLmp = new botao('eraser', "Limpar Formatação");
+    btnLmp.getButton().onclick = function() {
+      documento.formatar('removeFormat');
+    };
 
    
 
@@ -140,6 +145,7 @@ function editor(textid) {
    var buttonGroup5 = new grupoBotoes();
    buttonGroup5.adicionarBotao(btnLnk);
    buttonGroup5.adicionarBotao(btnUlk);
+   buttonGroup5.adicionarBotao(btnLmp);
 
    botoes.adicionarGrupo(buttonGroup1.getGroup());
    botoes.adicionarGrupo(buttonGroup2.getGroup());

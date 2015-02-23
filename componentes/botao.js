@@ -3,11 +3,13 @@
  * @param {int} tpo Tipo do botão. Se for um botão, 1 (padrão), caso seja um select, 2
  * @param {array} opcoes [{ texto: 'azul', valor: #2196F3 }] Apenas para select
  * */
-function botao(icon, tpo, opcoes) {
+function botao(icon, title, tpo, opcoes) {
     
     var tipo = tpo || 1;
     
     var icone = icon || '';
+
+    var titulo = title;
 
     if ( tipo === 2 ) {
         var btn = document.createElement("select");
@@ -29,6 +31,9 @@ function botao(icon, tpo, opcoes) {
             icn = document.createElement("i");
     
         btn.type = "button";
+        if (titulo) {
+            btn.title = titulo;
+        };
         btn.className = "editorButton";
         icn.className = "fa fa-" + icone;
         
