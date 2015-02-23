@@ -28,12 +28,6 @@ function acao(documento) {
         documento.verificaFormatacao(formato);
     };
     
-    this.definirAcao = function() {
-        
-    };
-    
-    this.getAcao = function() {
-        
-    };
+    this.btn = new botao();
     
 }

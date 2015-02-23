@@ -1,12 +1,14 @@
 /**
- * @param {string} icone Ícone do Font-awesome a ser adicionado ao botão. Caso seja um texto de um option do select, passar
+ * @param {string} icn Ícone do Font-awesome a ser adicionado ao botão. Caso seja um texto de um option do select, passar
  * @param {int} tpo Tipo do botão. Se for um botão, 1 (padrão), caso seja um select, 2
  * @param {array} opcoes [{ texto: 'azul', valor: #2196F3 }] Apenas para select
  * */
-function botao(icone, tpo, opcoes) {
+function botao(icon, tpo, opcoes) {
     
     var tipo = tpo || 1;
     
+    var icone = icon || '';
+
     if ( tipo === 2 ) {
         var btn = document.createElement("select");
         btn.className = "editorSelect";
@@ -69,6 +71,10 @@ function botao(icone, tpo, opcoes) {
     };
     
     this.setAction = function(acao) {
+    };
+
+    this.definirIcone = function(ricon) {
+        icn.className = "fa fa-" + ricon; 
     };
     
 }

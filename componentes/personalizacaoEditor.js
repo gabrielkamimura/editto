@@ -1,13 +1,9 @@
-function personalizacaoEditor( documento, botoes ) {
+function personalizacaoEditor( documento ) {
     
-    var documento = documento;
-    
-    
-    this.elementos = [];
-    
-    this.definirAcao = function(acao) {
-        
+    this.ac = new acao( documento );
+
+     this.definirIcone = function(icone) {
+        this.ac.btn.definirIcone(icone);
     };
-    
-    
 }
+
