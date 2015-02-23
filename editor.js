@@ -86,6 +86,36 @@ function editor(textid) {
         verificarBotoes();
     };
 
+    var btnNum = new botao('list-ol');
+    $this.adicionarBotaoVerificacao(btnNum, 'insertorderedlist');
+    btnNum.getButton().onclick = function() {
+      documento.formatar('insertorderedlist');
+      verificarBotoes();
+    };
+
+    var btnLst = new botao('list-ul');
+    $this.adicionarBotaoVerificacao(btnLst, 'insertunorderedlist');
+    btnLst.getButton().onclick = function() {
+      documento.formatar('insertunorderedlist');
+      verificarBotoes();
+    };
+
+    var btnLnk = new botao('link');
+    btnLnk.getButton().onclick = function() {
+        var sLnk = prompt('Digite a URL do link: ', 'http:\/\/');
+        if (sLnk && sLnk != '' && sLnk != 'http://') {
+            documento.formatar('createlink', sLnk);
+        };
+    };
+
+    var btnUlk = new botao('unlink');
+    btnUlk.getButton().onclick = function() {
+      documento.formatar('unlink');
+    }
+
+   
+
+
  /**
   * Grupos dos botões. Forma como eles são organizados
   */  
@@ -103,9 +133,19 @@ function editor(textid) {
    buttonGroup3.adicionarBotao(btnCentraliza);
    buttonGroup3.adicionarBotao(btnDireita);
 
+   var buttonGroup4 = new grupoBotoes();
+   buttonGroup4.adicionarBotao(btnNum);
+   buttonGroup4.adicionarBotao(btnLst);
+
+   var buttonGroup5 = new grupoBotoes();
+   buttonGroup5.adicionarBotao(btnLnk);
+   buttonGroup5.adicionarBotao(btnUlk);
+
    botoes.adicionarGrupo(buttonGroup1.getGroup());
    botoes.adicionarGrupo(buttonGroup2.getGroup());
    botoes.adicionarGrupo(buttonGroup3.getGroup());
+   botoes.adicionarGrupo(buttonGroup4.getGroup());
+   botoes.adicionarGrupo(buttonGroup5.getGroup());
 
 
    /*
