@@ -1,0 +1,7 @@
+{
+	"name": "eDitto",
+	"dependencies" : {
+		"font-awesome": "*",
+		"jquery": "*"
+	}
+}

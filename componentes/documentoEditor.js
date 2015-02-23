@@ -105,7 +105,7 @@ function documentoEditor( textid ) {
     this.permitirEdicao = function() {
         this.frame.designMode = 'On';
         this.getIframe('t' + textid).focus();
-        this.getValue
+        this.getValue();
     };
         
     var $this = this;

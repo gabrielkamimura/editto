@@ -103,7 +103,7 @@ function editor(textid) {
                            botoes.adicionarGrupo(buttonGroup3.getGroup());
 
 
-                            $(documento.frame).on('keypress focus change blur click select', function() {
+                            $(documento.frame).on('keypress focus change click select', function() {
                                 for (i in btnAtivacao) {
                                     btnAtivacao[i].botao.verificaAtivacao(documento, btnAtivacao[i].acao);
                                 };
