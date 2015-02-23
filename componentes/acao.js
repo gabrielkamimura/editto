@@ -15,7 +15,7 @@ function acao(documento) {
         */
         $(documento.getSelectedText()).load( template, function(response) {
             console.log(response);
-            var texto = response;
+            var texto = response + '<br/>'; //A quebra de linha é para evitar que o documento após a personalização fique inalterável
             documento.inserirElemento(texto);
         } );
     };
