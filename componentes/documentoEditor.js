@@ -1,14 +1,6 @@
 function documentoEditor( textid ) {
     
     this.textarea = document.getElementById(textid);
-
- editBox = document.createElement('iframe');
-  //editBox.className = 'editorDocumento';
-  //editBox.id = 't' + textid;
-
-  //  var teste = document.getElementById('teste');
-  // teste.insertBefore( editBox, teste.childNodes[0] );
-  //editBox.contentDocument.designMode = 'on';
     var editBox = $("<iframe contenteditable='true' class='editorDocumento' id='" + 't' + textid + "'></iframe>");
 
     var $this = this;

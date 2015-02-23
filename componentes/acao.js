@@ -6,13 +6,7 @@ function acao(documento) {
      * @returns Dados da requisição
      */
     this.carregar = function( template ) {
-    //    $(this.frame).load( template );
-    /*
-        $.load(template, function(response) {
-            return response;
-        });
-        return null;
-        */
+        
         $(documento.getSelectedText()).load( template, function(response) {
             console.log(response);
             var texto = response + '<br/>'; //A quebra de linha é para evitar que o documento após a personalização fique inalterável

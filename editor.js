@@ -46,7 +46,11 @@ function editor(textid) {
         verificarBotoes();
     };
 
-    var cores = [{texto: 'Azul', valor: "#2196F3"}, {texto: 'Vermelho', valor: "#F44336"}];
+    var cores = [
+        {texto: 'Preto', valor: "#000"},
+        {texto: 'Azul', valor: "#2196F3"}, 
+        {texto: 'Vermelho', valor: "#F44336"}
+    ];
     var btnCor = new botao("Fonte", 2, cores);
     $this.adicionarBotaoVerificacao(btnCor, 'forecolor');
     btnCor.getButton().onclick = function() {   
