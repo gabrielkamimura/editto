@@ -23,7 +23,7 @@
 
     <script>
         $(document).ready(function(){
-            edicao = new editor("textExample");
+            var edicao = new editor("textExample");
 
 
             /*
@@ -36,7 +36,14 @@
                 personalizacao.ac.formatar('italic');
             };
 
+            var carregamento = new personalizacaoEditor(edicao.obterDocumento());
+            carregamento.definirIcone('recycle');
+            carregamento.ac.btn.getButton().onclick = function() {
+                console.log(carregamento.ac.carregar('modelos/testeExterno.html'));
+            };
+
             edicao.addPersonalizacao(personalizacao);
+            edicao.addPersonalizacao(carregamento);
         });
         
     </script>

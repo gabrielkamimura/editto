@@ -1,6 +1,6 @@
 function editor(textid) {
+
     var documento = new documentoEditor(textid);
-    teste = documento;
     documento.permitirEdicao(); 
     var botoes = new barraBotoes( documento, textid );
     
@@ -29,19 +29,21 @@ function editor(textid) {
     btnNegrito.getButton().onclick = function() {
         $this.adicionarBotaoVerificacao(btnNegrito, 'bold');
         documento.formatar('bold');
-        btnNegrito.verificaAtivacao(documento, 'bold');
+        verificarBotoes();
     };
 
     var btnItalico = new botao("italic");
     btnAtivacao.push({botao: btnItalico, acao: 'italic'});
     btnItalico.getButton().onclick = function() {
         documento.formatar('italic');
+        verificarBotoes();
     };
 
     var btnUnderline = new botao('underline'); 
     $this.adicionarBotaoVerificacao(btnUnderline, 'underline');
     btnUnderline.getButton().onclick = function() {
         documento.formatar('underline');
+        verificarBotoes();
     };
 
     var cores = [{texto: 'Azul', valor: "#2196F3"}, {texto: 'Vermelho', valor: "#F44336"}];
@@ -62,6 +64,7 @@ function editor(textid) {
     $this.adicionarBotaoVerificacao(btnEsquerda, 'justifyleft');
     btnEsquerda.getButton().onclick = function() {
         documento.formatar('justifyleft');
+        verificarBotoes();
     };
 
 
@@ -69,12 +72,14 @@ function editor(textid) {
     $this.adicionarBotaoVerificacao(btnCentraliza, 'justifycenter');
     btnCentraliza.getButton().onclick = function() {
         documento.formatar('justifycenter');
+        verificarBotoes();
     };
 
-    var btnDireita= new botao('align-right');
+    var btnDireita = new botao('align-right');
     $this.adicionarBotaoVerificacao(btnDireita, 'justifyright');
     btnDireita.getButton().onclick = function() {
         documento.formatar('justifyright');
+        verificarBotoes();
     };
 
  /**
@@ -106,7 +111,6 @@ function editor(textid) {
    var btnGrpCst = new grupoBotoes();
 
    this.addPersonalizacao = function(personalizacao) {
-    console.log(personalizacao);
         btnGrpCst.adicionarBotao(personalizacao.ac.btn);
    };
 

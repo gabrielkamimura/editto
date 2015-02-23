@@ -7,10 +7,17 @@ function acao(documento) {
      */
     this.carregar = function( template ) {
     //    $(this.frame).load( template );
+    /*
         $.load(template, function(response) {
             return response;
         });
         return null;
+        */
+        $(documento.getSelectedText()).load( template, function(response) {
+            console.log(response);
+            var texto = response;
+            documento.inserirElemento(texto);
+        } );
     };
     
     /**

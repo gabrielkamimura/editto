@@ -103,9 +103,9 @@ function documentoEditor( textid ) {
     
 
     this.permitirEdicao = function() {
-        this.frame.designMode = 'On';
-        this.getIframe('t' + textid).focus();
         this.getValue();
+        this.frame.designMode = 'On';
+        this.getIframe('t' + textid).focus();        
     };
         
     var $this = this;
@@ -142,8 +142,10 @@ function documentoEditor( textid ) {
      */
     this.inserirElemento = function(elem) {
         if (this.getSelectedText) {
-            var range = this.getSelectedText.getRangeAt(0);
-            range.surroundContents(elem);
+            var a = document.createElement('div');
+            var range = this.getSelectedText().getRangeAt(0);
+            range.surroundContents(a);
+            a.innerHTML = elem;
         };  
     };
     
