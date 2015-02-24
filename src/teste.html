@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Teste de uso de editor</title>
+        <link href="editor.css" rel="stylesheet" type="text/css"/>
+        <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <textarea id="textExample">Este é o conteúdo</textarea>
+        <div id="teste"></div>
+        <button id='btn-ligar'>Acionar Editor</button>
+    </body>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="editto.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            var edicao = new editor("textExample");
+
+
+            /*
+                Definições de personalizações para este editor
+            */
+            var personalizacao = new personalizacaoEditor(edicao.obterDocumento());
+            personalizacao.definirIcone('smile-o');
+            personalizacao.ac.btn.getButton().onclick = function() {
+                personalizacao.ac.formatar('bold');
+                personalizacao.ac.formatar('italic');
+            };
+
+            var carregamento = new personalizacaoEditor(edicao.obterDocumento());
+            carregamento.definirIcone('recycle');
+            carregamento.ac.btn.getButton().onclick = function() {
+                console.log(carregamento.ac.carregar('modelos/testeExterno.html'));
+            };
+
+            edicao.addPersonalizacao(personalizacao);
+            edicao.addPersonalizacao(carregamento);
+        });
+        
+    </script>
+</html>
