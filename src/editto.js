@@ -2,10 +2,16 @@ function acao(documento) {
     
 
     var replaceAll = function(string, token, newtoken) {
-        string = string || "";
+        var string = string || "";
         while (string.indexOf(token) != -1) {
             string = string.replace(token, newtoken);
         }
+        return string;
+    };
+
+    var scapeHTML = function(string) {
+        var string = string || null;
+        string = replaceAll(replaceAll(string, "<", "&lt"), ">", "&gt");
         return string;
     };
      /**
@@ -20,7 +26,7 @@ function acao(documento) {
             if (options) {
                 for ( i in options ) {
                     var aux = "{{ " + options[i].variavel + " }}";
-                    texto = replaceAll(texto, aux, replaceAll(replaceAll(options[i].valor), "<", "&lt"), ">", "&ht");
+                    texto = replaceAll(texto, aux, scapeHTML(options[i].valor));
                 };
             }
             documento.inserirElemento(texto);
@@ -28,7 +34,7 @@ function acao(documento) {
     };
     
     this.inserirTexto = function( texto ) {
-        documento.inserirElemento(texto);
+        documento.inserirElemento(scapeHTML(texto));
     };
 
     /**
@@ -45,7 +51,7 @@ function acao(documento) {
     this.verificaFormatacao = function(formato) {
         documento.verificaFormatacao(formato);
     };
-    
+
     this.btn = new botao();
     
     
