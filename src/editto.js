@@ -2,6 +2,7 @@ function acao(documento) {
     
 
     var replaceAll = function(string, token, newtoken) {
+        string = string || "";
         while (string.indexOf(token) != -1) {
             string = string.replace(token, newtoken);
         }
