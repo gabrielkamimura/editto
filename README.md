@@ -28,7 +28,7 @@ var demo = new editor("meuEditor");
 
 ## Utilizando as personalizações
 
-Há três formas básicas de se adicionar personalizações ao editor: inserção de texto personalizado, inserção de arquivo externo e inserção de arquivo esterno com partes variáveis.
+Há três formas básicas de se adicionar personalizações ao editor: inserção de texto personalizado, inserção de arquivo externo e inserção de arquivo externo com partes variáveis.
 
 ### Personalização com inserção de Textos
 ```javascript
