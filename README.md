@@ -106,7 +106,7 @@ Ao final, as dependências do projeto serão instalados.
 No caso de o editor utilizar o carregamento de arquivos externos, certifique-se de que tenha subido um servidor local na máquina por meio de http-server ou php -S
 
 ### Desenvolvendo
-O projeto para desenvolvimento está estruturado no diretório componentes/src. Lá, há diversos arquivos referentes à manipulação de elementos específicos do editor. Faça as alterações nesses arquivos e ao final das instalações, navegue até o diretório src e execute o comando:
+O projeto para desenvolvimento está estruturado no diretório componentes/src. Lá, há diversos arquivos referentes à manipulação de elementos específicos do editor. Faça as alterações nesses arquivos e ao final das alterações, navegue até o diretório src e execute o comando:
 ```
 gulp scripts
 ```
@@ -117,3 +117,6 @@ gulp minify-js
 ```
 Este comando minificará o arquivo editto.js
 
+## Observação
+
+O projeto está em desenvolvimento, não sendo recomendado ainda o seu uso em aplicações. Ainda não há devidas considerações de compatibilidade, tendo sido testado apenas no Google Chrome versão 38.0.2125.104.
