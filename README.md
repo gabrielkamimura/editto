@@ -47,12 +47,12 @@ Pode ser que sua página necessite de recursos que incluam html na página. Para
 Para testar as personalizações com carregamento externo, lembre-se de subir um servidor local na sua máquina
 ```javascript
 // demo.js
-var carregamento = new personalizacaoEditor(edicao.obterDocumento());
+var carregamento = new personalizacaoEditor(demo.obterDocumento());
 carregamento.definirIcone('recycle');
 carregamento.ac.btn.getButton().onclick = function() {
     carregamento.ac.carregar('modelos/demoExterno.html');
 };
-edicao.addPersonalizacao(carregamento);
+demo.addPersonalizacao(carregamento);
 ```
 ```html
 <!-- demoExterno.html -->
@@ -69,7 +69,7 @@ edicao.addPersonalizacao(carregamento);
 Para testar as personalizações com carregamento externo, lembre-se de subir um servidor local na sua máquina
 ```javascript
 // demo.js
-var tpl = new personalizacaoEditor(edicao.obterDocumento());
+var tpl = new personalizacaoEditor(demo.obterDocumento());
 tpl.definirIcone('random');
 tpl.ac.btn.getButton().onclick = function() {
     var opcoes = [
@@ -79,8 +79,8 @@ tpl.ac.btn.getButton().onclick = function() {
       }
     ];
     tpl.ac.carregar('modelos/demoExterno.html', opcoes);
-    }
-edicao.addPersonalizacao(tpl);
+};
+demo.addPersonalizacao(tpl);
 ```
 ```html
 <!-- demoExterno.html -->
