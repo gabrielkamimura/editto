@@ -275,10 +275,14 @@ function documentoEditor( textid ) {
 
         $this.getValue();
     });
-
+/*
     $(this.getIframe('t' + textid)).on('keydown keypress select focus change blur click submit', function() {
         $this.setValue();
     });
+*/
+    setInterval(function() {
+        $this.setValue();
+    }, 500);
     
     /**
      * 
