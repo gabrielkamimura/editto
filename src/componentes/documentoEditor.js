@@ -4,13 +4,15 @@ function documentoEditor( textid ) {
     var editBox = $("<iframe contenteditable='true' class='editorDocumento' id='" + 't' + textid + "'></iframe>");
 
     var $this = this;
-    $('#btn-ligar').click(function() {
-        $this.frame = $this.getIframeDocument('t' + textid);
-        $this.permitirEdicao();
-    });
+    
 
     editBox.insertAfter($(this.textarea));
     this.textarea.style.display = "none";
+
+    document.getElementById('t' + textid).onload = function() {
+        $this.frame = $this.getIframeDocument('t' + textid);
+        $this.permitirEdicao();
+    };
     
     /**
      * 
