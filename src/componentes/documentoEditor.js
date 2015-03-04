@@ -114,10 +114,24 @@ function documentoEditor( textid ) {
         $this.setValue();
     });
 */
-    setInterval(function() {
-        $this.setValue();
-    }, 500);
     
+    var passaValor = null;
+    
+
+    this.pararPassag = function() {
+        clearInterval( passaValor );
+        passaValor = null;
+    };
+
+    this.iniciarPassagem = function() {
+        passaValor = setInterval(function() {
+            console.log("Passagem iniciada");   
+            $this.setValue();
+        }, 500);
+
+    };
+
+    this.iniciarPassagem();
     /**
      * 
      * @description Função que formata o texto do documento
