@@ -293,7 +293,6 @@ function documentoEditor( textid ) {
 
     this.iniciarPassagem = function() {
         passaValor = setInterval(function() {
-            console.log("Passagem iniciada");   
             $this.setValue();
         }, 500);
 
