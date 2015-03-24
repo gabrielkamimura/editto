@@ -95,7 +95,7 @@ demo.addPersonalizacao(tpl);
 ### Primeiros Passos
 Com o projeto baixado, navegue até o diretório src e digite o comando.
 ```
-npm start
+npm install
 ```
 Com isso, os pacotes necessários serão instalados. Após isso, digite o comando:
 ```
