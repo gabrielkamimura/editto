@@ -9,7 +9,7 @@ function acao(documento) {
         return string;
     };
 
-    var scapeHTML = function(string) {
+    var escapeHTML = function(string) {
         var string = string || null;
         string = replaceAll(replaceAll(string, "<", "&lt"), ">", "&gt");
         return string;
@@ -26,15 +26,31 @@ function acao(documento) {
             if (options) {
                 for ( i in options ) {
                     var aux = "{{ " + options[i].variavel + " }}";
-                    texto = replaceAll(texto, aux, scapeHTML(options[i].valor));
+                    texto = replaceAll(texto, aux, escapeHTML(options[i].valor));
                 };
             }
             documento.inserirElemento(texto);
         } );
     };
     
+    /**
+     * 
+     * @param {string} template Caminho para o template
+     * @returns Dados da requisição
+     */
+    this.inserirComponente = function( txt, options ) {
+            var texto = txt + '<br/>'; //A quebra de linha é para evitar que o documento após a personalização fique inalterável
+            if (options) {
+                for ( i in options ) {
+                    var aux = "{{ " + options[i].variavel + " }}";
+                    texto = replaceAll(texto, aux, escapeHTML(options[i].valor));
+                };
+            }
+            documento.inserirElemento(texto);
+    };
+    
     this.inserirTexto = function( texto ) {
-        documento.inserirElemento(scapeHTML(texto));
+        documento.inserirElemento(escapeHTML(texto));
     };
 
     /**
