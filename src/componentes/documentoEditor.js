@@ -153,7 +153,7 @@ function documentoEditor( textid ) {
      */
     this.inserirElemento = function(elem) {
         if (this.getSelectedText) {
-            var a = document.createElement('div');
+            var a = this.frame.createElement('div');
             var range = this.getSelectedText().getRangeAt(0);
             range.surroundContents(a);
             a.innerHTML = elem;
