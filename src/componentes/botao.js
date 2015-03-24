@@ -42,7 +42,7 @@ function botao(icon, title, tpo, opcoes) {
     
     this.verificaAtivacao = function( documento, formato ) {
         if ( tipo === 2 ) {
-            btn.value = documento.verificaFormatacao(formato);
+             btn.value = documento.verificaFormatacao(formato);
         }
         else {
             if (documento.verificaFormatacao(formato)) {

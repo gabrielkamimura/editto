@@ -52,15 +52,13 @@ function editor(textid) {
         {texto: 'Vermelho', valor: "#F44336"}
     ];
     var btnCor = new botao("Fonte",'', 2, cores);
-    $this.adicionarBotaoVerificacao(btnCor, 'forecolor');
-    btnCor.getButton().onclick = function() {   
+    btnCor.getButton().onchange = function() {   
         documento.formatar('forecolor', btnCor.getValue());
     };
 
     var fonts = [{texto: 'Arial', valor: "arial"}, {texto: 'Courier', valor: "courier"}];
     var btnFont = new botao("Fonte",'', 2, fonts);
-    $this.adicionarBotaoVerificacao(btnFont, 'fontname');
-    btnFont.getButton().onclick = function() {
+    btnFont.getButton().onchange = function() {
         documento.formatar('fontname', btnFont.getValue());
     };
 
