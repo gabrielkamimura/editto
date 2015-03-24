@@ -9,7 +9,6 @@
     <body>
         <textarea id="textExample">Este é o conteúdo</textarea>
         <div id="teste"></div>
-        <button id='btn-ligar'>Acionar Editor</button>
     </body>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="editto.js"></script>
@@ -45,10 +44,23 @@
             ];
                 carregamento.ac.carregar('modelos/testeTemplate.html', opcoes);
             };
+            
+            var img = new personalizacaoEditor(edicao.obterDocumento());
+            img.definirIcone('picture-o');
+            img.ac.btn.getButton().onclick = function() {
+                var opcoes = [
+                    {
+                        variavel: 'imagem.src',
+                        valor: prompt("Insira a url da imagem")
+                    }
+                ];
+                img.ac.carregar('modelos/imageInsert.html', opcoes);
+            };
 
             edicao.addPersonalizacao(personalizacao);
             edicao.addPersonalizacao(carregamento);
             edicao.addPersonalizacao(tpl);
+            edicao.addPersonalizacao(img);
         });
         
     </script>
