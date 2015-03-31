@@ -29,3 +29,9 @@ gulp.task('minify-js', function() {
     .pipe(uglify())
     .pipe(gulp.dest('./'))
 });
+
+gulp.task('theme-compiler', function() {
+  gulp.src('./scss/theme-generator/*-theme.scss')
+    .pipe(sass())
+    .pipe(gulp.dest('./themes'))
+});

@@ -1,0 +1,17 @@
+// Formatação do documento
+
+%formato-documento {
+    height: 30em;
+    width: 95%;
+    padding: 1em 1em;
+}
+
+// O visual é o mesmo utilizado nos efeitos de baixa (box-effects)
+
+// Definição de classe
+
+.editorDocumento {
+    @extend %formato-documento;
+    @extend %boxEffects;
+
+}

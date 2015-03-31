@@ -1,0 +1,21 @@
+//Formatação do grupo de botões
+
+%formato-groupButton {
+    margin-left: 1em;
+    margin-right: 1em;
+    float: left;
+    padding-right: 1em;
+}
+
+// Visual do grupo de botões
+
+%visual-groupButton {
+	border-right: $divider-color solid 1px;
+}
+
+//
+
+.editorGroupButton {
+    @extend %formato-groupButton;
+    @extend %visual-groupButton;
+}

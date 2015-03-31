@@ -1,0 +1,49 @@
+.editorDocumento {
+  border: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
+
+.editorBotoes {
+  width: 100%;
+  margin: 1em 1em;
+  padding-bottom: 2em; }
+
+.editorButton, .editorSelect {
+  border: none;
+  margin: 1px; }
+
+.editorButton {
+  background-color: transparent;
+  width: 2em;
+  height: 2em;
+  border-radius: 50% 50%;
+  color: #323232;
+  cursor: pointer; }
+
+.editorSelect {
+  background: none;
+  border: none;
+  color: #323232; }
+
+.editorButton:active {
+  background-color: #3F51B5;
+  color: #fff; }
+.editorButton.editorButton.ativo {
+  background-color: #3F51B5;
+  color: #fff; }
+.editorButton:hover {
+  color: #aaa; }
+
+.editorDocumento {
+  height: 30em;
+  width: 95%;
+  padding: 1em 1em; }
+
+.editorGroupButton {
+  margin-left: 1em;
+  margin-right: 1em;
+  float: left;
+  padding-right: 1em; }
+
+.editorGroupButton {
+  border-right: #ddd solid 1px; }
+

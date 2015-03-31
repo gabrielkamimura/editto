@@ -1,0 +1,54 @@
+//   Formatação
+
+%formato-itens {
+    
+    border: none;
+    margin: 1px;
+    
+}
+
+// Visual
+
+%visual-botao {
+
+    background-color: transparent;
+    width: 2em;
+    height: 2em;
+    border-radius: 50% 50%;
+    color: $color;
+    cursor: pointer;
+}
+
+%visual-select {
+    background: none;
+    border: none;
+    color: $color;
+}
+
+// Definição de classes
+
+.editorButton {
+
+    @extend %formato-itens;
+    @extend %visual-botao;
+
+    &:active {
+        background-color: $color-background-active;
+        color: $color-active;
+    }
+
+    &.editorButton.ativo {
+        background-color: $color-background-active;
+        color: $color-active;
+    }
+
+    &:hover {
+        color: $color-hover;
+    }
+
+}
+
+.editorSelect {
+    @extend %formato-itens;
+    @extend %visual-select;
+}
