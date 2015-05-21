@@ -48,12 +48,42 @@ function editor(textid) {
 
     var cores = [
         {texto: 'Preto', valor: "#000"},
+        {texto: 'Cinza', valor: "#9e9e9e"},
+        {texto: 'Marrom', valor: "#795548"},
         {texto: 'Azul', valor: "#2196F3"}, 
-        {texto: 'Vermelho', valor: "#F44336"}
+        {texto: 'Vermelho', valor: "#F44336"},
+        {texto: 'Amarelo', valor: "#ffeb3b"},
+        {texto: 'Verde', valor: "#4caf50"},
+        {texto: 'Laranja', valor: "#ff9800"},
+        {texto: 'Roxo', valor: "#9c27b0"},
+        {texto: 'Rosa', valor: "#e91e63"},
+        {texto: 'Ciano', valor: "#00bcd4"},
+        {texto: 'Azul claro', valor: "#03a9f4"},
+        {texto: 'Índigo', valor: "#3f51b5"},
+        {texto: 'Lima', valor: "#cddc39"},
+        {texto: 'Laranja Escuro', valor: "#ff5722"},
+        {texto: 'Rosa Claro', valor: "#F8BBD0"},
+        {texto: 'Teal', valor: "#009688"},
+        {texto: 'Roxo Escuro', valor: "#673AB7"}
     ];
     var btnCor = new botao("Fonte",'', 2, cores);
     btnCor.getButton().onchange = function() {   
         documento.formatar('forecolor', btnCor.getValue());
+    };
+
+
+    var tamanhosTexto = [
+        {texto: '1', valor: '1'},
+        {texto: '2', valor: '2'},
+        {texto: '3', valor: '3'},
+        {texto: '4', valor: '4'},
+        {texto: '5', valor: '5'},
+        {texto: '6', valor: '6'},
+        {texto: '7', valor: '7'}
+    ];
+    var btntamanhofonte = new botao("Fonte",'', 2, tamanhosTexto);
+    btntamanhofonte.getButton().onchange = function() {   
+        documento.formatar('fontSize', btntamanhofonte.getValue());
     };
 
     var fonts = [{texto: 'Arial', valor: "arial"}, {texto: 'Courier', valor: "courier"}];
@@ -125,6 +155,7 @@ function editor(textid) {
    var buttonGroup1 = new grupoBotoes();
    buttonGroup1.adicionarBotao(btnFont);
    buttonGroup1.adicionarBotao(btnCor);
+   buttonGroup1.adicionarBotao(btntamanhofonte);
 
    var buttonGroup2 = new grupoBotoes();
    buttonGroup2.adicionarBotao(btnNegrito);
