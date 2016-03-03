@@ -73,17 +73,17 @@ function acao(documento) {
     
 }
 function barraBotoes(documento, textid) {
-    
+
     var btnAtivacao = []; //Array dos botões a terem as ações monitoradass para a marcação do botão
     var documento = documento;
     var divBtn = $("<div id='b" + textid + "' class='editorBotoes'></div>");
-    
+
     divBtn.insertBefore($(documento.textarea));
-    
+
     var container = document.getElementById('b' + textid);
-    
+
     /**
-     * 
+     *
      * @description Função para adicionar um grupo de botões à barra de botões
      * @param {grupoBotoes} grupo
      * @returns {undefined}
@@ -91,24 +91,56 @@ function barraBotoes(documento, textid) {
     this.adicionarGrupo = function(grupo){
         container.appendChild(grupo);
     };
-    
-/*
- * Botões e ações ao clicá-los
- */    
-   
+
+    /**
+     * Verifica a ativação de todos os botões a serem verificados nesse grupo
+     * @return {undefined}
+     */
+    var verificarBotoes = function() {
+        for (i in btnAtivacao) {
+            btnAtivacao[i].botao.verificaAtivacao(documento, btnAtivacao[i].acao);
+        };
+    };
+
+    /**
+     * Adiciona um botão a grupo a ser verificado para marcar as alterações e marcar botões
+     * @param  {Object} botao
+     * @param  {string} acao
+     * @return {undefined}
+     */
+    this.adicionarBotaoVerificacao = function(botao, acao) {
+        btnAtivacao.push({botao: botao, acao: acao});
+        verificarBotoes();
+    };
+
+    $(documento.frame).on('keypress focus change click select', function() {
+        for (var i in btnAtivacao) {
+            btnAtivacao[i].botao.verificaAtivacao(documento, btnAtivacao[i].acao);
+        };
+    });
+
+
 }
+
 /**
  * @param {string} icn Ícone do Font-awesome a ser adicionado ao botão. Caso seja um texto de um option do select, passar
  * @param {int} tpo Tipo do botão. Se for um botão, 1 (padrão), caso seja um select, 2
  * @param {array} opcoes [{ texto: 'azul', valor: #2196F3 }] Apenas para select
  * */
-function botao(icon, title, tpo, opcoes) {
-    
-    var tipo = tpo || 1;
-    
-    var icone = icon || '';
+function botao(grupoBotoes, icon, title, tpo, opcoes) {
+  console.log(grupoBotoes);
+    var tipo = tpo || 1,
+        icone = icon || '',
+        titulo = title,
+        grupoBotoes = grupoBotoes;
 
-    var titulo = title;
+    /**
+     * Obtém o grupo de botões a que pertence esse botão
+     * @return {Object}
+     */
+    this.obterGrupoBotoes = function() {
+        return grupoBotoes;
+    };
 
     if ( tipo === 2 ) {
         var btn = document.createElement("select");
@@ -128,17 +160,18 @@ function botao(icon, title, tpo, opcoes) {
     else {
         var btn = document.createElement("button"),
             icn = document.createElement("i");
-    
+
         btn.type = "button";
         if (titulo) {
             btn.title = titulo;
         };
         btn.className = "editorButton";
         icn.className = "fa fa-" + icone;
-        
+
         btn.appendChild(icn);
     }
-    
+    grupoBotoes.adicionarBotao(this);
+
     this.verificaAtivacao = function( documento, formato ) {
         if ( tipo === 2 ) {
              btn.value = documento.verificaFormatacao(formato);
@@ -152,19 +185,19 @@ function botao(icon, title, tpo, opcoes) {
             };
         };
     };
-    
-    this.marcarBotao = function( ) {        
+
+    this.marcarBotao = function( ) {
         btn.className = 'editorButton ativo';
     };
-    
+
     this.desmarcarBotao = function() {
         btn.className = 'editorButton';
     };
-    
+
     this.getButton = function() {
         return btn;
     };
-    
+
     this.getValue = function() {
         if ( tipo == 2 ) {
             return this.getButton().value;
@@ -173,22 +206,23 @@ function botao(icon, title, tpo, opcoes) {
             return null;
         };
     };
-    
+
     this.setAction = function(acao) {
     };
 
     this.definirIcone = function(ricon) {
-        icn.className = "fa fa-" + ricon; 
+        icn.className = "fa fa-" + ricon;
     };
-    
+
 }
-function documentoEditor( textid ) {
-    
+
+function documentoEditor( textid, editor ) {
+
     this.textarea = document.getElementById(textid);
     var editBox = $("<iframe contenteditable='true' class='editorDocumento' id='" + 't' + textid + "'></iframe>");
-
+    var editor = editor || null;
     var $this = this;
-    
+
 
     editBox.insertAfter($(this.textarea));
     this.textarea.style.display = "none";
@@ -197,9 +231,17 @@ function documentoEditor( textid ) {
         $this.frame = $this.getIframeDocument('t' + textid);
         $this.permitirEdicao();
     };
-    
+
     /**
-     * 
+     * Obtém o editor deste documento
+     * @return {Object} [O editor relacionado a este documento]
+     */
+    this.obterEditor = function() {
+        return editor;
+    }
+
+    /**
+     *
      * @description Função que retorna o document do iframe desejado
      * @param {int} aID ID do Iframe que se deseja
      * @returns {Node.frames.document|document.frames.document|HTMLDocument.frames.document|Document.frames.document|Element.contentDocument}
@@ -220,12 +262,12 @@ function documentoEditor( textid ) {
             else {
                 return null;
             };
-          } 
+          }
       }
     };
-    
+
     /**
-     * 
+     *
      * @description Função para Obter o Iframe
      * @param {int} aID ID do Iframe que se deseja
      * @returns {Element|HTMLDocument.frames|document.frames|Document.frames|Node.frames}
@@ -239,31 +281,31 @@ function documentoEditor( textid ) {
         return document.frames[aID];
       }
     };
-    
+
     /**
-     * 
+     *
      * @description Função que passa o valor do textarea para o iframe
      * @returns {undefined}
      */
     this.getValue = function() {
         this.frame.body.innerHTML = this.textarea.value;
     };
-    
+
     /**
-     * 
+     *
      * @description Função que passa o valor do iframe para o textarea
      * @returns {undefined}
      */
     this.setValue = function() {
         this.textarea.value = this.frame.body.innerHTML;
     };
-    
+
 
     this.frame = this.getIframeDocument('t' + textid);
 
     /**
-     * 
-     * @description Função que retorna a seleção 
+     *
+     * @description Função que retorna a seleção
      * @returns {txt@pro;frame@call;getSelection|txt@pro;frame@pro;selection@call;createRange@pro;text|txt}
      */
     this.getSelectedText = function() {
@@ -274,18 +316,18 @@ function documentoEditor( textid ) {
         } else if (this.frame.selection) {
             txt = this.frame.selection.createRange().text;
         }
-        return txt;  
+        return txt;
     };
-    
-    
-    
+
+
+
 
     this.permitirEdicao = function() {
         this.getValue();
         this.frame.designMode = 'On';
-        this.getIframe('t' + textid).focus();        
+        this.getIframe('t' + textid).focus();
     };
-        
+
     var $this = this;
 
     $( '#t' + textid ).ready(function() {
@@ -298,9 +340,9 @@ function documentoEditor( textid ) {
         $this.setValue();
     });
 */
-    
+
     var passaValor = null;
-    
+
 
     this.pararPassag = function() {
         clearInterval( passaValor );
@@ -316,7 +358,7 @@ function documentoEditor( textid ) {
 
     this.iniciarPassagem();
     /**
-     * 
+     *
      * @description Função que formata o texto do documento
      * @param {string} formato Formato desejado a ser modificado. P. ex: bold
      * @param {string} opcao Opção para formatação, p. ex: blue
@@ -328,9 +370,9 @@ function documentoEditor( textid ) {
         this.frame.execCommand(formato, false, opcao);
         this.getIframe('t' + textid).focus();
     };
-    
+
     /**
-     * 
+     *
      * @description Função que insere elementos a posição atual
      * @param {type} elem
      * @returns {undefined}
@@ -341,11 +383,11 @@ function documentoEditor( textid ) {
             var range = this.getSelectedText().getRangeAt(0);
             range.surroundContents(a);
             a.innerHTML = elem;
-        };  
+        };
     };
-    
+
     /**
-     * 
+     *
      * @description Função que verifica a formatação do documento de acordo com um formato
      * @param {string} formato
      * @returns {documentoEditor@pro;frame@call;queryCommandState}
@@ -353,37 +395,30 @@ function documentoEditor( textid ) {
     this.verificaFormatacao = function(formato) {
         return (this.frame.queryCommandState(formato));
     };
-    
-    
+
+
 }
 
 function editor(textid) {
 
-    var documento = new documentoEditor(textid);
-    documento.permitirEdicao(); 
+    var documento = new documentoEditor(textid, this);
+    documento.permitirEdicao();
     var botoes = new barraBotoes( documento, textid );
-    
+
     this.executar = new acao(documento);
-    
+
     var btnAtivacao = [];
-    
-    var verificarBotoes = function() {
-        for (i in btnAtivacao) {
-            btnAtivacao[i].botao.verificaAtivacao(documento, btnAtivacao[i].acao);
-        };
-    };                        
-    
+
+    this.obterBarraBotoes = function() {
+        return botoes;
+    };
+
     this.obterDocumento = function() {
         return documento;
     };
 
-    this.adicionarBotaoVerificacao = function(botao, acao) {
-        btnAtivacao.push({botao: botao, acao: acao});
-        verificarBotoes();
-    };
-    
     var $this = this;
-    
+    /*
     var btnNegrito = new botao("bold", "Negrito");
     btnNegrito.getButton().onclick = function() {
         $this.adicionarBotaoVerificacao(btnNegrito, 'bold');
@@ -398,7 +433,7 @@ function editor(textid) {
         verificarBotoes();
     };
 
-    var btnUnderline = new botao('underline', "Sublinhado"); 
+    var btnUnderline = new botao('underline', "Sublinhado");
     $this.adicionarBotaoVerificacao(btnUnderline, 'underline');
     btnUnderline.getButton().onclick = function() {
         documento.formatar('underline');
@@ -409,7 +444,7 @@ function editor(textid) {
         {texto: 'Preto', valor: "#000"},
         {texto: 'Cinza', valor: "#9e9e9e"},
         {texto: 'Marrom', valor: "#795548"},
-        {texto: 'Azul', valor: "#2196F3"}, 
+        {texto: 'Azul', valor: "#2196F3"},
         {texto: 'Vermelho', valor: "#F44336"},
         {texto: 'Amarelo', valor: "#ffeb3b"},
         {texto: 'Verde', valor: "#4caf50"},
@@ -426,7 +461,7 @@ function editor(textid) {
         {texto: 'Roxo Escuro', valor: "#673AB7"}
     ];
     var btnCor = new botao("Fonte",'', 2, cores);
-    btnCor.getButton().onchange = function() {   
+    btnCor.getButton().onchange = function() {
         documento.formatar('forecolor', btnCor.getValue());
     };
 
@@ -441,7 +476,7 @@ function editor(textid) {
         {texto: '7', valor: '7'}
     ];
     var btntamanhofonte = new botao("Fonte",'', 2, tamanhosTexto);
-    btntamanhofonte.getButton().onchange = function() {   
+    btntamanhofonte.getButton().onchange = function() {
         documento.formatar('fontSize', btntamanhofonte.getValue());
     };
 
@@ -505,12 +540,13 @@ function editor(textid) {
       documento.formatar('removeFormat');
     };
 
-   
+
 
 
  /**
   * Grupos dos botões. Forma como eles são organizados
-  */  
+  */
+ /*
    var buttonGroup1 = new grupoBotoes();
    buttonGroup1.adicionarBotao(btnFont);
    buttonGroup1.adicionarBotao(btnCor);
@@ -518,7 +554,7 @@ function editor(textid) {
 
    var buttonGroup2 = new grupoBotoes();
    buttonGroup2.adicionarBotao(btnNegrito);
-   buttonGroup2.adicionarBotao(btnItalico);   
+   buttonGroup2.adicionarBotao(btnItalico);
    buttonGroup2.adicionarBotao(btnUnderline);
 
    var buttonGroup3 = new grupoBotoes();
@@ -553,18 +589,22 @@ function editor(textid) {
    };
 
    botoes.adicionarGrupo(btnGrpCst.getGroup());
-
-    $(documento.frame).on('keypress focus change click select', function() {
-        for (i in btnAtivacao) {
-            btnAtivacao[i].botao.verificaAtivacao(documento, btnAtivacao[i].acao);
-        };
-    });
 }
-function grupoBotoes() {
-    
-    var btngrp = document.createElement('div');
+
+function grupoBotoes(barraBotoes) {
+
+    var btngrp = document.createElement('div'),
+        barraBotoes = barraBotoes;
     btngrp.className = "editorGroupButton";
-    
+    barraBotoes.adicionarGrupo(this);
+    /**
+     * Obtém a barra de botões a que esse grupo atende
+     * @return {[type]} [description]
+     */
+    this.obterBarraBotoes = function() {
+      return barraBotoes;
+    }
+
     /**
      * @description Função para Adicionar Botão a um grupo de botões
      * @param {botao} botao
@@ -573,9 +613,9 @@ function grupoBotoes() {
     this.adicionarBotao = function(botao) {
         btngrp.appendChild(botao.getButton());
     };
-    
+
     /**
-     * 
+     *
      * @description Função para Obter o grupo
      * @returns {grupoBotoes.btngrp|Element}
      */
@@ -583,6 +623,7 @@ function grupoBotoes() {
         return btngrp;
     };
 }
+
 function personalizacaoEditor( documento ) {
     
     this.ac = new acao( documento );

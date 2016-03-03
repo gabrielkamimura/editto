@@ -16,11 +16,35 @@
     <script>
         $(document).ready(function(){
             var edicao = new editor("textExample");
+            var documento = edicao.obterDocumento(),
+                barraBotoes = edicao.obterBarraBotoes();
+
+            var buttonGroupAdicionado = new grupoBotoes(barraBotoes);
+            console.log(barraBotoes);
+
+            var btnNegrito = new botao(buttonGroupAdicionado, "bold", "Negrito");
+            btnNegrito.getButton().onclick = function() {
+                barraBotoes.adicionarBotaoVerificacao(btnNegrito, 'bold');
+                documento.formatar('bold');
+            };
+
+            var btnItalico = new botao("italic", "Itálico");
+            barraBotoes.adicionarBotaoVerificacao(btnItalico, 'italic');
+            btnItalico.getButton().onclick = function() {
+                documento.formatar('italic');
+            };
 
 
+            buttonGroupAdicionado.adicionarBotao(btnNegrito);
+            buttonGroupAdicionado.adicionarBotao(btnItalico);
+
+            barraBotoes.adicionarGrupo(buttonGroupAdicionado.getGroup());
+
+            window.edicao = edicao;
             /*
                 Definições de personalizações para este editor
             */
+           /*
             var personalizacao = new personalizacaoEditor(edicao.obterDocumento());
             personalizacao.definirIcone('smile-o');
             personalizacao.ac.btn.getButton().onclick = function() {
@@ -37,14 +61,14 @@
             tpl.definirIcone('random');
             tpl.ac.btn.getButton().onclick = function() {
                 var opcoes = [
-                { 
+                {
                     variavel: 'titulo',
                     valor: prompt("Insira um título")
                 }
             ];
                 carregamento.ac.carregar('modelos/testeTemplate.html', opcoes);
             };
-            
+
             var img = new personalizacaoEditor(edicao.obterDocumento());
             img.definirIcone('picture-o');
             img.ac.btn.getButton().onclick = function() {
@@ -59,7 +83,7 @@
                     img.ac.carregar('modelos/imageInsert.html', opcoes);
                 }
             };
-            
+
             var stgIns = new personalizacaoEditor();
             stgIns.definirIcone("comment");
             stgIns.ac.btn.getButton().onclick = function() {
@@ -72,12 +96,14 @@
                 img.ac.inserirComponente("<p>Olá, {{ nome }}!!</p>", opcoes);
             };
 
+
             edicao.addPersonalizacao(personalizacao);
             edicao.addPersonalizacao(carregamento);
             edicao.addPersonalizacao(tpl);
             edicao.addPersonalizacao(img);
             edicao.addPersonalizacao(stgIns);
+            */
         });
-        
+
     </script>
 </html>

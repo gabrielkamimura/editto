@@ -1,30 +1,23 @@
 function editor(textid) {
 
-    var documento = new documentoEditor(textid);
-    documento.permitirEdicao(); 
+    var documento = new documentoEditor(textid, this);
+    documento.permitirEdicao();
     var botoes = new barraBotoes( documento, textid );
-    
+
     this.executar = new acao(documento);
-    
+
     var btnAtivacao = [];
-    
-    var verificarBotoes = function() {
-        for (i in btnAtivacao) {
-            btnAtivacao[i].botao.verificaAtivacao(documento, btnAtivacao[i].acao);
-        };
-    };                        
-    
+
+    this.obterBarraBotoes = function() {
+        return botoes;
+    };
+
     this.obterDocumento = function() {
         return documento;
     };
 
-    this.adicionarBotaoVerificacao = function(botao, acao) {
-        btnAtivacao.push({botao: botao, acao: acao});
-        verificarBotoes();
-    };
-    
     var $this = this;
-    
+    /*
     var btnNegrito = new botao("bold", "Negrito");
     btnNegrito.getButton().onclick = function() {
         $this.adicionarBotaoVerificacao(btnNegrito, 'bold');
@@ -39,7 +32,7 @@ function editor(textid) {
         verificarBotoes();
     };
 
-    var btnUnderline = new botao('underline', "Sublinhado"); 
+    var btnUnderline = new botao('underline', "Sublinhado");
     $this.adicionarBotaoVerificacao(btnUnderline, 'underline');
     btnUnderline.getButton().onclick = function() {
         documento.formatar('underline');
@@ -50,7 +43,7 @@ function editor(textid) {
         {texto: 'Preto', valor: "#000"},
         {texto: 'Cinza', valor: "#9e9e9e"},
         {texto: 'Marrom', valor: "#795548"},
-        {texto: 'Azul', valor: "#2196F3"}, 
+        {texto: 'Azul', valor: "#2196F3"},
         {texto: 'Vermelho', valor: "#F44336"},
         {texto: 'Amarelo', valor: "#ffeb3b"},
         {texto: 'Verde', valor: "#4caf50"},
@@ -67,7 +60,7 @@ function editor(textid) {
         {texto: 'Roxo Escuro', valor: "#673AB7"}
     ];
     var btnCor = new botao("Fonte",'', 2, cores);
-    btnCor.getButton().onchange = function() {   
+    btnCor.getButton().onchange = function() {
         documento.formatar('forecolor', btnCor.getValue());
     };
 
@@ -82,7 +75,7 @@ function editor(textid) {
         {texto: '7', valor: '7'}
     ];
     var btntamanhofonte = new botao("Fonte",'', 2, tamanhosTexto);
-    btntamanhofonte.getButton().onchange = function() {   
+    btntamanhofonte.getButton().onchange = function() {
         documento.formatar('fontSize', btntamanhofonte.getValue());
     };
 
@@ -146,12 +139,13 @@ function editor(textid) {
       documento.formatar('removeFormat');
     };
 
-   
+
 
 
  /**
   * Grupos dos botões. Forma como eles são organizados
-  */  
+  */
+ /*
    var buttonGroup1 = new grupoBotoes();
    buttonGroup1.adicionarBotao(btnFont);
    buttonGroup1.adicionarBotao(btnCor);
@@ -159,7 +153,7 @@ function editor(textid) {
 
    var buttonGroup2 = new grupoBotoes();
    buttonGroup2.adicionarBotao(btnNegrito);
-   buttonGroup2.adicionarBotao(btnItalico);   
+   buttonGroup2.adicionarBotao(btnItalico);
    buttonGroup2.adicionarBotao(btnUnderline);
 
    var buttonGroup3 = new grupoBotoes();
@@ -194,10 +188,4 @@ function editor(textid) {
    };
 
    botoes.adicionarGrupo(btnGrpCst.getGroup());
-
-    $(documento.frame).on('keypress focus change click select', function() {
-        for (i in btnAtivacao) {
-            btnAtivacao[i].botao.verificaAtivacao(documento, btnAtivacao[i].acao);
-        };
-    });
 }
