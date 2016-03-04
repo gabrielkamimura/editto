@@ -23,7 +23,7 @@ No seu documento HTML, insira um textarea especificando um id.
 Com isso, basta criar uma instância do editor. Passando o id do textarea criado.
 
 ```javascript
-var demo = new editor("meuEditor");
+var demo = new eDitto("meuEditor");
 ```
 E pronto. O seu editor básico já deve estar funcionando :)
 
@@ -46,12 +46,11 @@ Pode ser que sua página necessite de recursos que incluam html na página. Para
 Para testar as personalizações com carregamento externo, lembre-se de subir um servidor local na sua máquina
 ```javascript
 // demo.js
-var carregamento = new personalizacaoEditor(demo.obterDocumento());
-carregamento.definirIcone('recycle');
-carregamento.ac.btn.getButton().onclick = function() {
-    carregamento.ac.carregar('modelos/demoExterno.html');
+
+var carregamento = new eDittoButton(buttonGroupCustom, 'random', "Modelo externo");
+carregamento.getButtonDOM().onclick = function() {
+  demo.obterDocumento().carregar('modelos/testeExterno.html')
 };
-demo.addPersonalizacao(carregamento);
 ```
 ```html
 <!-- demoExterno.html -->
@@ -68,18 +67,16 @@ demo.addPersonalizacao(carregamento);
 Para testar as personalizações com carregamento externo, lembre-se de subir um servidor local na sua máquina
 ```javascript
 // demo.js
-var tpl = new personalizacaoEditor(demo.obterDocumento());
-tpl.definirIcone('random');
-tpl.ac.btn.getButton().onclick = function() {
-    var opcoes = [
-      { 
-          variavel: 'titulo',
-          valor: prompt("Insira um título")
-      }
-    ];
-    tpl.ac.carregar('modelos/demoExterno.html', opcoes);
+var tpl = new eDittoButton(buttonGroupCustom, 'random', "Carregamento de template");
+tpl.getButtonDOM().onclick = function() {
+  var opcoes = [
+    {
+      variavel: 'titulo',
+      valor: prompt("Insira um título")
+    }
+  ];
+  demo.obterDocumento().carregar('modelos/testeTemplate.html', opcoes);
 };
-demo.addPersonalizacao(tpl);
 ```
 ```html
 <!-- demoExterno.html -->
