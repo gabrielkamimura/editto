@@ -1,10 +1,15 @@
+/**
+ * [eDittoDocument description]
+ * @param  {string} textid id do textarea a ser utilizado pelo editor
+ * @param  {object} editor
+ * @return {object} 
+ */
 function eDittoDocument(textid, editor) {
 
     this.textarea = document.getElementById(textid);
     var editBox = $("<iframe contenteditable='true' class='editorDocumento' id='" + 't' + textid + "'></iframe>");
     var editor = editor || null;
     var $this = this;
-
 
     editBox.insertAfter($(this.textarea));
     this.textarea.style.display = "none";
@@ -23,8 +28,7 @@ function eDittoDocument(textid, editor) {
     }
 
     /**
-     *
-     * @description Função que retorna o document do iframe desejado
+     * Retorna o document do iframe desejado
      * @param {int} aID ID do Iframe que se deseja
      * @returns {Node.frames.document|document.frames.document|HTMLDocument.frames.document|Document.frames.document|Element.contentDocument}
      */
@@ -49,8 +53,7 @@ function eDittoDocument(textid, editor) {
     };
 
     /**
-     *
-     * @description Função para Obter o Iframe
+     * Obtém o Iframe
      * @param {int} aID ID do Iframe que se deseja
      * @returns {Element|HTMLDocument.frames|document.frames|Document.frames|Node.frames}
      */
@@ -65,8 +68,7 @@ function eDittoDocument(textid, editor) {
     };
 
     /**
-     *
-     * @description Função que passa o valor do textarea para o iframe
+     * Passa o valor do textarea para o iframe
      * @returns {undefined}
      */
     this.getValue = function() {
@@ -74,8 +76,7 @@ function eDittoDocument(textid, editor) {
     };
 
     /**
-     *
-     * @description Função que passa o valor do iframe para o textarea
+     * Passa o valor do iframe para o textarea
      * @returns {undefined}
      */
     this.setValue = function() {
@@ -86,8 +87,7 @@ function eDittoDocument(textid, editor) {
     this.frame = this.getIframeDocument('t' + textid);
 
     /**
-     *
-     * @description Função que retorna a seleção
+     * Retorna a seleção atual
      * @returns {txt@pro;frame@call;getSelection|txt@pro;frame@pro;selection@call;createRange@pro;text|txt}
      */
     this.getSelectedText = function() {
@@ -101,9 +101,9 @@ function eDittoDocument(textid, editor) {
         return txt;
     };
 
-
-
-
+    /**
+     * Habilita o design mode do iframe possibilitando alterações
+     */
     this.permitirEdicao = function() {
         this.getValue();
         this.frame.designMode = 'On';
@@ -125,12 +125,18 @@ function eDittoDocument(textid, editor) {
 
     var passaValor = null;
 
-
+    /**
+     * Para a transferência automática para a textarea
+     */
     this.pararPassag = function() {
         clearInterval( passaValor );
         passaValor = null;
     };
 
+    /**
+     * Inicia a transferência automática para o textarea
+     * @return {[type]} [description]
+     */
     this.iniciarPassagem = function() {
         passaValor = setInterval(function() {
             $this.setValue();

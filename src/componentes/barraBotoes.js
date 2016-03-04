@@ -6,7 +6,7 @@
  *   @example  {
  *             		disableDefaultComponents: true //Devem ser desabilitados os componentes padrão do editor (funcionalidades padão e só devem ser usadas as personalizações)
  *             }
- * @return {[type]}           [description]
+ * @return object
  */
 function eDittoButtonBar(documento, textid, options) {
 
@@ -49,14 +49,16 @@ function eDittoButtonBar(documento, textid, options) {
         this.verificarBotoes();
     };
 
+    // Ao alterar, requisitar verificação
     $(documento.frame).on('keypress focus change click select', function() {
         for (var i in btnAtivacao) {
             btnAtivacao[i].botao.verificaAtivacao(documento, btnAtivacao[i].acao);
         };
     });
 
-
-
+    /**
+     * Adição de elementos padrão caso estes não tenham sido removidos via opções
+     */
     if (!options.disableDefaultComponents) {
       var $this = this;
       console.log("Carregando elementos padrão do editor");

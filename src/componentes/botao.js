@@ -47,6 +47,12 @@ function eDittoButton(grupoBotoes, icon, title, tpo, opcoes) {
         btn.appendChild(icn);
     }
 
+    /**
+     * Verifica se ação do botão atual está ativa no ponto do documento selecionado
+     * @param  {object} documento
+     * @param  {string} formato
+     * @return {undefined}
+     */
     this.verificaAtivacao = function( documento, formato ) {
         if ( tipo === 2 ) {
              btn.value = documento.verificaFormatacao(formato);
@@ -61,18 +67,34 @@ function eDittoButton(grupoBotoes, icon, title, tpo, opcoes) {
         };
     };
 
+    /**
+     * Marca botão como ativo
+     * @return {undefined}
+     */
     this.marcarBotao = function( ) {
         btn.className = 'editorButton ativo';
     };
 
+    /**
+     * Marca botão como desativo (retira botão marcado como utilizado)
+     * @return {undefined}
+     */
     this.desmarcarBotao = function() {
         btn.className = 'editorButton';
     };
 
+    /**
+     * Obtém o elemento button criado a partir do document.createElement()
+     * @return {[type]} [description]
+     */
     this.getButtonDOM = function() {
         return btn;
     };
 
+    /**
+     * Obtém o valor no button criado a partir do document.createElement()
+     * @return {[type]} [description]
+     */
     this.getValue = function() {
         if ( tipo == 2 ) {
             return this.getButtonDOM().value;
@@ -82,9 +104,11 @@ function eDittoButton(grupoBotoes, icon, title, tpo, opcoes) {
         };
     };
 
-    this.setAction = function(acao) {
-    };
-
+    /**
+     * Define o ícone a ser utilizado por esse botão
+     * @param  {string} ricon Nome do ícone
+     * @return {undefined}
+     */
     this.definirIcone = function(ricon) {
         icn.className = "fa fa-" + ricon;
     };

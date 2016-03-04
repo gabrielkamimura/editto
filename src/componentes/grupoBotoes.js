@@ -1,3 +1,8 @@
+/**
+ * [eDittoButtonGroup description]
+ * @param  {object} barraBotoes
+ * @return {object}
+ */
 function eDittoButtonGroup(barraBotoes) {
 
     var btngrp = document.createElement('div'),
@@ -6,7 +11,7 @@ function eDittoButtonGroup(barraBotoes) {
 
     /**
      * Obtém a barra de botões a que esse grupo atende
-     * @return {[type]} [description]
+     * @return {object}
      */
     this.obterBarraBotoes = function() {
       return barraBotoes;

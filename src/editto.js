@@ -6,7 +6,7 @@
  *   @example  {
  *             		disableDefaultComponents: true //Devem ser desabilitados os componentes padrão do editor (funcionalidades padão e só devem ser usadas as personalizações)
  *             }
- * @return {[type]}           [description]
+ * @return object
  */
 function eDittoButtonBar(documento, textid, options) {
 
@@ -49,14 +49,16 @@ function eDittoButtonBar(documento, textid, options) {
         this.verificarBotoes();
     };
 
+    // Ao alterar, requisitar verificação
     $(documento.frame).on('keypress focus change click select', function() {
         for (var i in btnAtivacao) {
             btnAtivacao[i].botao.verificaAtivacao(documento, btnAtivacao[i].acao);
         };
     });
 
-
-
+    /**
+     * Adição de elementos padrão caso estes não tenham sido removidos via opções
+     */
     if (!options.disableDefaultComponents) {
       var $this = this;
       console.log("Carregando elementos padrão do editor");
@@ -238,6 +240,12 @@ function eDittoButton(grupoBotoes, icon, title, tpo, opcoes) {
         btn.appendChild(icn);
     }
 
+    /**
+     * Verifica se ação do botão atual está ativa no ponto do documento selecionado
+     * @param  {object} documento
+     * @param  {string} formato
+     * @return {undefined}
+     */
     this.verificaAtivacao = function( documento, formato ) {
         if ( tipo === 2 ) {
              btn.value = documento.verificaFormatacao(formato);
@@ -252,18 +260,34 @@ function eDittoButton(grupoBotoes, icon, title, tpo, opcoes) {
         };
     };
 
+    /**
+     * Marca botão como ativo
+     * @return {undefined}
+     */
     this.marcarBotao = function( ) {
         btn.className = 'editorButton ativo';
     };
 
+    /**
+     * Marca botão como desativo (retira botão marcado como utilizado)
+     * @return {undefined}
+     */
     this.desmarcarBotao = function() {
         btn.className = 'editorButton';
     };
 
+    /**
+     * Obtém o elemento button criado a partir do document.createElement()
+     * @return {[type]} [description]
+     */
     this.getButtonDOM = function() {
         return btn;
     };
 
+    /**
+     * Obtém o valor no button criado a partir do document.createElement()
+     * @return {[type]} [description]
+     */
     this.getValue = function() {
         if ( tipo == 2 ) {
             return this.getButtonDOM().value;
@@ -273,9 +297,11 @@ function eDittoButton(grupoBotoes, icon, title, tpo, opcoes) {
         };
     };
 
-    this.setAction = function(acao) {
-    };
-
+    /**
+     * Define o ícone a ser utilizado por esse botão
+     * @param  {string} ricon Nome do ícone
+     * @return {undefined}
+     */
     this.definirIcone = function(ricon) {
         icn.className = "fa fa-" + ricon;
     };
@@ -285,13 +311,18 @@ function eDittoButton(grupoBotoes, icon, title, tpo, opcoes) {
 
 }
 
+/**
+ * [eDittoDocument description]
+ * @param  {string} textid id do textarea a ser utilizado pelo editor
+ * @param  {object} editor
+ * @return {object} 
+ */
 function eDittoDocument(textid, editor) {
 
     this.textarea = document.getElementById(textid);
     var editBox = $("<iframe contenteditable='true' class='editorDocumento' id='" + 't' + textid + "'></iframe>");
     var editor = editor || null;
     var $this = this;
-
 
     editBox.insertAfter($(this.textarea));
     this.textarea.style.display = "none";
@@ -310,8 +341,7 @@ function eDittoDocument(textid, editor) {
     }
 
     /**
-     *
-     * @description Função que retorna o document do iframe desejado
+     * Retorna o document do iframe desejado
      * @param {int} aID ID do Iframe que se deseja
      * @returns {Node.frames.document|document.frames.document|HTMLDocument.frames.document|Document.frames.document|Element.contentDocument}
      */
@@ -336,8 +366,7 @@ function eDittoDocument(textid, editor) {
     };
 
     /**
-     *
-     * @description Função para Obter o Iframe
+     * Obtém o Iframe
      * @param {int} aID ID do Iframe que se deseja
      * @returns {Element|HTMLDocument.frames|document.frames|Document.frames|Node.frames}
      */
@@ -352,8 +381,7 @@ function eDittoDocument(textid, editor) {
     };
 
     /**
-     *
-     * @description Função que passa o valor do textarea para o iframe
+     * Passa o valor do textarea para o iframe
      * @returns {undefined}
      */
     this.getValue = function() {
@@ -361,8 +389,7 @@ function eDittoDocument(textid, editor) {
     };
 
     /**
-     *
-     * @description Função que passa o valor do iframe para o textarea
+     * Passa o valor do iframe para o textarea
      * @returns {undefined}
      */
     this.setValue = function() {
@@ -373,8 +400,7 @@ function eDittoDocument(textid, editor) {
     this.frame = this.getIframeDocument('t' + textid);
 
     /**
-     *
-     * @description Função que retorna a seleção
+     * Retorna a seleção atual
      * @returns {txt@pro;frame@call;getSelection|txt@pro;frame@pro;selection@call;createRange@pro;text|txt}
      */
     this.getSelectedText = function() {
@@ -388,9 +414,9 @@ function eDittoDocument(textid, editor) {
         return txt;
     };
 
-
-
-
+    /**
+     * Habilita o design mode do iframe possibilitando alterações
+     */
     this.permitirEdicao = function() {
         this.getValue();
         this.frame.designMode = 'On';
@@ -412,12 +438,18 @@ function eDittoDocument(textid, editor) {
 
     var passaValor = null;
 
-
+    /**
+     * Para a transferência automática para a textarea
+     */
     this.pararPassag = function() {
         clearInterval( passaValor );
         passaValor = null;
     };
 
+    /**
+     * Inicia a transferência automática para o textarea
+     * @return {[type]} [description]
+     */
     this.iniciarPassagem = function() {
         passaValor = setInterval(function() {
             $this.setValue();
@@ -572,6 +604,11 @@ function eDitto(textid, options) {
     var $this = this;
 }
 
+/**
+ * [eDittoButtonGroup description]
+ * @param  {object} barraBotoes
+ * @return {object}
+ */
 function eDittoButtonGroup(barraBotoes) {
 
     var btngrp = document.createElement('div'),
@@ -580,7 +617,7 @@ function eDittoButtonGroup(barraBotoes) {
 
     /**
      * Obtém a barra de botões a que esse grupo atende
-     * @return {[type]} [description]
+     * @return {object}
      */
     this.obterBarraBotoes = function() {
       return barraBotoes;
