@@ -1,5 +1,5 @@
 # e-Ditto
-Editor modular para web que permite fáceis alterações para adequações a necessidades específicas.
+O e-Ditto é um editor wysiwyg modular que permite fáceis alterações para adequações a necessidades específicas.
 
 ## Utilização Básica
 
@@ -25,21 +25,20 @@ Com isso, basta criar uma instância do editor. Passando o id do textarea criado
 ```javascript
 var demo = new editor("meuEditor");
 ```
+E pronto. O seu editor básico já deve estar funcionando :)
 
-## Utilizando as personalizações
+## Personalizando o seu e-Ditto
 
-Há três formas básicas de se adicionar personalizações ao editor: inserção de texto personalizado, inserção de arquivo externo e inserção de arquivo externo com partes variáveis.
+O e-Ditto tem como objetivo ser capaz de se adequar a uma grande diversidade de projetos e necessidades. Para tal, ele permite a inserção de funcionalidades personalizadas. Veja nessa seção como utilizá-las
 
 ### Personalização com inserção de Textos
 ```javascript
-var smile = new personalizacaoEditor(demo.obterDocumento());
-smile.definirIcone('smile-o');
-smile.ac.btn.getButton().onclick = function() {
-    smile.ac.inserirTexto(":)");
+var buttonGroupCustom = new eDittoButtonGroup(demo.obterBarraBotoes());// Definindo um grupode botões para a inserção da personalização
+
+var smile = new eDittoButton(buttonGroupCustom, 'smile-o', "Elemento personalizado");
+personalizacao.getButtonDOM().onclick = function() {
+  demo.obterDocumento().inserirTexto(":)");
 };
-
-demo.addPersonalizacao(smile);
-
 ```
 
 ### Personalização com Inserção de Arquivo Externo
