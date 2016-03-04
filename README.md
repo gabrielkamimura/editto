@@ -29,8 +29,12 @@ E pronto. O seu editor básico já deve estar funcionando :)
 
 ## Personalizando o seu e-Ditto
 
-O e-Ditto tem como objetivo ser capaz de se adequar a uma grande diversidade de projetos e necessidades. Para tal, ele permite a inserção de funcionalidades personalizadas. Veja nessa seção como utilizá-las
+O e-Ditto tem como objetivo ser capaz de se adequar a uma grande diversidade de projetos e necessidades. Para tal, ele permite a inserção de funcionalidades personalizadas. A personalização é tanta que você pode até mesmo reconstruir ou adaptar as funcionalidades disponíveis por padrão para que elas se adequem a suas necessidades.Veja nessa seção como utilizá-las
 
+Obs.: A personalização é muito importante. Logo, se você quiser utilizar apenas seus módulos personalizados (ou quer alterar os componentes padrão) e não usar os elementos padrão do editor, utilize:
+```javascript
+var demo = new eDitto("meuEditor", {disableDefaultComponents: true});
+```
 ### Personalização com inserção de Textos
 ```javascript
 var buttonGroupCustom = new eDittoButtonGroup(demo.obterBarraBotoes());// Definindo um grupode botões para a inserção da personalização
