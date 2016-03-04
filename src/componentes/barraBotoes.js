@@ -22,7 +22,7 @@ function eDittoButtonBar(documento, textid) {
      * Verifica a ativação de todos os botões a serem verificados nesse grupo
      * @return {undefined}
      */
-    var verificarBotoes = function() {
+    this.verificarBotoes = function() {
         for (i in btnAtivacao) {
             btnAtivacao[i].botao.verificaAtivacao(documento, btnAtivacao[i].acao);
         };
@@ -36,7 +36,7 @@ function eDittoButtonBar(documento, textid) {
      */
     this.adicionarBotaoVerificacao = function(botao, acao) {
         btnAtivacao.push({botao: botao, acao: acao});
-        verificarBotoes();
+        this.verificarBotoes();
     };
 
     $(documento.frame).on('keypress focus change click select', function() {

@@ -14,87 +14,186 @@
     <script src="editto.js"></script>
 
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
             var edicao = new eDitto("textExample");
             var documento = edicao.obterDocumento(),
                 barraBotoes = edicao.obterBarraBotoes();
 
-            var buttonGroupAdicionado = new eDittoButtonGroup(barraBotoes);
+            var buttonGroup1 = new eDittoButtonGroup(barraBotoes);
 
-            var btnNegrito = new eDittoButton(buttonGroupAdicionado, "bold", "Negrito");
+            var btnNegrito = new eDittoButton(buttonGroup1, "bold", "Negrito");
             btnNegrito.getButtonDOM().onclick = function() {
                 barraBotoes.adicionarBotaoVerificacao(btnNegrito, 'bold');
                 documento.formatar('bold');
+                barraBotoes.verificarBotoes();
             };
 
-            var btnItalico = new eDittoButton(buttonGroupAdicionado, "italic", "Itálico");
+            var btnItalico = new eDittoButton(buttonGroup1, "italic", "Itálico");
             barraBotoes.adicionarBotaoVerificacao(btnItalico, 'italic');
             btnItalico.getButtonDOM().onclick = function() {
                 documento.formatar('italic');
+                barraBotoes.verificarBotoes();
             };
 
-            /*
-                Definições de personalizações para este editor
-            */
-           /*
-            var personalizacao = new personalizacaoEditor(edicao.obterDocumento());
-            personalizacao.definirIcone('smile-o');
-            personalizacao.ac.btn.getButton().onclick = function() {
-                personalizacao.ac.inserirTexto(":)");
+            var btnUnderline = new eDittoButton(buttonGroup1, 'underline', "Sublinhado");
+            barraBotoes.adicionarBotaoVerificacao(btnUnderline, 'underline');
+            btnUnderline.getButtonDOM().onclick = function() {
+                documento.formatar('underline');
+                barraBotoes.verificarBotoes();
             };
 
-            var carregamento = new personalizacaoEditor(edicao.obterDocumento());
-            carregamento.definirIcone('recycle');
-            carregamento.ac.btn.getButton().onclick = function() {
-                carregamento.ac.carregar('modelos/testeExterno.html');
-            };
-
-            var tpl = new personalizacaoEditor(edicao.obterDocumento());
-            tpl.definirIcone('random');
-            tpl.ac.btn.getButton().onclick = function() {
-                var opcoes = [
-                {
-                    variavel: 'titulo',
-                    valor: prompt("Insira um título")
-                }
+            var buttonGroup2 = new eDittoButtonGroup(barraBotoes);
+            var cores = [
+                {texto: 'Preto', valor: "#000"},
+                {texto: 'Cinza', valor: "#9e9e9e"},
+                {texto: 'Marrom', valor: "#795548"},
+                {texto: 'Azul', valor: "#2196F3"},
+                {texto: 'Vermelho', valor: "#F44336"},
+                {texto: 'Amarelo', valor: "#ffeb3b"},
+                {texto: 'Verde', valor: "#4caf50"},
+                {texto: 'Laranja', valor: "#ff9800"},
+                {texto: 'Roxo', valor: "#9c27b0"},
+                {texto: 'Rosa', valor: "#e91e63"},
+                {texto: 'Ciano', valor: "#00bcd4"},
+                {texto: 'Azul claro', valor: "#03a9f4"},
+                {texto: 'Índigo', valor: "#3f51b5"},
+                {texto: 'Lima', valor: "#cddc39"},
+                {texto: 'Laranja Escuro', valor: "#ff5722"},
+                {texto: 'Rosa Claro', valor: "#F8BBD0"},
+                {texto: 'Teal', valor: "#009688"},
+                {texto: 'Roxo Escuro', valor: "#673AB7"}
             ];
-                carregamento.ac.carregar('modelos/testeTemplate.html', opcoes);
+            var btnCor = new eDittoButton(buttonGroup2, "Fonte",'', 2, cores);
+            btnCor.getButtonDOM().onchange = function() {
+                documento.formatar('forecolor', btnCor.getValue());
             };
 
-            var img = new personalizacaoEditor(edicao.obterDocumento());
-            img.definirIcone('picture-o');
-            img.ac.btn.getButton().onclick = function() {
-                var url = prompt("Insira a url da imagem");
-                if (url) {
-                    var opcoes = [
-                        {
-                            variavel: 'imagem.src',
-                            valor: url
-                        }
-                    ];
-                    img.ac.carregar('modelos/imageInsert.html', opcoes);
+
+            var tamanhosTexto = [
+                {texto: '1', valor: '1'},
+                {texto: '2', valor: '2'},
+                {texto: '3', valor: '3'},
+                {texto: '4', valor: '4'},
+                {texto: '5', valor: '5'},
+                {texto: '6', valor: '6'},
+                {texto: '7', valor: '7'}
+            ];
+            var btntamanhofonte = new eDittoButton(buttonGroup2, "Fonte",'', 2, tamanhosTexto);
+            btntamanhofonte.getButtonDOM().onchange = function() {
+                documento.formatar('fontSize', btntamanhofonte.getValue());
+            };
+
+            var fonts = [{texto: 'Arial', valor: "arial"}, {texto: 'Courier', valor: "courier"}];
+            var btnFont = new eDittoButton(buttonGroup2, "Fonte",'', 2, fonts);
+            btnFont.getButtonDOM().onchange = function() {
+                documento.formatar('fontname', btnFont.getValue());
+            };
+
+            var buttonGroup3 = new eDittoButtonGroup(barraBotoes);
+            var btnEsquerda = new eDittoButton(buttonGroup3, 'align-left', "Alinhar à Esquerda");
+            barraBotoes.adicionarBotaoVerificacao(btnEsquerda, 'justifyleft');
+            btnEsquerda.getButtonDOM().onclick = function() {
+                documento.formatar('justifyleft');
+                barraBotoes.verificarBotoes();
+            };
+
+
+            var btnCentraliza = new eDittoButton(buttonGroup3, 'align-center', "Centralizar");
+            barraBotoes.adicionarBotaoVerificacao(btnCentraliza, 'justifycenter');
+            btnCentraliza.getButtonDOM().onclick = function() {
+                documento.formatar('justifycenter');
+                barraBotoes.verificarBotoes();
+            };
+
+            var btnDireita = new eDittoButton(buttonGroup3, 'align-right', "Alinhar à direita");
+            barraBotoes.adicionarBotaoVerificacao(btnDireita, 'justifyright');
+            btnDireita.getButtonDOM().onclick = function() {
+                documento.formatar('justifyright');
+                barraBotoes.verificarBotoes();
+            };
+
+            var buttonGroup4 = new eDittoButtonGroup(barraBotoes);
+            var btnNum = new eDittoButton(buttonGroup4, 'list-ol', "Lista Numérica");
+            barraBotoes.adicionarBotaoVerificacao(btnNum, 'insertorderedlist');
+            btnNum.getButtonDOM().onclick = function() {
+              documento.formatar('insertorderedlist');
+              barraBotoes.verificarBotoes();
+            };
+
+            var btnLst = new eDittoButton(buttonGroup4, 'list-ul', "Lista");
+            barraBotoes.adicionarBotaoVerificacao(btnLst, 'insertunorderedlist');
+            btnLst.getButtonDOM().onclick = function() {
+              documento.formatar('insertunorderedlist');
+              barraBotoes.verificarBotoes();
+            };
+
+            var buttonGroup5 = new eDittoButtonGroup(barraBotoes);
+            var btnLnk = new eDittoButton(buttonGroup5, 'link', "link");
+            btnLnk.getButtonDOM().onclick = function() {
+                var sLnk = prompt('Digite a URL do link: ', 'http:\/\/');
+                if (sLnk && sLnk != '' && sLnk != 'http://') {
+                    documento.formatar('createlink', sLnk);
+                };
+            };
+
+            var btnUlk = new eDittoButton(buttonGroup5, 'unlink', "Remover Link");
+            btnUlk.getButtonDOM().onclick = function() {
+              documento.formatar('unlink');
+            }
+
+            var btnLmp = new eDittoButton(buttonGroup5, 'eraser', "Limpar Formatação");
+            btnLmp.getButtonDOM().onclick = function() {
+              documento.formatar('removeFormat');
+            };
+
+            // Elementos personalizados
+            var buttonGroupCustom = new eDittoButtonGroup(barraBotoes);
+
+            var btnImagem = new eDittoButton(buttonGroupCustom, "picture-o", "Imagem");
+            btnImagem.getButtonDOM().onclick = function() {
+              var url = prompt("Insira a url da imagem");
+              if (url) {
+                  var opcoes = [
+                      {
+                          variavel: 'imagem.src',
+                          valor: url
+                      }
+                  ];
+                  documento.carregar('modelos/imageInsert.html', opcoes);
+              }
+            };
+
+            var personalizacao = new eDittoButton(buttonGroupCustom, 'smile-o', "Elemento personalizado");
+            personalizacao.getButtonDOM().onclick = function() {
+              documento.inserirTexto(":)");
+            };
+
+            var carregamento = new eDittoButton(buttonGroupCustom, 'random', "Modelo externo");
+            carregamento.getButtonDOM().onclick = function() {
+              documento.carregar('modelos/testeExterno.html')
+            };
+
+            var tpl = new eDittoButton(buttonGroupCustom, 'random', "Carregamento de template");
+            tpl.getButtonDOM().onclick = function() {
+              var opcoes = [
+                {
+                  variavel: 'titulo',
+                  valor: prompt("Insira um título")
                 }
+              ];
+              documento.carregar('modelos/testeTemplate.html', opcoes);
             };
 
-            var stgIns = new personalizacaoEditor();
-            stgIns.definirIcone("comment");
-            stgIns.ac.btn.getButton().onclick = function() {
-                var opcoes = [
-                    {
-                        variavel: 'nome',
-                        valor: prompt("Insira o seu nome")
-                    }
-                ];
-                img.ac.inserirComponente("<p>Olá, {{ nome }}!!</p>", opcoes);
-            };
-
-
-            edicao.addPersonalizacao(personalizacao);
-            edicao.addPersonalizacao(carregamento);
-            edicao.addPersonalizacao(tpl);
-            edicao.addPersonalizacao(img);
-            edicao.addPersonalizacao(stgIns);
-            */
+            var stgIns = new eDittoButton(buttonGroupCustom, 'comment', "Olá, meu amigo")
+            stgIns.getButtonDOM().onclick = function() {
+              var opcoes = [
+                  {
+                      variavel: 'nome',
+                      valor: prompt("Insira o seu nome")
+                  }
+              ];
+              documento.inserirComponente("<p>Olá, {{ nome }}!!</p>", opcoes);
+            }
         });
 
     </script>

@@ -210,7 +210,7 @@ function eDittoDocument(textid, editor) {
        * @returns Dados da requisição
        */
       this.carregar = function( template, options ) {
-
+        var $this = this;
           $(this.getSelectedText()).load( template, function(response) {
               var texto = response + '<br/>'; //A quebra de linha é para evitar que o documento após a personalização fique inalterável
               if (options) {
@@ -219,7 +219,7 @@ function eDittoDocument(textid, editor) {
                       texto = replaceAll(texto, aux, escapeHTML(options[i].valor));
                   };
               }
-              this.inserirElemento(texto);
+              $this.inserirElemento(texto);
           } );
       };
 
@@ -229,6 +229,7 @@ function eDittoDocument(textid, editor) {
        * @returns Dados da requisição
        */
       this.inserirComponente = function( txt, options ) {
+        var $this = this;
               var texto = txt + '<br/>'; //A quebra de linha é para evitar que o documento após a personalização fique inalterável
               if (options) {
                   for ( i in options ) {
@@ -236,11 +237,12 @@ function eDittoDocument(textid, editor) {
                       texto = replaceAll(texto, aux, escapeHTML(options[i].valor));
                   };
               }
-              this.inserirElemento(texto);
+              $this.inserirElemento(texto);
       };
 
       this.inserirTexto = function( texto ) {
-          this.inserirElemento(escapeHTML(texto));
+          var $this = this;
+          $this.inserirElemento(escapeHTML(texto));
       };
 
 }

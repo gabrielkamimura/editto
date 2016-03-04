@@ -3,8 +3,7 @@ function eDitto(textid) {
     var documento = new eDittoDocument(textid, this),
         botoes = new eDittoButtonBar(documento, textid),
         btnAtivacao = [];
-    this.executar = new acao(documento);
-
+        
     //Permitindo edição do documento
     documento.permitirEdicao();
 

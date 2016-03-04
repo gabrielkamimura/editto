@@ -75,7 +75,7 @@ function eDittoButton(grupoBotoes, icon, title, tpo, opcoes) {
 
     this.getValue = function() {
         if ( tipo == 2 ) {
-            return this.getButton().value;
+            return this.getButtonDOM().value;
         }
         else {
             return null;

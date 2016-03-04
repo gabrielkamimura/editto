@@ -35,7 +35,7 @@ function eDittoButtonBar(documento, textid) {
      * Verifica a ativação de todos os botões a serem verificados nesse grupo
      * @return {undefined}
      */
-    var verificarBotoes = function() {
+    this.verificarBotoes = function() {
         for (i in btnAtivacao) {
             btnAtivacao[i].botao.verificaAtivacao(documento, btnAtivacao[i].acao);
         };
@@ -49,7 +49,7 @@ function eDittoButtonBar(documento, textid) {
      */
     this.adicionarBotaoVerificacao = function(botao, acao) {
         btnAtivacao.push({botao: botao, acao: acao});
-        verificarBotoes();
+        this.verificarBotoes();
     };
 
     $(documento.frame).on('keypress focus change click select', function() {
@@ -138,7 +138,7 @@ function eDittoButton(grupoBotoes, icon, title, tpo, opcoes) {
 
     this.getValue = function() {
         if ( tipo == 2 ) {
-            return this.getButton().value;
+            return this.getButtonDOM().value;
         }
         else {
             return null;
@@ -369,7 +369,7 @@ function eDittoDocument(textid, editor) {
        * @returns Dados da requisição
        */
       this.carregar = function( template, options ) {
-
+        var $this = this;
           $(this.getSelectedText()).load( template, function(response) {
               var texto = response + '<br/>'; //A quebra de linha é para evitar que o documento após a personalização fique inalterável
               if (options) {
@@ -378,7 +378,7 @@ function eDittoDocument(textid, editor) {
                       texto = replaceAll(texto, aux, escapeHTML(options[i].valor));
                   };
               }
-              this.inserirElemento(texto);
+              $this.inserirElemento(texto);
           } );
       };
 
@@ -388,6 +388,7 @@ function eDittoDocument(textid, editor) {
        * @returns Dados da requisição
        */
       this.inserirComponente = function( txt, options ) {
+        var $this = this;
               var texto = txt + '<br/>'; //A quebra de linha é para evitar que o documento após a personalização fique inalterável
               if (options) {
                   for ( i in options ) {
@@ -395,11 +396,12 @@ function eDittoDocument(textid, editor) {
                       texto = replaceAll(texto, aux, escapeHTML(options[i].valor));
                   };
               }
-              this.inserirElemento(texto);
+              $this.inserirElemento(texto);
       };
 
       this.inserirTexto = function( texto ) {
-          this.inserirElemento(escapeHTML(texto));
+          var $this = this;
+          $this.inserirElemento(escapeHTML(texto));
       };
 
 }
@@ -409,8 +411,7 @@ function eDitto(textid) {
     var documento = new eDittoDocument(textid, this),
         botoes = new eDittoButtonBar(documento, textid),
         btnAtivacao = [];
-    this.executar = new acao(documento);
-
+        
     //Permitindo edição do documento
     documento.permitirEdicao();
 
