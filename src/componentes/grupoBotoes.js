@@ -1,9 +1,9 @@
-function grupoBotoes(barraBotoes) {
+function eDittoButtonGroup(barraBotoes) {
 
     var btngrp = document.createElement('div'),
         barraBotoes = barraBotoes;
     btngrp.className = "editorGroupButton";
-    barraBotoes.adicionarGrupo(this);
+
     /**
      * Obtém a barra de botões a que esse grupo atende
      * @return {[type]} [description]
@@ -18,7 +18,7 @@ function grupoBotoes(barraBotoes) {
      * @returns {undefined}
      */
     this.adicionarBotao = function(botao) {
-        btngrp.appendChild(botao.getButton());
+        btngrp.appendChild(botao.getButtonDOM());
     };
 
     /**
@@ -26,7 +26,10 @@ function grupoBotoes(barraBotoes) {
      * @description Função para Obter o grupo
      * @returns {grupoBotoes.btngrp|Element}
      */
-    this.getGroup = function() {
+    this.getGroupHTML = function() {
         return btngrp;
     };
+
+    // Adicionando grupo a barra de botões
+    barraBotoes.adicionarGrupo(this);
 }

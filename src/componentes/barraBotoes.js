@@ -1,4 +1,4 @@
-function barraBotoes(documento, textid) {
+function eDittoButtonBar(documento, textid) {
 
     var btnAtivacao = []; //Array dos botões a terem as ações monitoradass para a marcação do botão
     var documento = documento;
@@ -15,7 +15,7 @@ function barraBotoes(documento, textid) {
      * @returns {undefined}
      */
     this.adicionarGrupo = function(grupo){
-        container.appendChild(grupo);
+        container.appendChild(grupo.getGroupHTML());
     };
 
     /**

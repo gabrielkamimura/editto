@@ -1,78 +1,17 @@
+/**
+ * @deprecated Depreciado para alterações futuras de melhoria de versativização
+ * @todo -> integrar funções ao eDittoDocument (documentoEditor)
+ */
 function acao(documento) {
-    
 
-    var replaceAll = function(string, token, newtoken) {
-        var string = string || "";
-        while (string.indexOf(token) != -1) {
-            string = string.replace(token, newtoken);
-        }
-        return string;
-    };
+  
 
-    var escapeHTML = function(string) {
-        var string = string || null;
-        string = replaceAll(replaceAll(string, "<", "&lt"), ">", "&gt");
-        return string;
-    };
-     /**
-     * 
-     * @param {string} template Caminho para o template
-     * @returns Dados da requisição
-     */
-    this.carregar = function( template, options ) {
-        
-        $(documento.getSelectedText()).load( template, function(response) {
-            var texto = response + '<br/>'; //A quebra de linha é para evitar que o documento após a personalização fique inalterável
-            if (options) {
-                for ( i in options ) {
-                    var aux = "{{ " + options[i].variavel + " }}";
-                    texto = replaceAll(texto, aux, escapeHTML(options[i].valor));
-                };
-            }
-            documento.inserirElemento(texto);
-        } );
-    };
-    
-    /**
-     * 
-     * @param {string} template Caminho para o template
-     * @returns Dados da requisição
-     */
-    this.inserirComponente = function( txt, options ) {
-            var texto = txt + '<br/>'; //A quebra de linha é para evitar que o documento após a personalização fique inalterável
-            if (options) {
-                for ( i in options ) {
-                    var aux = "{{ " + options[i].variavel + " }}";
-                    texto = replaceAll(texto, aux, escapeHTML(options[i].valor));
-                };
-            }
-            documento.inserirElemento(texto);
-    };
-    
-    this.inserirTexto = function( texto ) {
-        documento.inserirElemento(escapeHTML(texto));
-    };
+    //this.btn = new eDittoButton();
 
-    /**
-     * 
-     * @description Função que formata o texto do documento
-     * @param {string} formato Formato desejado a ser modificado. P. ex: bold
-     * @param {string} opcao Opção para formatação, p. ex: blue
-     * @returns {undefined}
-     */
-    this.formatar = function(formato, opcao) {
-        documento.formatar(formato, opcao);
-    };
-    
-    this.verificaFormatacao = function(formato) {
-        documento.verificaFormatacao(formato);
-    };
 
-    this.btn = new botao();
-    
-    
 }
-function barraBotoes(documento, textid) {
+
+function eDittoButtonBar(documento, textid) {
 
     var btnAtivacao = []; //Array dos botões a terem as ações monitoradass para a marcação do botão
     var documento = documento;
@@ -89,7 +28,7 @@ function barraBotoes(documento, textid) {
      * @returns {undefined}
      */
     this.adicionarGrupo = function(grupo){
-        container.appendChild(grupo);
+        container.appendChild(grupo.getGroupHTML());
     };
 
     /**
@@ -127,8 +66,8 @@ function barraBotoes(documento, textid) {
  * @param {int} tpo Tipo do botão. Se for um botão, 1 (padrão), caso seja um select, 2
  * @param {array} opcoes [{ texto: 'azul', valor: #2196F3 }] Apenas para select
  * */
-function botao(grupoBotoes, icon, title, tpo, opcoes) {
-  console.log(grupoBotoes);
+function eDittoButton(grupoBotoes, icon, title, tpo, opcoes) {
+
     var tipo = tpo || 1,
         icone = icon || '',
         titulo = title,
@@ -170,7 +109,6 @@ function botao(grupoBotoes, icon, title, tpo, opcoes) {
 
         btn.appendChild(icn);
     }
-    grupoBotoes.adicionarBotao(this);
 
     this.verificaAtivacao = function( documento, formato ) {
         if ( tipo === 2 ) {
@@ -194,7 +132,7 @@ function botao(grupoBotoes, icon, title, tpo, opcoes) {
         btn.className = 'editorButton';
     };
 
-    this.getButton = function() {
+    this.getButtonDOM = function() {
         return btn;
     };
 
@@ -214,9 +152,12 @@ function botao(grupoBotoes, icon, title, tpo, opcoes) {
         icn.className = "fa fa-" + ricon;
     };
 
+    // Adicionando botão criado a grupo definido
+    grupoBotoes.adicionarBotao(this);
+
 }
 
-function documentoEditor( textid, editor ) {
+function eDittoDocument(textid, editor) {
 
     this.textarea = document.getElementById(textid);
     var editBox = $("<iframe contenteditable='true' class='editorDocumento' id='" + 't' + textid + "'></iframe>");
@@ -396,23 +337,95 @@ function documentoEditor( textid, editor ) {
         return (this.frame.queryCommandState(formato));
     };
 
+    /**
+     * Recebe uma string e um determinado caractere a ser alterado e retorna string com caracteres alterados
+     * @param  {string} string   A string a sofrer alteração
+     * @param  {string} token    Texto a ser buscado na string para modufucação
+     * @param  {string} newtoken Texto a reposicionar token
+     * @return {string}
+     */
+      var replaceAll = function(string, token, newtoken) {
+          var string = string || "";
+          while (string.indexOf(token) != -1) {
+              string = string.replace(token, newtoken);
+          }
+          return string;
+      };
+
+      /**
+       * Recebe uma string e remove os caracteres de HTML
+       * @param  {string} string Um texto que pode ter tags HTML
+       * @return {string}        O tetxo agora sem tags HTML
+       */
+      var escapeHTML = function(string) {
+          var string = string || null;
+          string = replaceAll(replaceAll(string, "<", "&lt"), ">", "&gt");
+          return string;
+      };
+
+       /**
+       *
+       * @param {string} template Caminho para o template
+       * @returns Dados da requisição
+       */
+      this.carregar = function( template, options ) {
+
+          $(this.getSelectedText()).load( template, function(response) {
+              var texto = response + '<br/>'; //A quebra de linha é para evitar que o documento após a personalização fique inalterável
+              if (options) {
+                  for ( i in options ) {
+                      var aux = "{{ " + options[i].variavel + " }}";
+                      texto = replaceAll(texto, aux, escapeHTML(options[i].valor));
+                  };
+              }
+              this.inserirElemento(texto);
+          } );
+      };
+
+      /**
+       *
+       * @param {string} template Caminho para o template
+       * @returns Dados da requisição
+       */
+      this.inserirComponente = function( txt, options ) {
+              var texto = txt + '<br/>'; //A quebra de linha é para evitar que o documento após a personalização fique inalterável
+              if (options) {
+                  for ( i in options ) {
+                      var aux = "{{ " + options[i].variavel + " }}";
+                      texto = replaceAll(texto, aux, escapeHTML(options[i].valor));
+                  };
+              }
+              this.inserirElemento(texto);
+      };
+
+      this.inserirTexto = function( texto ) {
+          this.inserirElemento(escapeHTML(texto));
+      };
 
 }
 
-function editor(textid) {
+function eDitto(textid) {
 
-    var documento = new documentoEditor(textid, this);
-    documento.permitirEdicao();
-    var botoes = new barraBotoes( documento, textid );
-
+    var documento = new eDittoDocument(textid, this),
+        botoes = new eDittoButtonBar(documento, textid),
+        btnAtivacao = [];
     this.executar = new acao(documento);
 
-    var btnAtivacao = [];
+    //Permitindo edição do documento
+    documento.permitirEdicao();
 
+    /**
+     * Obtém a Barra de botões desse Editor
+     * @return {object} eDittoButtonBar
+     */
     this.obterBarraBotoes = function() {
         return botoes;
     };
 
+    /**
+     * Obtém o documento que esse editor manipula
+     * @return {object} eDittoDocument
+     */
     this.obterDocumento = function() {
         return documento;
     };
@@ -581,22 +594,23 @@ function editor(textid) {
    /*
       Esta parte é para a definição das personalizações
    */
-
-   var btnGrpCst = new grupoBotoes();
-
+   /*
+   var btnGrpCst = new eDittoButtonGroup(botoes);
+console.log(btnGrpCst);
    this.addPersonalizacao = function(personalizacao) {
         btnGrpCst.adicionarBotao(personalizacao.ac.btn);
    };
 
    botoes.adicionarGrupo(btnGrpCst.getGroup());
+   */
 }
 
-function grupoBotoes(barraBotoes) {
+function eDittoButtonGroup(barraBotoes) {
 
     var btngrp = document.createElement('div'),
         barraBotoes = barraBotoes;
     btngrp.className = "editorGroupButton";
-    barraBotoes.adicionarGrupo(this);
+
     /**
      * Obtém a barra de botões a que esse grupo atende
      * @return {[type]} [description]
@@ -611,7 +625,7 @@ function grupoBotoes(barraBotoes) {
      * @returns {undefined}
      */
     this.adicionarBotao = function(botao) {
-        btngrp.appendChild(botao.getButton());
+        btngrp.appendChild(botao.getButtonDOM());
     };
 
     /**
@@ -619,17 +633,23 @@ function grupoBotoes(barraBotoes) {
      * @description Função para Obter o grupo
      * @returns {grupoBotoes.btngrp|Element}
      */
-    this.getGroup = function() {
+    this.getGroupHTML = function() {
         return btngrp;
     };
+
+    // Adicionando grupo a barra de botões
+    barraBotoes.adicionarGrupo(this);
 }
 
+/**
+ * @deprecated Depreciado para alterações futuras de melhoria de versativização
+ * @todo -> integrar funcionalidades ao botão
+ */
 function personalizacaoEditor( documento ) {
-    
+
     this.ac = new acao( documento );
 
      this.definirIcone = function(icone) {
         this.ac.btn.definirIcone(icone);
     };
 }
-

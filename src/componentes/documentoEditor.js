@@ -1,4 +1,4 @@
-function documentoEditor( textid, editor ) {
+function eDittoDocument(textid, editor) {
 
     this.textarea = document.getElementById(textid);
     var editBox = $("<iframe contenteditable='true' class='editorDocumento' id='" + 't' + textid + "'></iframe>");
@@ -178,5 +178,69 @@ function documentoEditor( textid, editor ) {
         return (this.frame.queryCommandState(formato));
     };
 
+    /**
+     * Recebe uma string e um determinado caractere a ser alterado e retorna string com caracteres alterados
+     * @param  {string} string   A string a sofrer alteração
+     * @param  {string} token    Texto a ser buscado na string para modufucação
+     * @param  {string} newtoken Texto a reposicionar token
+     * @return {string}
+     */
+      var replaceAll = function(string, token, newtoken) {
+          var string = string || "";
+          while (string.indexOf(token) != -1) {
+              string = string.replace(token, newtoken);
+          }
+          return string;
+      };
+
+      /**
+       * Recebe uma string e remove os caracteres de HTML
+       * @param  {string} string Um texto que pode ter tags HTML
+       * @return {string}        O tetxo agora sem tags HTML
+       */
+      var escapeHTML = function(string) {
+          var string = string || null;
+          string = replaceAll(replaceAll(string, "<", "&lt"), ">", "&gt");
+          return string;
+      };
+
+       /**
+       *
+       * @param {string} template Caminho para o template
+       * @returns Dados da requisição
+       */
+      this.carregar = function( template, options ) {
+
+          $(this.getSelectedText()).load( template, function(response) {
+              var texto = response + '<br/>'; //A quebra de linha é para evitar que o documento após a personalização fique inalterável
+              if (options) {
+                  for ( i in options ) {
+                      var aux = "{{ " + options[i].variavel + " }}";
+                      texto = replaceAll(texto, aux, escapeHTML(options[i].valor));
+                  };
+              }
+              this.inserirElemento(texto);
+          } );
+      };
+
+      /**
+       *
+       * @param {string} template Caminho para o template
+       * @returns Dados da requisição
+       */
+      this.inserirComponente = function( txt, options ) {
+              var texto = txt + '<br/>'; //A quebra de linha é para evitar que o documento após a personalização fique inalterável
+              if (options) {
+                  for ( i in options ) {
+                      var aux = "{{ " + options[i].variavel + " }}";
+                      texto = replaceAll(texto, aux, escapeHTML(options[i].valor));
+                  };
+              }
+              this.inserirElemento(texto);
+      };
+
+      this.inserirTexto = function( texto ) {
+          this.inserirElemento(escapeHTML(texto));
+      };
 
 }

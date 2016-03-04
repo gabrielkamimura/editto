@@ -3,8 +3,8 @@
  * @param {int} tpo Tipo do botão. Se for um botão, 1 (padrão), caso seja um select, 2
  * @param {array} opcoes [{ texto: 'azul', valor: #2196F3 }] Apenas para select
  * */
-function botao(grupoBotoes, icon, title, tpo, opcoes) {
-  
+function eDittoButton(grupoBotoes, icon, title, tpo, opcoes) {
+
     var tipo = tpo || 1,
         icone = icon || '',
         titulo = title,
@@ -46,7 +46,6 @@ function botao(grupoBotoes, icon, title, tpo, opcoes) {
 
         btn.appendChild(icn);
     }
-    grupoBotoes.adicionarBotao(this);
 
     this.verificaAtivacao = function( documento, formato ) {
         if ( tipo === 2 ) {
@@ -70,7 +69,7 @@ function botao(grupoBotoes, icon, title, tpo, opcoes) {
         btn.className = 'editorButton';
     };
 
-    this.getButton = function() {
+    this.getButtonDOM = function() {
         return btn;
     };
 
@@ -89,5 +88,8 @@ function botao(grupoBotoes, icon, title, tpo, opcoes) {
     this.definirIcone = function(ricon) {
         icn.className = "fa fa-" + ricon;
     };
+
+    // Adicionando botão criado a grupo definido
+    grupoBotoes.adicionarBotao(this);
 
 }

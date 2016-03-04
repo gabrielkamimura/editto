@@ -1,17 +1,25 @@
-function editor(textid) {
+function eDitto(textid) {
 
-    var documento = new documentoEditor(textid, this);
-    documento.permitirEdicao();
-    var botoes = new barraBotoes( documento, textid );
-
+    var documento = new eDittoDocument(textid, this),
+        botoes = new eDittoButtonBar(documento, textid),
+        btnAtivacao = [];
     this.executar = new acao(documento);
 
-    var btnAtivacao = [];
+    //Permitindo edição do documento
+    documento.permitirEdicao();
 
+    /**
+     * Obtém a Barra de botões desse Editor
+     * @return {object} eDittoButtonBar
+     */
     this.obterBarraBotoes = function() {
         return botoes;
     };
 
+    /**
+     * Obtém o documento que esse editor manipula
+     * @return {object} eDittoDocument
+     */
     this.obterDocumento = function() {
         return documento;
     };
@@ -180,12 +188,13 @@ function editor(textid) {
    /*
       Esta parte é para a definição das personalizações
    */
-
-   var btnGrpCst = new grupoBotoes();
-
+   /*
+   var btnGrpCst = new eDittoButtonGroup(botoes);
+console.log(btnGrpCst);
    this.addPersonalizacao = function(personalizacao) {
         btnGrpCst.adicionarBotao(personalizacao.ac.btn);
    };
 
    botoes.adicionarGrupo(btnGrpCst.getGroup());
+   */
 }

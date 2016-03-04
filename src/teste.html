@@ -15,32 +15,24 @@
 
     <script>
         $(document).ready(function(){
-            var edicao = new editor("textExample");
+            var edicao = new eDitto("textExample");
             var documento = edicao.obterDocumento(),
                 barraBotoes = edicao.obterBarraBotoes();
 
-            var buttonGroupAdicionado = new grupoBotoes(barraBotoes);
-            console.log(barraBotoes);
+            var buttonGroupAdicionado = new eDittoButtonGroup(barraBotoes);
 
-            var btnNegrito = new botao(buttonGroupAdicionado, "bold", "Negrito");
-            btnNegrito.getButton().onclick = function() {
+            var btnNegrito = new eDittoButton(buttonGroupAdicionado, "bold", "Negrito");
+            btnNegrito.getButtonDOM().onclick = function() {
                 barraBotoes.adicionarBotaoVerificacao(btnNegrito, 'bold');
                 documento.formatar('bold');
             };
 
-            var btnItalico = new botao("italic", "Itálico");
+            var btnItalico = new eDittoButton(buttonGroupAdicionado, "italic", "Itálico");
             barraBotoes.adicionarBotaoVerificacao(btnItalico, 'italic');
-            btnItalico.getButton().onclick = function() {
+            btnItalico.getButtonDOM().onclick = function() {
                 documento.formatar('italic');
             };
 
-
-            buttonGroupAdicionado.adicionarBotao(btnNegrito);
-            buttonGroupAdicionado.adicionarBotao(btnItalico);
-
-            barraBotoes.adicionarGrupo(buttonGroupAdicionado.getGroup());
-
-            window.edicao = edicao;
             /*
                 Definições de personalizações para este editor
             */
