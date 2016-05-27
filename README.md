@@ -40,7 +40,7 @@ var demo = new eDitto("meuEditor", {disableDefaultComponents: true});
 var buttonGroupCustom = new eDittoButtonGroup(demo.obterBarraBotoes());// Definindo um grupode botões para a inserção da personalização
 
 var smile = new eDittoButton(buttonGroupCustom, 'smile-o', "Elemento personalizado");
-personalizacao.getButtonDOM().onclick = function() {
+smile.getButtonDOM().onclick = function() {
   demo.obterDocumento().inserirTexto(":)");
 };
 ```
