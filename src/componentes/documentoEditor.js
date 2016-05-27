@@ -2,7 +2,7 @@
  * [eDittoDocument description]
  * @param  {string} textid id do textarea a ser utilizado pelo editor
  * @param  {object} editor
- * @return {object} 
+ * @return {object}
  */
 function eDittoDocument(textid, editor) {
 
@@ -250,5 +250,20 @@ function eDittoDocument(textid, editor) {
           var $this = this;
           $this.inserirElemento(escapeHTML(texto));
       };
+
+      // Cópia do css da página pai para o editor
+      var pageStyleSheets = document.styleSheets;
+      var cssString = [];
+      for (var i in pageStyleSheets) {
+        var cssRules = pageStyleSheets[i].cssRules;
+        for (var j in cssRules) {
+            cssString.push(cssRules[j].cssText);
+        }
+      }
+      var styleEl = $this.frame.createElement('style');
+      styleEl.type = 'text/css';
+      styleEl.innerHTML = cssString.join("\n");
+
+      $this.frame.head.appendChild(styleEl);
 
 }
