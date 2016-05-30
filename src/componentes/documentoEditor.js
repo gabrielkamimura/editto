@@ -252,18 +252,23 @@ function eDittoDocument(textid, editor) {
       };
 
       // Cópia do css da página pai para o editor
-      var pageStyleSheets = document.styleSheets;
-      var cssString = [];
-      for (var i in pageStyleSheets) {
-        var cssRules = pageStyleSheets[i].cssRules;
-        for (var j in cssRules) {
-            cssString.push(cssRules[j].cssText);
+      try {
+        var pageStyleSheets = document.styleSheets;
+        var cssString = [];
+        for (var i in pageStyleSheets) {
+          var cssRules = pageStyleSheets[i].cssRules;
+          for (var j in cssRules) {
+              cssString.push(cssRules[j].cssText);
+          }
         }
-      }
-      var styleEl = $this.frame.createElement('style');
-      styleEl.type = 'text/css';
-      styleEl.innerHTML = cssString.join("\n");
+        var styleEl = $this.frame.createElement('style');
+        styleEl.type = 'text/css';
+        styleEl.innerHTML = cssString.join("\n");
 
-      $this.frame.head.appendChild(styleEl);
+        $this.frame.head.appendChild(styleEl);
+      } catch (err){
+
+      }
+
 
 }
