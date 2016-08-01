@@ -11,11 +11,16 @@
         <div id="teste"></div>
     </body>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="editto.js"></script>
-
+    <script src="componentes/barraBotoes.js"></script>
+    <script src="componentes/botao.js"></script>
+    <script src="componentes/documentoEditor.js"></script>
+    <script src="componentes/grupoBotoes.js"></script>
+    <script src="componentes/editor.js"></script>
+    <script src="componentes/action.js"></script>
+    <script src="componentes/select.js"></script>
     <script>
         $(document).ready(function() {
-            var edicao = new eDitto("textExample", {disableDefaultComponents: true});
+            var edicao = new eDitto("textExample");
             var documento = edicao.obterDocumento(),
                 barraBotoes = edicao.obterBarraBotoes();
 

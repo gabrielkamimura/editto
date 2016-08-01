@@ -241,26 +241,6 @@ function eDittoButton(grupoBotoes, icon, title, tpo, opcoes) {
     }
 
     /**
-     * Verifica se ação do botão atual está ativa no ponto do documento selecionado
-     * @param  {object} documento
-     * @param  {string} formato
-     * @return {undefined}
-     */
-    this.verificaAtivacao = function( documento, formato ) {
-        if ( tipo === 2 ) {
-             btn.value = documento.verificaFormatacao(formato);
-        }
-        else {
-            if (documento.verificaFormatacao(formato)) {
-                this.marcarBotao();
-            }
-            else {
-                this.desmarcarBotao();
-            };
-        };
-    };
-
-    /**
      * Marca botão como ativo
      * @return {undefined}
      */
@@ -310,6 +290,26 @@ function eDittoButton(grupoBotoes, icon, title, tpo, opcoes) {
     grupoBotoes.adicionarBotao(this);
 
 }
+
+/**
+ * Verifica se ação do botão atual está ativa no ponto do documento selecionado
+ * @param  {object} documento
+ * @param  {string} formato
+ * @return {undefined}
+ */
+eDittoButton.prototype.verificaAtivacao = function( documento, formato ) {
+    if ( tipo === 2 ) {
+         btn.value = documento.verificaFormatacao(formato);
+    }
+    else {
+        if (documento.verificaFormatacao(formato)) {
+            this.marcarBotao();
+        }
+        else {
+            this.desmarcarBotao();
+        };
+    };
+};
 
 /**
  * [eDittoDocument description]
