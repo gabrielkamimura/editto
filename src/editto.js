@@ -1,4 +1,54 @@
 /**
+ * Este aquivo conterá as chamadas base para ações
+  * @param {string} icn Ícone do Font-awesome a ser adicionado ao botão. Caso seja um texto de um option do select, passar
+  * @param {int} tpo Tipo do botão. Se for um botão, 1 (padrão), caso seja um select, 2
+  * @param {array} opcoes [{ texto: 'azul', valor: #2196F3 }] Apenas para select
+  * */
+ function eDittoAction(grupoBotoes, title) {
+
+     this.titulo = title;
+     this.grupoBotoes = grupoBotoes;
+
+     // Adicionando botão criado a grupo definido
+     grupoBotoes.adicionarBotao(this);
+
+ }
+
+ /**
+  * Obtém o grupo de botões a que pertence esse botão
+  * @return {Object}
+  */
+ eDittoAction.prototype.obterGrupoBotoes = function() {
+     return this.grupoBotoes;
+ };
+
+ /**
+  * Verifica se ação do botão atual está ativa no ponto do documento selecionado
+  * @param  {object} documento
+  * @param  {string} formato
+  * @return {undefined}
+  */
+ eDittoAction.prototype.verificaAtivacao = function( documento, formato ) {
+
+ };
+
+ /**
+  * Obtém o elemento button criado a partir do document.createElement()
+  * @return {[type]} [description]
+  */
+ eDittoAction.prototype.getElementDOM = function() {
+
+ };
+
+ /**
+  * Obtém o valor no button criado a partir do document.createElement()
+  * @return {[type]} [description]
+  */
+ eDittoAction.prototype.getValue = function() {
+    return null;
+ };
+
+/**
  * [eDittoButtonBar description]
  * @param  {object} documento
  * @param  {string} textid    id para div de barra de botões
@@ -61,7 +111,6 @@ function eDittoButtonBar(documento, textid, options) {
      */
     if (!options.disableDefaultComponents) {
       var $this = this;
-      console.log("Carregando elementos padrão do editor");
       var buttonGroup1 = new eDittoButtonGroup($this);
 
       var btnNegrito = new eDittoButton(buttonGroup1, "bold", "Negrito");
@@ -87,26 +136,27 @@ function eDittoButtonBar(documento, textid, options) {
 
       var buttonGroup2 = new eDittoButtonGroup($this);
       var cores = [
-          {texto: 'Preto', valor: "#000"},
-          {texto: 'Cinza', valor: "#9e9e9e"},
-          {texto: 'Marrom', valor: "#795548"},
-          {texto: 'Azul', valor: "#2196F3"},
-          {texto: 'Vermelho', valor: "#F44336"},
-          {texto: 'Amarelo', valor: "#ffeb3b"},
-          {texto: 'Verde', valor: "#4caf50"},
-          {texto: 'Laranja', valor: "#ff9800"},
-          {texto: 'Roxo', valor: "#9c27b0"},
-          {texto: 'Rosa', valor: "#e91e63"},
-          {texto: 'Ciano', valor: "#00bcd4"},
-          {texto: 'Azul claro', valor: "#03a9f4"},
-          {texto: 'Índigo', valor: "#3f51b5"},
-          {texto: 'Lima', valor: "#cddc39"},
-          {texto: 'Laranja Escuro', valor: "#ff5722"},
-          {texto: 'Rosa Claro', valor: "#F8BBD0"},
-          {texto: 'Teal', valor: "#009688"},
-          {texto: 'Roxo Escuro', valor: "#673AB7"}
+          {texto: 'Preto', valor: "rgb(0, 0, 0)"},
+          {texto: 'Cinza', valor: "rgb(158, 158, 158)"},
+          {texto: 'Marrom', valor: "rgb(121, 85, 72)"},
+          {texto: 'Azul', valor: "rgb(33, 150, 243)"},
+          {texto: 'Vermelho', valor: "rgb(244, 67, 54)"},
+          {texto: 'Amarelo', valor: "rgb(255, 235, 59)"},
+          {texto: 'Verde', valor: "rgb(76, 175, 80)"},
+          {texto: 'Laranja', valor: "rgb(255, 152, 0)"},
+          {texto: 'Roxo', valor: "rgb(156, 39, 176)"},
+          {texto: 'Rosa', valor: "rgb(233, 30, 99)"},
+          {texto: 'Ciano', valor: "rgb(0, 188, 212)"},
+          {texto: 'Azul claro', valor: "rgb(3, 169, 244)"},
+          {texto: 'Índigo', valor: "rgb(63, 81, 181)"},
+          {texto: 'Lima', valor: "rgb(205, 220, 57)"},
+          {texto: 'Laranja Escuro', valor: "rgb(255, 87, 34)"},
+          {texto: 'Rosa Claro', valor: "rgb(248, 187, 208)"},
+          {texto: 'Teal', valor: "rgb(0, 150, 136)"},
+          {texto: 'Roxo Escuro', valor: "rgb(103, 58, 183)"}
       ];
-      var btnCor = new eDittoButton(buttonGroup2, "Fonte",'', 2, cores);
+      var btnCor = new eDittoSelect(buttonGroup2, "Fonte", cores);
+      $this.adicionarBotaoVerificacao(btnCor, 'forecolor');
       btnCor.getButtonDOM().onchange = function() {
           documento.formatar('forecolor', btnCor.getValue());
       };
@@ -121,13 +171,15 @@ function eDittoButtonBar(documento, textid, options) {
           {texto: '6', valor: '6'},
           {texto: '7', valor: '7'}
       ];
-      var btntamanhofonte = new eDittoButton(buttonGroup2, "Fonte",'', 2, tamanhosTexto);
+      var btntamanhofonte = new eDittoSelect(buttonGroup2, "Fonte", tamanhosTexto);
+      $this.adicionarBotaoVerificacao(btntamanhofonte, 'fontSize');
       btntamanhofonte.getButtonDOM().onchange = function() {
           documento.formatar('fontSize', btntamanhofonte.getValue());
       };
 
       var fonts = [{texto: 'Arial', valor: "arial"}, {texto: 'Courier', valor: "courier"}];
-      var btnFont = new eDittoButton(buttonGroup2, "Fonte",'', 2, fonts);
+      var btnFont = new eDittoSelect(buttonGroup2, "Fonte", fonts);
+      $this.adicionarBotaoVerificacao(btnFont, 'fontname');
       btnFont.getButtonDOM().onchange = function() {
           documento.formatar('fontname', btnFont.getValue());
       };
@@ -241,6 +293,26 @@ function eDittoButton(grupoBotoes, icon, title, tpo, opcoes) {
     }
 
     /**
+     * Verifica se ação do botão atual está ativa no ponto do documento selecionado
+     * @param  {object} documento
+     * @param  {string} formato
+     * @return {undefined}
+     */
+    this.verificaAtivacao = function( documento, formato ) {
+        if ( tipo === 2 ) {
+             btn.value = documento.verificaFormatacao(formato);
+        }
+        else {
+            if (documento.verificaFormatacao(formato)) {
+                this.marcarBotao();
+            }
+            else {
+                this.desmarcarBotao();
+            };
+        };
+    };
+
+    /**
      * Marca botão como ativo
      * @return {undefined}
      */
@@ -290,26 +362,6 @@ function eDittoButton(grupoBotoes, icon, title, tpo, opcoes) {
     grupoBotoes.adicionarBotao(this);
 
 }
-
-/**
- * Verifica se ação do botão atual está ativa no ponto do documento selecionado
- * @param  {object} documento
- * @param  {string} formato
- * @return {undefined}
- */
-eDittoButton.prototype.verificaAtivacao = function( documento, formato ) {
-    if ( tipo === 2 ) {
-         btn.value = documento.verificaFormatacao(formato);
-    }
-    else {
-        if (documento.verificaFormatacao(formato)) {
-            this.marcarBotao();
-        }
-        else {
-            this.desmarcarBotao();
-        };
-    };
-};
 
 /**
  * [eDittoDocument description]
@@ -664,3 +716,57 @@ function eDittoButtonGroup(barraBotoes) {
     // Adicionando grupo a barra de botões
     barraBotoes.adicionarGrupo(this);
 }
+
+/**
+ * @param {string} icn Ícone do Font-awesome a ser adicionado ao botão. Caso seja um texto de um option do select, passar
+ * @param {int} tpo Tipo do botão. Se for um botão, 1 (padrão), caso seja um select, 2
+ * @param {array} opcoes [{ texto: 'azul', valor: #2196F3 }] Apenas para select
+ * */
+function eDittoSelect(grupoBotoes, title, opcoes) {
+
+
+    this.opcoes = opcoes;
+
+    this.btn = document.createElement("select");
+    this.btn.className = "editorSelect";
+    if ( opcoes ) {
+        for ( i in opcoes ) {
+            var opt = document.createElement("option");
+            opt.innerHTML = opcoes[i].texto;
+            opt.value = opcoes[i].valor;
+            this.btn.appendChild(opt);
+        };
+    }
+    else {
+        console.warning("Defina as opções");
+    }
+    eDittoAction.call(this, grupoBotoes, title);
+}
+
+
+eDittoSelect.prototype.contructor = eDittoAction;
+/**
+ * Verifica se ação do botão atual está ativa no ponto do documento selecionado
+ * @param  {object} documento
+ * @param  {string} formato
+ * @return {undefined}
+ */
+eDittoSelect.prototype.verificaAtivacao = function( documento, formato ) {
+    this.btn.value = documento.frame.queryCommandValue(formato);
+};
+
+/**
+ * Obtém o elemento button criado a partir do document.createElement()
+ * @return {[type]} [description]
+ */
+eDittoSelect.prototype.getButtonDOM = function() {
+    return this.btn;
+};
+
+/**
+ * Obtém o valor no button criado a partir do document.createElement()
+ * @return {[type]} [description]
+ */
+eDittoSelect.prototype.getValue = function() {
+    return this.getButtonDOM().value;
+};
