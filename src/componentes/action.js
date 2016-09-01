@@ -4,9 +4,8 @@
   * @param {int} tpo Tipo do botão. Se for um botão, 1 (padrão), caso seja um select, 2
   * @param {array} opcoes [{ texto: 'azul', valor: #2196F3 }] Apenas para select
   * */
- function eDittoAction(grupoBotoes, title) {
+ function eDittoAction(grupoBotoes) {
 
-     this.titulo = title;
      this.grupoBotoes = grupoBotoes;
 
      // Adicionando botão criado a grupo definido
@@ -38,12 +37,4 @@
   */
  eDittoAction.prototype.getElementDOM = function() {
 
- };
-
- /**
-  * Obtém o valor no button criado a partir do document.createElement()
-  * @return {[type]} [description]
-  */
- eDittoAction.prototype.getValue = function() {
-    return null;
  };
