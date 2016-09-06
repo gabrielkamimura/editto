@@ -1,17 +1,17 @@
-.editorDocumento {
-  border: none;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
+.editto_document {
+  border: 2px #eee solid;
+  border-radius: 20px; }
 
-.editorBotoes {
+.editto_bar {
   width: 100%;
   margin: 1em 1em;
   padding-bottom: 2em; }
 
-.editorButton, .editorSelect {
+.editto_button__icon, .editto_select {
   border: none;
   margin: 1px; }
 
-.editorButton {
+.editto_button__icon {
   background-color: transparent;
   width: 2em;
   height: 2em;
@@ -19,31 +19,35 @@
   color: #323232;
   cursor: pointer; }
 
-.editorSelect {
+.editto_select {
   background: none;
   border: none;
   color: #323232; }
 
-.editorButton:active {
+.editto_button__icon:active {
   background-color: #F44336;
   color: #fff; }
-.editorButton.editorButton.ativo {
+
+.editto_button__icon.editto_button__icon.ativo {
   background-color: #F44336;
   color: #fff; }
-.editorButton:hover {
+
+.editto_button__icon:hover {
   color: #aaa; }
 
-.editorDocumento {
+.editto_document {
   height: 30em;
   width: 95%;
   padding: 1em 1em; }
 
-.editorGroupButton {
+.editto_document:active, .editto_document:focus {
+  border-color: #F44336; }
+
+.editto_group {
   margin-left: 1em;
   margin-right: 1em;
   float: left;
   padding-right: 1em; }
 
-.editorGroupButton {
+.editto_group {
   border-right: #ddd solid 1px; }
-

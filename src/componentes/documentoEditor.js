@@ -7,7 +7,7 @@
 function eDittoDocument(textid, editor) {
 
     this.textarea = document.getElementById(textid);
-    var editBox = $("<iframe contenteditable='true' class='editorDocumento' id='" + 't' + textid + "'></iframe>");
+    var editBox = $("<iframe contenteditable='true' class='editto_document' id='" + 't' + textid + "'></iframe>");
     var editor = editor || null;
     var $this = this;
 

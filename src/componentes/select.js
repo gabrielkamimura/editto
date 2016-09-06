@@ -9,7 +9,7 @@ function eDittoSelect(grupoBotoes, title, opcoes) {
     this.opcoes = opcoes;
 
     this.btn = document.createElement("select");
-    this.btn.className = "editorSelect";
+    this.btn.className = "editto_select";
     if ( opcoes ) {
         for ( i in opcoes ) {
             var opt = document.createElement("option");

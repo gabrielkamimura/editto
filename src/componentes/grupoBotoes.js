@@ -7,7 +7,7 @@ function eDittoButtonGroup(barraBotoes) {
 
     var btngrp = document.createElement('div'),
         barraBotoes = barraBotoes;
-    btngrp.className = "editorGroupButton";
+    btngrp.className = "editto_group";
 
     /**
      * Obtém a barra de botões a que esse grupo atende

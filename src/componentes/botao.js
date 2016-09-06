@@ -12,7 +12,7 @@ function eDittoButton(grupoBotoes, icone, titulo) {
         if (titulo) {
             this.btn.title = titulo;
         };
-        this.btn.className = "editorButton";
+        this.btn.className = "editto_button__icon";
         icn.className = "fa fa-" + icone;
 
         this.btn.appendChild(icn);
@@ -42,7 +42,7 @@ eDittoButton.prototype.verificaAtivacao = function( documento, formato ) {
  * @return {undefined}
  */
 eDittoButton.prototype.marcarBotao = function( ) {
-    this.btn.className = 'editorButton ativo';
+    this.btn.className = 'editto_button__icon ativo';
 };
 
 /**
@@ -50,7 +50,7 @@ eDittoButton.prototype.marcarBotao = function( ) {
  * @return {undefined}
  */
 eDittoButton.prototype.desmarcarBotao = function() {
-    this.btn.className = 'editorButton';
+    this.btn.className = 'editto_button__icon';
 };
 
 /**

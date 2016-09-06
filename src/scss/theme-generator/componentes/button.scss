@@ -27,7 +27,7 @@
 
 // Definição de classes
 
-.editorButton {
+.editto_button__icon {
 
     @extend %formato-itens;
     @extend %visual-botao;
@@ -37,7 +37,7 @@
         color: $color-active;
     }
 
-    &.editorButton.ativo {
+    &.editto_button__icon.ativo {
         background-color: $color-background-active;
         color: $color-active;
     }
@@ -48,7 +48,7 @@
 
 }
 
-.editorSelect {
+.editto_select {
     @extend %formato-itens;
     @extend %visual-select;
 }

@@ -12,7 +12,7 @@ function eDittoButtonBar(documento, textid, options) {
 
     var btnAtivacao = []; //Array dos botões a terem as ações monitoradass para a marcação do botão
     var documento = documento;
-    var divBtn = $("<div id='b" + textid + "' class='editorBotoes'></div>");
+    var divBtn = $("<div id='b" + textid + "' class='editto_bar'></div>");
 
     divBtn.insertBefore($(documento.textarea));
 
