@@ -1,16 +1,14 @@
 //   Formatação
 
 %formato-itens {
-    
     border: none;
     margin: 1px;
-    
+    box-sizing: border-box;
 }
 
 // Visual
 
 %visual-botao {
-
     background-color: transparent;
     width: 2em;
     height: 2em;
@@ -20,6 +18,7 @@
 }
 
 %visual-select {
+    height: 2em;
     background: none;
     border: none;
     color: $color;

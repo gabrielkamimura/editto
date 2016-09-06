@@ -33,6 +33,7 @@
 
             var btnImagem = new eDittoButton(buttonGroupCustom, "picture-o", "Imagem");
             btnImagem.getButtonDOM().onclick = function() {
+              console.log(documento.getSelectedText());
               var url = prompt("Insira a url da imagem");
               if (url) {
                   var opcoes = [

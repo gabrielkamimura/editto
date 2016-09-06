@@ -5,11 +5,13 @@
 .editto_bar {
   width: 100%;
   margin: 1em 1em;
-  padding-bottom: 2em; }
+  padding-bottom: 2em;
+  box-sizing: border-box; }
 
 .editto_button__icon, .editto_select {
   border: none;
-  margin: 1px; }
+  margin: 1px;
+  box-sizing: border-box; }
 
 .editto_button__icon {
   background-color: transparent;
@@ -20,6 +22,7 @@
   cursor: pointer; }
 
 .editto_select {
+  height: 2em;
   background: none;
   border: none;
   color: #323232; }
@@ -38,7 +41,8 @@
 .editto_document {
   height: 30em;
   width: 95%;
-  padding: 1em 1em; }
+  padding: 1em 1em;
+  box-sizing: border-box; }
 
 .editto_document:active, .editto_document:focus {
   border-color: #00BCD4; }
@@ -47,7 +51,8 @@
   margin-left: 1em;
   margin-right: 1em;
   float: left;
-  padding-right: 1em; }
+  padding-right: 1em;
+  box-sizing: border-box; }
 
 .editto_group {
   border-right: #ddd solid 1px; }

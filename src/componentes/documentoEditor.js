@@ -109,8 +109,6 @@ function eDittoDocument(textid, editor) {
         this.frame.designMode = 'On';
         this.getIframe('t' + textid).focus();
         
-        // Evitando redimensionamento de imagens padrão
-        this.getIframeDocument().execCommand("enableObjectResizing", false, false);
     };
 
     var $this = this;
