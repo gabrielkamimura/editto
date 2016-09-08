@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8"/>
-        <title>Teste de uso de editor</title>
-        <link href="themes/editto-cyan-theme.css" rel="stylesheet" type="text/css"/>
-        <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-    </head>
-    <body>
-        <textarea id="textExample">Este é o conteúdo</textarea>
-        <div id="teste"></div>
-    </body>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Teste de uso de editor</title>
+    <link href="themes/editto-cyan-theme.css" rel="stylesheet" type="text/css"/>
+    <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body>
+    <textarea id="textExample">Este é o conteúdo</textarea>
+    <div id="teste"></div>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="componentes/barraBotoes.js"></script>
     
@@ -19,7 +18,7 @@
     <script src="componentes/action.js"></script>
     <script src="componentes/botao.js"></script>
     <script src="componentes/select.js"></script>
-<!--    <script src="editto.js"></script>-->
+  <!--    <script src="editto.js"></script>-->
     <script>
         $(document).ready(function() {
             var edicao = new eDitto("textExample");
@@ -51,12 +50,12 @@
               documento.inserirTexto(":)");
             };
 
-            var carregamento = new eDittoButton(buttonGroupCustom, 'random', "Modelo externo");
+            var carregamento = new eDittoButton(buttonGroupCustom, null, "Modelo externo");
             carregamento.getButtonDOM().onclick = function() {
               documento.carregar('modelos/testeExterno.html')
             };
 
-            var tpl = new eDittoButton(buttonGroupCustom, 'random', "Carregamento de template");
+            var tpl = new eDittoButton(buttonGroupCustom, null, "Carregamento de template");
             tpl.getButtonDOM().onclick = function() {
               var opcoes = [
                 {
@@ -80,4 +79,5 @@
         });
 
     </script>
+  </body>
 </html>

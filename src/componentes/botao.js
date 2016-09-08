@@ -1,23 +1,29 @@
 /**
- * @param {string} icn Ícone do Font-awesome a ser adicionado ao botão. Caso seja um texto de um option do select, passar
+ * @param {string} icone Ícone do Font-awesome a ser adicionado ao botão. Caso seja um texto de um option do select, passar
  * @param {int} tpo Tipo do botão. Se for um botão, 1 (padrão), caso seja um select, 2
  * @param {array} opcoes [{ texto: 'azul', valor: #2196F3 }] Apenas para select
  * */
 function eDittoButton(grupoBotoes, icone, titulo) {
-
-        var icn = document.createElement("i");
     
-        this.btn = document.createElement("button");
-        this.btn.type = "button";
-        if (titulo) {
-            this.btn.title = titulo;
-        };
+    this.btn = document.createElement("button");
+    this.btn.type = "button";
+    
+    if (icone) {
+        var innerElement = document.createElement("i");
+        innerElement.className = "fa fa-" + icone;
         this.btn.className = "editto_button__icon";
-        icn.className = "fa fa-" + icone;
-
-        this.btn.appendChild(icn);
+    } else {
+        var innerElement = document.createTextNode(titulo);
+        this.btn.className = "editto_button__text";
+    }
     
-        eDittoAction.call(this, grupoBotoes, titulo);
+    if (titulo) {
+        this.btn.title = titulo;
+    };
+
+    this.btn.appendChild(innerElement);
+
+    eDittoAction.call(this, grupoBotoes, titulo);
 }
 
 eDittoButton.prototype.contructor = eDittoAction;

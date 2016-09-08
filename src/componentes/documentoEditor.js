@@ -90,7 +90,7 @@ function eDittoDocument(textid, editor) {
      * Retorna a seleção atual
      * @returns {txt@pro;frame@call;getSelection|txt@pro;frame@pro;selection@call;createRange@pro;text|txt}
      */
-    this.getSelectedText = function() {
+    this.getSelection = function() {
         if (this.frame.getSelection) {
             txt = this.frame.getSelection();
         } else if (this.frame.getSelection()) {
@@ -100,6 +100,21 @@ function eDittoDocument(textid, editor) {
         }
         return txt;
     };
+
+    /**
+     * Obtém o texto selecionado em um elemento
+     */
+    this.getSelectedText = function() {
+        var textoSelecionado = null;
+        try {
+            textoSelecionado = this.getSelection().toString();
+        } 
+        catch(error) {
+        
+        }
+
+        return textoSelecionado;
+    }
 
     /**
      * Habilita o design mode do iframe possibilitando alterações
@@ -167,9 +182,9 @@ function eDittoDocument(textid, editor) {
      * @returns {undefined}
      */
     this.inserirElemento = function(elem) {
-        if (this.getSelectedText) {
+        if (this.getSelection()) {
             var a = this.frame.createElement('div');
-            var range = this.getSelectedText().getRangeAt(0);
+            var range = this.getSelection().getRangeAt(0);
             range.surroundContents(a);
             a.innerHTML = elem;
         };
@@ -218,7 +233,7 @@ function eDittoDocument(textid, editor) {
        */
       this.carregar = function( template, options ) {
         var $this = this;
-          $(this.getSelectedText()).load( template, function(response) {
+          $(this.getSelection()).load( template, function(response) {
               var texto = response + '<br/>'; //A quebra de linha é para evitar que o documento após a personalização fique inalterável
               if (options) {
                   for ( i in options ) {

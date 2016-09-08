@@ -4,21 +4,18 @@
     border: none;
     margin: 1px;
     box-sizing: border-box;
+    height: 2em;
 }
 
 // Visual
 
 %visual-botao {
     background-color: transparent;
-    width: 2em;
-    height: 2em;
-    border-radius: 50% 50%;
     color: $color;
     cursor: pointer;
 }
 
 %visual-select {
-    height: 2em;
     background: none;
     border: none;
     color: $color;
@@ -27,6 +24,30 @@
 // Definição de classes
 
 .editto_button__icon {
+
+    @extend %formato-itens;
+    @extend %visual-botao;
+    
+    width: 2em;
+    border-radius: 50% 50%;
+
+    &:active {
+        background-color: $color-background-active;
+        color: $color-active;
+    }
+
+    &.editto_button__icon.ativo {
+        background-color: $color-background-active;
+        color: $color-active;
+    }
+
+    &:hover {
+        color: $color-hover;
+    }
+
+}
+
+.editto_button__text {
 
     @extend %formato-itens;
     @extend %visual-botao;
