@@ -102,6 +102,23 @@ function eDittoDocument(textid, editor) {
     };
 
     /**
+     * Obtém o range para a inserção de componentes
+     */
+    this.getSelectionRange = function() {
+
+        var range = null;
+        if (this.getSelection().getRangeAt) {
+          range = this.getSelection().getRangeAt(0);
+        } else {
+          range = document.createRange();
+          range.setStart (userSelection.anchorNode, userSelection.anchorOffset);
+          range.setEnd (userSelection.focusNode, userSelection.focusOffset);
+        }
+
+        return range;
+    }
+
+    /**
      * Obtém o texto selecionado em um elemento
      */
     this.getSelectedText = function() {
@@ -113,7 +130,26 @@ function eDittoDocument(textid, editor) {
         
         }
 
-        return textoSelecionado;
+        return textoSelecionado.length > 0 ? textoSelecionado : null;
+    }
+
+    /**
+     * Obtém o texto selecionado em um elemento
+     */
+    this.getSelectedHTML = function() {
+        var elementoSelecionado = null;
+        try {
+            var range = this.getSelectionRange().cloneContents(),
+                tmp = document.createElement('div');
+                tmp.appendChild(range);
+
+            elementoSelecionado = tmp.innerHTML;
+        } 
+        catch(error) {
+        
+        }
+
+        return elementoSelecionado.length > 0 ? elementoSelecionado : null;
     }
 
     /**
@@ -122,7 +158,7 @@ function eDittoDocument(textid, editor) {
     this.permitirEdicao = function() {
         this.getValue();
         this.frame.designMode = 'On';
-        this.getIframe('t' + textid).focus();
+        // this.getIframe('t' + textid).focus();
         
     };
 
@@ -184,7 +220,7 @@ function eDittoDocument(textid, editor) {
     this.inserirElemento = function(elem) {
         if (this.getSelection()) {
             var a = this.frame.createElement('div');
-            var range = this.getSelection().getRangeAt(0);
+            var range = this.getSelectionRange();
             range.surroundContents(a);
             a.innerHTML = elem;
         };

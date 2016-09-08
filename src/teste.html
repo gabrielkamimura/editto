@@ -60,7 +60,7 @@
               var opcoes = [
                 {
                   variavel: 'titulo',
-                  valor: prompt("Insira um título")
+                  valor: documento.getSelectedText() || prompt("Insira um título")
                 }
               ];
               documento.carregar('modelos/testeTemplate.html', opcoes);
