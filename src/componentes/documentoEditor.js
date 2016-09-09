@@ -269,16 +269,26 @@ function eDittoDocument(textid, editor) {
        */
       this.carregar = function( template, options ) {
         var $this = this;
-          $(this.getSelection()).load( template, function(response) {
-              var texto = response + '<br/>'; //A quebra de linha é para evitar que o documento após a personalização fique inalterável
-              if (options) {
-                  for ( i in options ) {
-                      var aux = "{{ " + options[i].variavel + " }}";
-                      texto = replaceAll(texto, aux, escapeHTML(options[i].valor));
-                  };
-              }
-              $this.inserirElemento(texto);
-          } );
+
+        var xhttp = new XMLHttpRequest();
+
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+
+                var texto = this.responseText + '<br/>';
+                if (options) {
+                    for ( i in options ) {
+                        var aux = "{{ " + options[i].variavel + " }}",
+                        texto = replaceAll(this.responseText, aux, escapeHTML(options[i].valor));
+                    };
+                }
+                $this.inserirElemento(texto);
+            }   
+        };
+
+        xhttp.open("GET", template, true);
+        xhttp.send();
+
       };
 
       /**

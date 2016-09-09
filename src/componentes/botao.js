@@ -81,10 +81,19 @@ function eDittoIcon(path) {
     this.element = document.createElement('div');
     this.element.className = "editto_button__icon_icon";
 
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", path, false);
+    var xhttp = new XMLHttpRequest(),
+        $this = this;
+    
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            $this.element.innerHTML = this.responseText;
+        }   
+    };
+    
+    xhttp.open("GET", path, true);
     xhttp.send();
     this.element.innerHTML = xhttp.responseText;
+
 }
 
 /**
