@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .editto_document {
   border: 2px #eee solid;
   border-radius: 20px; }
@@ -46,6 +47,16 @@
 
 .editto_button__text:hover {
   color: #aaa; }
+
+/**
+ * O ícone dentro do bloco de botão
+ */
+.edittoButton_icon {
+  height: 100%;
+  width: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center; }
 
 .editto_document {
   height: 30em;

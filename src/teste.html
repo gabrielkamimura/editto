@@ -4,7 +4,6 @@
     <meta charset="utf-8"/>
     <title>Teste de uso de editor</title>
     <link href="themes/editto-cyan-theme.css" rel="stylesheet" type="text/css"/>
-    <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
   </head>
   <body>
     <textarea id="textExample">Este é o conteúdo</textarea>
@@ -30,7 +29,7 @@
             // Elementos personalizados
             var buttonGroupCustom = new eDittoButtonGroup(barraBotoes);
 
-            var btnImagem = new eDittoButton(buttonGroupCustom, "picture-o", "Imagem");
+            var btnImagem = new eDittoButton(buttonGroupCustom, "/icons/insert_photo.svg", "Imagem");
             btnImagem.getButtonDOM().onclick = function() {
               console.log(documento.getSelectedText());
               var url = prompt("Insira a url da imagem");
@@ -45,7 +44,7 @@
               }
             };
 
-            var personalizacao = new eDittoButton(buttonGroupCustom, 'smile-o', "Elemento personalizado");
+            var personalizacao = new eDittoButton(buttonGroupCustom, '/icons/heart.svg', "Elemento personalizado");
             personalizacao.getButtonDOM().onclick = function() {
               documento.inserirTexto(":)");
             };
@@ -66,7 +65,7 @@
               documento.carregar('modelos/testeTemplate.html', opcoes);
             };
 
-            var stgIns = new eDittoButton(buttonGroupCustom, 'comment', "Olá, meu amigo")
+            var stgIns = new eDittoButton(buttonGroupCustom, '/icons/heart.svg', "Olá, meu amigo")
             stgIns.getButtonDOM().onclick = function() {
               var opcoes = [
                   {

@@ -1,5 +1,5 @@
 /**
- * @param {string} icone Ícone do Font-awesome a ser adicionado ao botão. Caso seja um texto de um option do select, passar
+ * @param {string} icone Link para arquivo svg contendo o ícone a ser utilizado
  * @param {int} tpo Tipo do botão. Se for um botão, 1 (padrão), caso seja um select, 2
  * @param {array} opcoes [{ texto: 'azul', valor: #2196F3 }] Apenas para select
  * */
@@ -9,8 +9,8 @@ function eDittoButton(grupoBotoes, icone, titulo) {
     this.btn.type = "button";
     
     if (icone) {
-        var innerElement = document.createElement("i");
-        innerElement.className = "fa fa-" + icone;
+        var icone = new eDittoIcon(icone);
+        var innerElement = icone.getElementDOM();
         this.btn.className = "editto_button__icon";
     } else {
         var innerElement = document.createTextNode(titulo);
@@ -76,4 +76,15 @@ eDittoButton.prototype.definirIcone = function(ricon) {
     icn.className = "fa fa-" + ricon;
 };
 
+function eDittoIcon(path) {
+    this.element =  document.createElement('img');
+    this.element.className = "edittoButton_icon";
+    this.element.src = path;
+}
 
+/**
+ * Obtém o elemento de ícone a ser inserido no DOM
+ */
+eDittoIcon.prototype.getElementDOM = function() {
+    return this.element;
+}

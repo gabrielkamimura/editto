@@ -72,3 +72,14 @@
     @extend %formato-itens;
     @extend %visual-select;
 }
+
+/**
+ * O ícone dentro do bloco de botão
+ */
+.edittoButton_icon {
+    height: 100%;
+    width: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
