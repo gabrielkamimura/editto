@@ -77,9 +77,14 @@ eDittoButton.prototype.definirIcone = function(ricon) {
 };
 
 function eDittoIcon(path) {
-    this.element =  document.createElement('img');
-    this.element.className = "edittoButton_icon";
-    this.element.src = path;
+
+    this.element = document.createElement('div');
+    this.element.className = "editto_button__icon_icon";
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", path, false);
+    xhttp.send();
+    this.element.innerHTML = xhttp.responseText;
 }
 
 /**

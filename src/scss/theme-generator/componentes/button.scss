@@ -39,10 +39,17 @@
     &.editto_button__icon.ativo {
         background-color: $color-background-active;
         color: $color-active;
+        svg {
+            fill: $color-active;
+        }
     }
 
     &:hover {
         color: $color-hover;
+
+        svg {
+            fill: $color-hover;
+        }
     }
 
 }
@@ -76,10 +83,16 @@
 /**
  * O ícone dentro do bloco de botão
  */
-.edittoButton_icon {
+.editto_button__icon_icon {
     height: 100%;
     width: 100%;
-    background-size: contain;
+    /*background-size: contain;
     background-repeat: no-repeat;
-    background-position: center center;
+    background-position: center center;*/
+
+    svg {
+        width: 100%;
+        height: 100%;
+        fill: $color;
+    }
 }

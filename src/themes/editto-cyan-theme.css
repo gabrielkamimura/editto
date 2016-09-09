@@ -34,8 +34,12 @@
   .editto_button__icon.editto_button__icon.ativo {
     background-color: #00BCD4;
     color: #fff; }
+    .editto_button__icon.editto_button__icon.ativo svg {
+      fill: #fff; }
   .editto_button__icon:hover {
     color: #aaa; }
+    .editto_button__icon:hover svg {
+      fill: #aaa; }
 
 .editto_button__text:active {
   background-color: #00BCD4;
@@ -51,12 +55,16 @@
 /**
  * O ícone dentro do bloco de botão
  */
-.edittoButton_icon {
+.editto_button__icon_icon {
   height: 100%;
   width: 100%;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center center; }
+  /*background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;*/ }
+  .editto_button__icon_icon svg {
+    width: 100%;
+    height: 100%;
+    fill: #323232; }
 
 .editto_document {
   height: 30em;
