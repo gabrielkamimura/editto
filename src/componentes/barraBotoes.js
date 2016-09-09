@@ -12,9 +12,13 @@ function eDittoButtonBar(documento, textid, options) {
 
     var btnAtivacao = []; //Array dos botões a terem as ações monitoradass para a marcação do botão
     var documento = documento;
-    var divBtn = $("<div id='b" + textid + "' class='editto_bar'></div>");
+    var divBtn = document.createElement('div');
+    divBtn.id = 'b' + textid;
+    divBtn.className = 'editto_bar';
 
-    divBtn.insertBefore($(documento.textarea));
+    var $this = this;
+
+    eDittoHelpers.insertAfter(divBtn, documento.textarea);
 
     var container = document.getElementById('b' + textid);
 
@@ -49,12 +53,15 @@ function eDittoButtonBar(documento, textid, options) {
         this.verificarBotoes();
     };
 
-    // Ao alterar, requisitar verificação
-    $(documento.frame).on('keypress focus change click select', function() {
-        for (var i in btnAtivacao) {
-            btnAtivacao[i].botao.verificaAtivacao(documento, btnAtivacao[i].acao);
-        };
-    });
+    /**
+     * Função a ser executada quando for necessário veerificar botões
+     */
+    var fverificacaoBotoes = function() {
+      $this.verificarBotoes();
+    };
+    documento.frame.onclick = fverificacaoBotoes;
+    documento.frame.onkeypress = fverificacaoBotoes;
+    documento.frame.onfocus = fverificacaoBotoes;
 
     /**
      * Adição de elementos padrão caso estes não tenham sido removidos via opções

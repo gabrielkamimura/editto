@@ -33,5 +33,27 @@ function eDitto(textid, options) {
         return documento;
     };
 
+
     var $this = this;
+}
+
+/**
+ * Funcionalidade gerais a serem utilizadas
+ */
+window.eDittoHelpers = {
+    /**
+     * Insere um elemtno anteriormente a outro. Utilizado para inserir componentes como a barra de botões e o documento
+     */
+    insertAfter: function(newElement,targetElement) {
+        var parent = targetElement.parentNode;
+
+        //if the parents lastchild is the targetElement...
+        if(parent.lastchild == targetElement) {
+            //add the newElement after the target element.
+            parent.appendChild(newElement);
+            } else {
+            // else the target has siblings, insert the new element between the target and it's next sibling.
+            parent.insertBefore(newElement, targetElement.nextSibling);
+            }
+    }
 }

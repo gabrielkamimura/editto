@@ -7,14 +7,24 @@
 function eDittoDocument(textid, editor) {
 
     this.textarea = document.getElementById(textid);
-    var editBox = $("<iframe contenteditable='true' class='editto_document' id='" + 't' + textid + "'></iframe>");
+
+    var editBox = document.createElement('iframe');
+    editBox.className = 'editto_document';
+    editBox.id = 't' + textid;
+    editBox.contenteditable = true;
+
     var editor = editor || null;
     var $this = this;
 
-    editBox.insertAfter($(this.textarea));
+    eDittoHelpers.insertAfter(editBox, this.textarea);
     this.textarea.style.display = "none";
 
-    document.getElementById('t' + textid).onload = function() {
+    // document.getElementById('t' + textid).onload = function() {
+    //     $this.frame = $this.getIframeDocument('t' + textid);
+    //     $this.permitirEdicao();
+    // };
+
+    editBox.onload = function() {
         $this.frame = $this.getIframeDocument('t' + textid);
         $this.permitirEdicao();
     };
@@ -163,17 +173,6 @@ function eDittoDocument(textid, editor) {
     };
 
     var $this = this;
-
-    $( '#t' + textid ).ready(function() {
-        $this.frame = $this.getIframeDocument('t' + textid);
-
-        $this.getValue();
-    });
-/*
-    $(this.getIframe('t' + textid)).on('keydown keypress select focus change blur click submit', function() {
-        $this.setValue();
-    });
-*/
 
     var passaValor = null;
 

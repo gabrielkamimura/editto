@@ -8,7 +8,6 @@
   <body>
     <textarea id="textExample">Este é o conteúdo</textarea>
     <div id="teste"></div>
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="componentes/barraBotoes.js"></script>
     
     <script src="componentes/documentoEditor.js"></script>
@@ -19,7 +18,7 @@
     <script src="componentes/select.js"></script>
   <!--    <script src="editto.js"></script>-->
     <script>
-        $(document).ready(function() {
+        window.onload = function() {
             var edicao = new eDitto("textExample");
             var documento = edicao.obterDocumento(),
                 barraBotoes = edicao.obterBarraBotoes();
@@ -75,7 +74,7 @@
               ];
               documento.inserirComponente("<p>Olá, {{ nome }}!!</p>", opcoes);
             }
-        });
+        };
 
     </script>
   </body>
