@@ -91,7 +91,15 @@ function eDittoDocument(textid, editor) {
      */
     this.setValue = function() {
         this.textarea.value = this.frame.body.innerHTML;
+        // Verificar a ativação dos elementos também
     };
+
+    /**
+     * Chama na barra de botões a funcionalidade de verificação de ações ativas
+     */
+    this.verificarBotoes = function() {
+        editor.obterBarraBotoes().verificarBotoes();
+    }
 
 
     this.frame = this.getIframeDocument('t' + textid);
@@ -191,6 +199,7 @@ function eDittoDocument(textid, editor) {
     this.iniciarPassagem = function() {
         passaValor = setInterval(function() {
             $this.setValue();
+            $this.verificarBotoes();
         }, 500);
 
     };

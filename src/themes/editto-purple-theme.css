@@ -13,7 +13,7 @@
   border: none;
   margin: 1px;
   box-sizing: border-box;
-  height: 2em; }
+  height: 2.2em; }
 
 .editto_button__icon, .editto_button__text {
   background-color: transparent;
@@ -26,7 +26,7 @@
   color: #323232; }
 
 .editto_button__icon {
-  width: 2em;
+  width: 2.2em;
   border-radius: 50% 50%; }
   .editto_button__icon:active {
     background-color: #3F51B5;

@@ -54,16 +54,6 @@ function eDittoButtonBar(documento, textid, options) {
     };
 
     /**
-     * Função a ser executada quando for necessário veerificar botões
-     */
-    var fverificacaoBotoes = function() {
-      $this.verificarBotoes();
-    };
-    documento.frame.onclick = fverificacaoBotoes;
-    documento.frame.onkeypress = fverificacaoBotoes;
-    documento.frame.onfocus = fverificacaoBotoes;
-
-    /**
      * Adição de elementos padrão caso estes não tenham sido removidos via opções
      */
     if (!options.disableDefaultComponents) {
