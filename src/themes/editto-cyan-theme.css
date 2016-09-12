@@ -34,11 +34,11 @@
   .editto_button__icon.editto_button__icon.ativo {
     background-color: #00BCD4;
     color: #fff; }
-    .editto_button__icon.editto_button__icon.ativo svg {
+    .editto_button__icon.editto_button__icon.ativo svg, .editto_button__icon.editto_button__icon.ativo rect, .editto_button__icon.editto_button__icon.ativo circle, .editto_button__icon.editto_button__icon.ativo g {
       fill: #fff; }
   .editto_button__icon:hover {
     color: #aaa; }
-    .editto_button__icon:hover svg {
+    .editto_button__icon:hover svg, .editto_button__icon:hover rect, .editto_button__icon:hover circle, .editto_button__icon:hover g {
       fill: #aaa; }
 
 .editto_button__text:active {
@@ -64,6 +64,8 @@
   .editto_button__icon_icon svg {
     width: 100%;
     height: 100%;
+    fill: #323232; }
+  .editto_button__icon_icon svg, .editto_button__icon_icon rect, .editto_button__icon_icon circle, .editto_button__icon_icon g {
     fill: #323232; }
 
 .editto_document {

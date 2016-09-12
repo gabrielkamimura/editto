@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg width="70px" height="70px" viewBox="0 0 70 70" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
-    <title>insert_photo</title>
+    <title>insert_image</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="insert_photo" fill="#4A4A4A">
+        <g id="insert_image" fill="#4A4A4A">
             <path d="M8,21.9982674 C8,17.0286616 12.0219981,13 17.0051707,13 L53.9948293,13 C58.9682477,13 63,17.0330522 63,21.9982674 L63,49.0017326 C63,53.9713384 58.9780019,58 53.9948293,58 L17.0051707,58 C12.0317523,58 8,53.9669478 8,49.0017326 L8,21.9982674 Z M15.0622187,29.3241591 L15.0791847,50.5826081 L17.6854917,50.7256075 L32.828087,40.3431985 L15.0622187,29.3241591 Z M33.5,31 C35.9852814,31 38,28.9852814 38,26.5 C38,24.0147186 35.9852814,22 33.5,22 C31.0147186,22 29,24.0147186 29,26.5 C29,28.9852814 31.0147186,31 33.5,31 Z M41.8006988,35.3155952 L58.3256224,50.6189639 L19.6656711,50.6819806 L41.8006988,35.3155952 Z" id="Combined-Shape"></path>
         </g>
     </g>
