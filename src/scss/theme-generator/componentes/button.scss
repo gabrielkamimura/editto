@@ -98,4 +98,8 @@
   svg, rect, circle, g {
     fill: $color;
   }
+
+  text {
+    font-family: sans-serif;
+  }
 }

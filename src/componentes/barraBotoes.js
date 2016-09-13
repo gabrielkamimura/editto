@@ -60,21 +60,21 @@ function eDittoButtonBar(documento, textid, options) {
       var $this = this;
       var buttonGroup1 = new eDittoButtonGroup($this);
 
-      var btnNegrito = new eDittoButton(buttonGroup1, "/icons/bold.svg", "Negrito");
+      var btnNegrito = new eDittoButton(buttonGroup1, "@eDittoIcons/bold.svg", "Negrito");
       btnNegrito.getButtonDOM().onclick = function() {
           $this.adicionarBotaoVerificacao(btnNegrito, 'bold');
           documento.formatar('bold');
           $this.verificarBotoes();
       };
 
-      var btnItalico = new eDittoButton(buttonGroup1, "/icons/italic.svg", "Itálico");
+      var btnItalico = new eDittoButton(buttonGroup1, "@eDittoIcons/italic.svg", "Itálico");
       $this.adicionarBotaoVerificacao(btnItalico, 'italic');
       btnItalico.getButtonDOM().onclick = function() {
           documento.formatar('italic');
           $this.verificarBotoes();
       };
 
-      var btnUnderline = new eDittoButton(buttonGroup1, "/icons/underline.svg", "Sublinhado");
+      var btnUnderline = new eDittoButton(buttonGroup1, "@eDittoIcons/underline.svg", "Sublinhado");
       $this.adicionarBotaoVerificacao(btnUnderline, 'underline');
       btnUnderline.getButtonDOM().onclick = function() {
           documento.formatar('underline');
@@ -132,7 +132,7 @@ function eDittoButtonBar(documento, textid, options) {
       };
 
       var buttonGroup3 = new eDittoButtonGroup($this);
-      var btnEsquerda = new eDittoButton(buttonGroup3, "/icons/align_left.svg", "Alinhar à Esquerda");
+      var btnEsquerda = new eDittoButton(buttonGroup3, "@eDittoIcons/align_left.svg", "Alinhar à Esquerda");
       $this.adicionarBotaoVerificacao(btnEsquerda, 'justifyleft');
       btnEsquerda.getButtonDOM().onclick = function() {
           documento.formatar('justifyleft');
@@ -140,14 +140,14 @@ function eDittoButtonBar(documento, textid, options) {
       };
 
 
-      var btnCentraliza = new eDittoButton(buttonGroup3, "/icons/align_center.svg", "Centralizar");
+      var btnCentraliza = new eDittoButton(buttonGroup3, "@eDittoIcons/align_center.svg", "Centralizar");
       $this.adicionarBotaoVerificacao(btnCentraliza, 'justifycenter');
       btnCentraliza.getButtonDOM().onclick = function() {
           documento.formatar('justifycenter');
           $this.verificarBotoes();
       };
 
-      var btnDireita = new eDittoButton(buttonGroup3, "/icons/align_right.svg", "Alinhar à direita");
+      var btnDireita = new eDittoButton(buttonGroup3, "@eDittoIcons/align_right.svg", "Alinhar à direita");
       $this.adicionarBotaoVerificacao(btnDireita, 'justifyright');
       btnDireita.getButtonDOM().onclick = function() {
           documento.formatar('justifyright');
@@ -155,14 +155,14 @@ function eDittoButtonBar(documento, textid, options) {
       };
 
       var buttonGroup4 = new eDittoButtonGroup($this);
-      var btnNum = new eDittoButton(buttonGroup4, "/icons/list_ol.svg", "Lista Numérica");
+      var btnNum = new eDittoButton(buttonGroup4, "@eDittoIcons/list_ol.svg", "Lista Numérica");
       $this.adicionarBotaoVerificacao(btnNum, 'insertorderedlist');
       btnNum.getButtonDOM().onclick = function() {
         documento.formatar('insertorderedlist');
         $this.verificarBotoes();
       };
 
-      var btnLst = new eDittoButton(buttonGroup4, "/icons/list_ul.svg", "Lista");
+      var btnLst = new eDittoButton(buttonGroup4, "@eDittoIcons/list_ul.svg", "Lista");
       $this.adicionarBotaoVerificacao(btnLst, 'insertunorderedlist');
       btnLst.getButtonDOM().onclick = function() {
         documento.formatar('insertunorderedlist');
@@ -170,7 +170,7 @@ function eDittoButtonBar(documento, textid, options) {
       };
 
       var buttonGroup5 = new eDittoButtonGroup($this);
-      var btnLnk = new eDittoButton(buttonGroup5, '/icons/link.svg', "link");
+      var btnLnk = new eDittoButton(buttonGroup5, '@eDittoIcons/link.svg', "link");
       btnLnk.getButtonDOM().onclick = function() {
           var sLnk = prompt('Digite a URL do link: ', 'http:\/\/');
           if (sLnk && sLnk != '' && sLnk != 'http://') {
@@ -178,12 +178,12 @@ function eDittoButtonBar(documento, textid, options) {
           };
       };
 
-      var btnUlk = new eDittoButton(buttonGroup5, '/icons/unlink.svg', "Remover Link");
+      var btnUlk = new eDittoButton(buttonGroup5, '@eDittoIcons/unlink.svg', "Remover Link");
       btnUlk.getButtonDOM().onclick = function() {
         documento.formatar('unlink');
       }
 
-      var btnLmp = new eDittoButton(buttonGroup5, '/icons/clear.svg', "Limpar Formatação");
+      var btnLmp = new eDittoButton(buttonGroup5, '@eDittoIcons/clear.svg', "Limpar Formatação");
       btnLmp.getButtonDOM().onclick = function() {
         documento.formatar('removeFormat');
       };

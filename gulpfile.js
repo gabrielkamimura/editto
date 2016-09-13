@@ -20,7 +20,8 @@ gulp.task( 'minify-css', function() {
  
 gulp.task('scripts', function() {
   return gulp.src('./src/componentes/*.js')
-    .pipe(concat('editto.js'))
+    .pipe(concat('editto.min.js'))
+    .pipe(uglify())
     .pipe(gulp.dest('./'));
 });
  

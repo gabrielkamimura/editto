@@ -53,9 +53,13 @@ function eDittoButtonBar(documento, textid, options) {
 
     var btnAtivacao = []; //Array dos botões a terem as ações monitoradass para a marcação do botão
     var documento = documento;
-    var divBtn = $("<div id='b" + textid + "' class='editorBotoes'></div>");
+    var divBtn = document.createElement('div');
+    divBtn.id = 'b' + textid;
+    divBtn.className = 'editto_bar';
 
-    divBtn.insertBefore($(documento.textarea));
+    var $this = this;
+
+    eDittoHelpers.insertAfter(divBtn, documento.textarea);
 
     var container = document.getElementById('b' + textid);
 
@@ -90,13 +94,6 @@ function eDittoButtonBar(documento, textid, options) {
         this.verificarBotoes();
     };
 
-    // Ao alterar, requisitar verificação
-    $(documento.frame).on('keypress focus change click select', function() {
-        for (var i in btnAtivacao) {
-            btnAtivacao[i].botao.verificaAtivacao(documento, btnAtivacao[i].acao);
-        };
-    });
-
     /**
      * Adição de elementos padrão caso estes não tenham sido removidos via opções
      */
@@ -104,21 +101,21 @@ function eDittoButtonBar(documento, textid, options) {
       var $this = this;
       var buttonGroup1 = new eDittoButtonGroup($this);
 
-      var btnNegrito = new eDittoButton(buttonGroup1, "bold", "Negrito");
+      var btnNegrito = new eDittoButton(buttonGroup1, "@eDittoIcons/bold.svg", "Negrito");
       btnNegrito.getButtonDOM().onclick = function() {
           $this.adicionarBotaoVerificacao(btnNegrito, 'bold');
           documento.formatar('bold');
           $this.verificarBotoes();
       };
 
-      var btnItalico = new eDittoButton(buttonGroup1, "italic", "Itálico");
+      var btnItalico = new eDittoButton(buttonGroup1, "@eDittoIcons/italic.svg", "Itálico");
       $this.adicionarBotaoVerificacao(btnItalico, 'italic');
       btnItalico.getButtonDOM().onclick = function() {
           documento.formatar('italic');
           $this.verificarBotoes();
       };
 
-      var btnUnderline = new eDittoButton(buttonGroup1, 'underline', "Sublinhado");
+      var btnUnderline = new eDittoButton(buttonGroup1, "@eDittoIcons/underline.svg", "Sublinhado");
       $this.adicionarBotaoVerificacao(btnUnderline, 'underline');
       btnUnderline.getButtonDOM().onclick = function() {
           documento.formatar('underline');
@@ -176,7 +173,7 @@ function eDittoButtonBar(documento, textid, options) {
       };
 
       var buttonGroup3 = new eDittoButtonGroup($this);
-      var btnEsquerda = new eDittoButton(buttonGroup3, 'align-left', "Alinhar à Esquerda");
+      var btnEsquerda = new eDittoButton(buttonGroup3, "@eDittoIcons/align_left.svg", "Alinhar à Esquerda");
       $this.adicionarBotaoVerificacao(btnEsquerda, 'justifyleft');
       btnEsquerda.getButtonDOM().onclick = function() {
           documento.formatar('justifyleft');
@@ -184,14 +181,14 @@ function eDittoButtonBar(documento, textid, options) {
       };
 
 
-      var btnCentraliza = new eDittoButton(buttonGroup3, 'align-center', "Centralizar");
+      var btnCentraliza = new eDittoButton(buttonGroup3, "@eDittoIcons/align_center.svg", "Centralizar");
       $this.adicionarBotaoVerificacao(btnCentraliza, 'justifycenter');
       btnCentraliza.getButtonDOM().onclick = function() {
           documento.formatar('justifycenter');
           $this.verificarBotoes();
       };
 
-      var btnDireita = new eDittoButton(buttonGroup3, 'align-right', "Alinhar à direita");
+      var btnDireita = new eDittoButton(buttonGroup3, "@eDittoIcons/align_right.svg", "Alinhar à direita");
       $this.adicionarBotaoVerificacao(btnDireita, 'justifyright');
       btnDireita.getButtonDOM().onclick = function() {
           documento.formatar('justifyright');
@@ -199,14 +196,14 @@ function eDittoButtonBar(documento, textid, options) {
       };
 
       var buttonGroup4 = new eDittoButtonGroup($this);
-      var btnNum = new eDittoButton(buttonGroup4, 'list-ol', "Lista Numérica");
+      var btnNum = new eDittoButton(buttonGroup4, "@eDittoIcons/list_ol.svg", "Lista Numérica");
       $this.adicionarBotaoVerificacao(btnNum, 'insertorderedlist');
       btnNum.getButtonDOM().onclick = function() {
         documento.formatar('insertorderedlist');
         $this.verificarBotoes();
       };
 
-      var btnLst = new eDittoButton(buttonGroup4, 'list-ul', "Lista");
+      var btnLst = new eDittoButton(buttonGroup4, "@eDittoIcons/list_ul.svg", "Lista");
       $this.adicionarBotaoVerificacao(btnLst, 'insertunorderedlist');
       btnLst.getButtonDOM().onclick = function() {
         documento.formatar('insertunorderedlist');
@@ -214,7 +211,7 @@ function eDittoButtonBar(documento, textid, options) {
       };
 
       var buttonGroup5 = new eDittoButtonGroup($this);
-      var btnLnk = new eDittoButton(buttonGroup5, 'link', "link");
+      var btnLnk = new eDittoButton(buttonGroup5, '@eDittoIcons/link.svg', "link");
       btnLnk.getButtonDOM().onclick = function() {
           var sLnk = prompt('Digite a URL do link: ', 'http:\/\/');
           if (sLnk && sLnk != '' && sLnk != 'http://') {
@@ -222,12 +219,12 @@ function eDittoButtonBar(documento, textid, options) {
           };
       };
 
-      var btnUlk = new eDittoButton(buttonGroup5, 'unlink', "Remover Link");
+      var btnUlk = new eDittoButton(buttonGroup5, '@eDittoIcons/unlink.svg', "Remover Link");
       btnUlk.getButtonDOM().onclick = function() {
         documento.formatar('unlink');
       }
 
-      var btnLmp = new eDittoButton(buttonGroup5, 'eraser', "Limpar Formatação");
+      var btnLmp = new eDittoButton(buttonGroup5, '@eDittoIcons/clear.svg', "Limpar Formatação");
       btnLmp.getButtonDOM().onclick = function() {
         documento.formatar('removeFormat');
       };
@@ -235,25 +232,31 @@ function eDittoButtonBar(documento, textid, options) {
 }
 
 /**
- * @param {string} icn Ícone do Font-awesome a ser adicionado ao botão. Caso seja um texto de um option do select, passar
+ * @param {string} icone Link para arquivo svg contendo o ícone a ser utilizado
  * @param {int} tpo Tipo do botão. Se for um botão, 1 (padrão), caso seja um select, 2
  * @param {array} opcoes [{ texto: 'azul', valor: #2196F3 }] Apenas para select
  * */
 function eDittoButton(grupoBotoes, icone, titulo) {
-
-        var icn = document.createElement("i");
     
-        this.btn = document.createElement("button");
-        this.btn.type = "button";
-        if (titulo) {
-            this.btn.title = titulo;
-        };
-        this.btn.className = "editorButton";
-        icn.className = "fa fa-" + icone;
-
-        this.btn.appendChild(icn);
+    this.btn = document.createElement("button");
+    this.btn.type = "button";
     
-        eDittoAction.call(this, grupoBotoes, titulo);
+    if (icone) {
+        var icone = new eDittoIcon(icone);
+        var innerElement = icone.getElementDOM();
+        this.btn.className = "editto_button__icon";
+    } else {
+        var innerElement = document.createTextNode(titulo);
+        this.btn.className = "editto_button__text";
+    }
+    
+    if (titulo) {
+        this.btn.title = titulo;
+    };
+
+    this.btn.appendChild(innerElement);
+
+    eDittoAction.call(this, grupoBotoes, titulo);
 }
 
 eDittoButton.prototype.contructor = eDittoAction;
@@ -278,7 +281,7 @@ eDittoButton.prototype.verificaAtivacao = function( documento, formato ) {
  * @return {undefined}
  */
 eDittoButton.prototype.marcarBotao = function( ) {
-    this.btn.className = 'editorButton ativo';
+    this.btn.className = 'editto_button__icon ativo';
 };
 
 /**
@@ -286,7 +289,7 @@ eDittoButton.prototype.marcarBotao = function( ) {
  * @return {undefined}
  */
 eDittoButton.prototype.desmarcarBotao = function() {
-    this.btn.className = 'editorButton';
+    this.btn.className = 'editto_button__icon';
 };
 
 /**
@@ -306,8 +309,35 @@ eDittoButton.prototype.definirIcone = function(ricon) {
     icn.className = "fa fa-" + ricon;
 };
 
+function eDittoIcon(path) {
+    if (path.indexOf('@eDittoIcons') != -1) {
+        path = path.replace('@eDittoIcons', eDittoHelpers.getFileLocation() + 'icons');
+    }
+    
+    this.element = document.createElement('div');
+    this.element.className = "editto_button__icon_icon";
 
+    var xhttp = new XMLHttpRequest(),
+        $this = this;
+    
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            $this.element.innerHTML = this.responseText;
+        }   
+    };
+    
+    xhttp.open("GET", path, true);
+    xhttp.send();
+    this.element.innerHTML = xhttp.responseText;
 
+}
+
+/**
+ * Obtém o elemento de ícone a ser inserido no DOM
+ */
+eDittoIcon.prototype.getElementDOM = function() {
+    return this.element;
+}
 /**
  * [eDittoDocument description]
  * @param  {string} textid id do textarea a ser utilizado pelo editor
@@ -317,14 +347,24 @@ eDittoButton.prototype.definirIcone = function(ricon) {
 function eDittoDocument(textid, editor) {
 
     this.textarea = document.getElementById(textid);
-    var editBox = $("<iframe contenteditable='true' class='editorDocumento' id='" + 't' + textid + "'></iframe>");
+
+    var editBox = document.createElement('iframe');
+    editBox.className = 'editto_document';
+    editBox.id = 't' + textid;
+    editBox.contenteditable = true;
+
     var editor = editor || null;
     var $this = this;
 
-    editBox.insertAfter($(this.textarea));
+    eDittoHelpers.insertAfter(editBox, this.textarea);
     this.textarea.style.display = "none";
 
-    document.getElementById('t' + textid).onload = function() {
+    // document.getElementById('t' + textid).onload = function() {
+    //     $this.frame = $this.getIframeDocument('t' + textid);
+    //     $this.permitirEdicao();
+    // };
+
+    editBox.onload = function() {
         $this.frame = $this.getIframeDocument('t' + textid);
         $this.permitirEdicao();
     };
@@ -391,7 +431,15 @@ function eDittoDocument(textid, editor) {
      */
     this.setValue = function() {
         this.textarea.value = this.frame.body.innerHTML;
+        // Verificar a ativação dos elementos também
     };
+
+    /**
+     * Chama na barra de botões a funcionalidade de verificação de ações ativas
+     */
+    this.verificarBotoes = function() {
+        editor.obterBarraBotoes().verificarBotoes();
+    }
 
 
     this.frame = this.getIframeDocument('t' + textid);
@@ -400,7 +448,7 @@ function eDittoDocument(textid, editor) {
      * Retorna a seleção atual
      * @returns {txt@pro;frame@call;getSelection|txt@pro;frame@pro;selection@call;createRange@pro;text|txt}
      */
-    this.getSelectedText = function() {
+    this.getSelection = function() {
         if (this.frame.getSelection) {
             txt = this.frame.getSelection();
         } else if (this.frame.getSelection()) {
@@ -412,26 +460,67 @@ function eDittoDocument(textid, editor) {
     };
 
     /**
+     * Obtém o range para a inserção de componentes
+     */
+    this.getSelectionRange = function() {
+
+        var range = null;
+        if (this.getSelection().getRangeAt) {
+          range = this.getSelection().getRangeAt(0);
+        } else {
+          range = document.createRange();
+          range.setStart (userSelection.anchorNode, userSelection.anchorOffset);
+          range.setEnd (userSelection.focusNode, userSelection.focusOffset);
+        }
+
+        return range;
+    }
+
+    /**
+     * Obtém o texto selecionado em um elemento
+     */
+    this.getSelectedText = function() {
+        var textoSelecionado = null;
+        try {
+            textoSelecionado = this.getSelection().toString();
+        } 
+        catch(error) {
+        
+        }
+
+        return textoSelecionado.length > 0 ? textoSelecionado : null;
+    }
+
+    /**
+     * Obtém o texto selecionado em um elemento
+     */
+    this.getSelectedHTML = function() {
+        var elementoSelecionado = null;
+        try {
+            var range = this.getSelectionRange().cloneContents(),
+                tmp = document.createElement('div');
+                tmp.appendChild(range);
+
+            elementoSelecionado = tmp.innerHTML;
+        } 
+        catch(error) {
+        
+        }
+
+        return elementoSelecionado.length > 0 ? elementoSelecionado : null;
+    }
+
+    /**
      * Habilita o design mode do iframe possibilitando alterações
      */
     this.permitirEdicao = function() {
         this.getValue();
         this.frame.designMode = 'On';
-        this.getIframe('t' + textid).focus();
+        // this.getIframe('t' + textid).focus();
+        
     };
 
     var $this = this;
-
-    $( '#t' + textid ).ready(function() {
-        $this.frame = $this.getIframeDocument('t' + textid);
-
-        $this.getValue();
-    });
-/*
-    $(this.getIframe('t' + textid)).on('keydown keypress select focus change blur click submit', function() {
-        $this.setValue();
-    });
-*/
 
     var passaValor = null;
 
@@ -450,6 +539,7 @@ function eDittoDocument(textid, editor) {
     this.iniciarPassagem = function() {
         passaValor = setInterval(function() {
             $this.setValue();
+            $this.verificarBotoes();
         }, 500);
 
     };
@@ -476,9 +566,9 @@ function eDittoDocument(textid, editor) {
      * @returns {undefined}
      */
     this.inserirElemento = function(elem) {
-        if (this.getSelectedText) {
+        if (this.getSelection()) {
             var a = this.frame.createElement('div');
-            var range = this.getSelectedText().getRangeAt(0);
+            var range = this.getSelectionRange();
             range.surroundContents(a);
             a.innerHTML = elem;
         };
@@ -527,16 +617,26 @@ function eDittoDocument(textid, editor) {
        */
       this.carregar = function( template, options ) {
         var $this = this;
-          $(this.getSelectedText()).load( template, function(response) {
-              var texto = response + '<br/>'; //A quebra de linha é para evitar que o documento após a personalização fique inalterável
-              if (options) {
-                  for ( i in options ) {
-                      var aux = "{{ " + options[i].variavel + " }}";
-                      texto = replaceAll(texto, aux, escapeHTML(options[i].valor));
-                  };
-              }
-              $this.inserirElemento(texto);
-          } );
+
+        var xhttp = new XMLHttpRequest();
+
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+
+                var texto = this.responseText + '<br/>';
+                if (options) {
+                    for ( i in options ) {
+                        var aux = "{{ " + options[i].variavel + " }}",
+                        texto = replaceAll(this.responseText, aux, escapeHTML(options[i].valor));
+                    };
+                }
+                $this.inserirElemento(texto);
+            }   
+        };
+
+        xhttp.open("GET", template, true);
+        xhttp.send();
+
       };
 
       /**
@@ -618,7 +718,45 @@ function eDitto(textid, options) {
         return documento;
     };
 
+
     var $this = this;
+}
+
+/**
+ * Funcionalidade gerais a serem utilizadas
+ */
+window.eDittoHelpers = {
+    /**
+     * Insere um elemtno anteriormente a outro. Utilizado para inserir componentes como a barra de botões e o documento
+     */
+    insertAfter: function(newElement,targetElement) {
+        var parent = targetElement.parentNode;
+
+        //if the parents lastchild is the targetElement...
+        if (parent.lastchild == targetElement) {
+            //add the newElement after the target element.
+            parent.appendChild(newElement);
+        } else {
+            // else the target has siblings, insert the new element between the target and it's next sibling.
+            parent.insertBefore(newElement, targetElement.nextSibling);
+        }
+    },
+
+    /**
+     * Obtém a localização da pasta do arquivo do eDitto(editto.js ou editto.min.js)
+     */
+    getFileLocation: function() {
+        var scriptElements = document.getElementsByTagName('script');
+        for (var i = 0; i < scriptElements.length; i++) {
+            var source = scriptElements[i].src;
+            var fileIndex = source.indexOf('editto.min.js') > -1 ? source.indexOf('editto.min.js') : source.indexOf('editto.js');
+            if (fileIndex > -1) {
+                var location = source.substring(0, fileIndex);
+                return location;
+            }
+        }
+      return false;
+    }
 }
 
 /**
@@ -630,7 +768,7 @@ function eDittoButtonGroup(barraBotoes) {
 
     var btngrp = document.createElement('div'),
         barraBotoes = barraBotoes;
-    btngrp.className = "editorGroupButton";
+    btngrp.className = "editto_group";
 
     /**
      * Obtém a barra de botões a que esse grupo atende
@@ -673,7 +811,7 @@ function eDittoSelect(grupoBotoes, title, opcoes) {
     this.opcoes = opcoes;
 
     this.btn = document.createElement("select");
-    this.btn.className = "editorSelect";
+    this.btn.className = "editto_select";
     if ( opcoes ) {
         for ( i in opcoes ) {
             var opt = document.createElement("option");

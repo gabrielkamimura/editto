@@ -67,6 +67,8 @@
     fill: #323232; }
   .editto_button__icon_icon svg, .editto_button__icon_icon rect, .editto_button__icon_icon circle, .editto_button__icon_icon g {
     fill: #323232; }
+  .editto_button__icon_icon text {
+    font-family: sans-serif; }
 
 .editto_document {
   height: 30em;

@@ -48,12 +48,28 @@ window.eDittoHelpers = {
         var parent = targetElement.parentNode;
 
         //if the parents lastchild is the targetElement...
-        if(parent.lastchild == targetElement) {
+        if (parent.lastchild == targetElement) {
             //add the newElement after the target element.
             parent.appendChild(newElement);
-            } else {
+        } else {
             // else the target has siblings, insert the new element between the target and it's next sibling.
             parent.insertBefore(newElement, targetElement.nextSibling);
+        }
+    },
+
+    /**
+     * Obtém a localização da pasta do arquivo do eDitto(editto.js ou editto.min.js)
+     */
+    getFileLocation: function() {
+        var scriptElements = document.getElementsByTagName('script');
+        for (var i = 0; i < scriptElements.length; i++) {
+            var source = scriptElements[i].src;
+            var fileIndex = source.indexOf('editto.min.js') > -1 ? source.indexOf('editto.min.js') : source.indexOf('editto.js');
+            if (fileIndex > -1) {
+                var location = source.substring(0, fileIndex);
+                return location;
             }
+        }
+      return false;
     }
 }

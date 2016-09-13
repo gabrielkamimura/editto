@@ -77,7 +77,10 @@ eDittoButton.prototype.definirIcone = function(ricon) {
 };
 
 function eDittoIcon(path) {
-
+    if (path.indexOf('@eDittoIcons') != -1) {
+        path = path.replace('@eDittoIcons', eDittoHelpers.getFileLocation() + 'icons');
+    }
+    
     this.element = document.createElement('div');
     this.element.className = "editto_button__icon_icon";
 
