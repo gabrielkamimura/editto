@@ -340,13 +340,16 @@ eDittoIcon.prototype.getElementDOM = function() {
 }
 /**
  * [eDittoDocument description]
- * @param  {string} textid id do textarea a ser utilizado pelo editor
+ * @param  {string} textid id do textarea a ser utilizado pelo editor ou o próprio elemento a ser inserido
  * @param  {object} editor
  * @return {object}
  */
 function eDittoDocument(textid, editor) {
-
-    this.textarea = document.getElementById(textid);
+    if (textid instanceof Element) {
+        this.textarea = textid;
+    } else {
+        this.textarea = document.getElementById(textid);
+    }
 
     var editBox = document.createElement('iframe');
     editBox.className = 'editto_document';
@@ -752,7 +755,7 @@ window.eDittoHelpers = {
             var fileIndex = source.indexOf('editto.min.js') > -1 ? source.indexOf('editto.min.js') : source.indexOf('editto.js');
             if (fileIndex > -1) {
                 var location = source.substring(0, fileIndex);
-                return location;
+                return location.substring(location.indexOf('dist'), 0);
             }
         }
       return false;

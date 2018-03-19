@@ -1,12 +1,15 @@
 /**
  * [eDittoDocument description]
- * @param  {string} textid id do textarea a ser utilizado pelo editor
+ * @param  {string} textid id do textarea a ser utilizado pelo editor ou o próprio elemento a ser inserido
  * @param  {object} editor
  * @return {object}
  */
 function eDittoDocument(textid, editor) {
-
-    this.textarea = document.getElementById(textid);
+    if (textid instanceof Element) {
+        this.textarea = textid;
+    } else {
+        this.textarea = document.getElementById(textid);
+    }
 
     var editBox = document.createElement('iframe');
     editBox.className = 'editto_document';

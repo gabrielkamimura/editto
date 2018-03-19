@@ -67,7 +67,7 @@ window.eDittoHelpers = {
             var fileIndex = source.indexOf('editto.min.js') > -1 ? source.indexOf('editto.min.js') : source.indexOf('editto.js');
             if (fileIndex > -1) {
                 var location = source.substring(0, fileIndex);
-                return location;
+                return location.substring(location.indexOf('dist'), 0);
             }
         }
       return false;

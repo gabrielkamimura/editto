@@ -21,13 +21,13 @@ gulp.task( 'minify-css', function() {
 gulp.task('scripts', function() {
   return gulp.src('./componentes/*.js')
     .pipe(concat('editto.js'))
-    .pipe(gulp.dest('./'));
+    .pipe(gulp.dest('./dist'));
 });
  
 gulp.task('minify-js', function() {
   gulp.src('./editto.js')
     .pipe(uglify())
-    .pipe(gulp.dest('./'))
+    .pipe(gulp.dest('./dist'))
 });
 
 gulp.task('theme-compiler', function() {
