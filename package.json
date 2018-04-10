@@ -3,7 +3,6 @@
     "description": "Editor de Texto",
     "dependencies": {
         "http-server": "^0.6.1",
-        "bower": "1.3.12",
         "gulp": "*",
         "gulp-sass": "*",
         "gulp-minify-css": "*",
