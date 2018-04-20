@@ -4,11 +4,20 @@
     <meta charset="utf-8"/>
     <title>Editto Test</title>
 <!--    <link href="themes/editto-cyan-theme.css" rel="stylesheet" type="text/css"/>-->
+    <link type="text/css" rel="stylesheet" href="themes/editto-cyan-theme.css"/>
   </head>
   <body>
+    <editto-button-bar editto="meueditor">
+      <div class="editto_button_group">
+        <button class="editto_button" data-editto-format="bold"><img src="icons/bold.svg"/></button>
+        <button class="editto_button" data-editto-format="italic">Italic</button>
+        <button class="editto_button" data-editto-format="underline">Underline</button>
+      </div>
+    </editto-button-bar>
     <editto-editor value="Teste de " id="meueditor">
       <h1> Title</h1>
       <p>Some text should be written here.</p>
+      <editto-editor><p>asfsafs </p></editto-editor>  
     </editto-editor>
     
 <!--

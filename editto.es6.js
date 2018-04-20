@@ -9,21 +9,11 @@ class eDitto extends HTMLElement {
         var style = document.createElement('style');
         this.shadow.appendChild(style);
         this.shadow.appendChild(this.iframe);
-        console.log(this.innerHTML);
-        var buttons = this.querySelectorAll('button');
-        console.log(buttons);
         var that = this;
-        for (let i = 0; i < (buttons.length); i++) {
-            buttons[i].onclick = function() {
-                console.log(that);
-                console.log("Foi")
-            }
-        }
-      this.allowEdition();
+        this.allowEdition();
     }
     
     connectedCallback() {
-        console.log('Custom element added to page.');
       }
 
       disconnectedCallback() {
@@ -218,7 +208,42 @@ class eDitto extends HTMLElement {
     
 }
 
+class eDittoButtonBar extends HTMLElement {
+    static get observedAttributes() {return ['editto']; }
+    
+    constructor() {
+        super();
+        var buttons = this.querySelectorAll('button');
+        var that  = this;
+        for (let i = 0; i < (buttons.length); i++) {
+            this.setButtonAction(buttons[i])
+        }
+        
+    }
+    
+    setButtonAction(button) {
+        let that = this,
+            action = button.dataset.edittoFormat,
+            value = null;
+        if (action) {
+            button.onclick = function() {
+                that.eDitto.format(action, value);
+            }
+        }
+    }
+    
+    attributeChangedCallback(attrName, oldVal, newVal) {
+        console.log("Atribute change")
+        if (attrName == 'editto') {
+            this.eDitto = document.getElementById(newVal);  
+        }
+    }
+    
+    
+}
+
 customElements.define('editto-editor', eDitto);
+customElements.define('editto-button-bar', eDittoButtonBar);
 
 /**
  * Funcionalidade gerais a serem utilizadas
