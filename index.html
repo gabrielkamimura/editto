@@ -8,27 +8,17 @@
   </head>
   <body>
     <editto-button-bar editto="meueditor">
-      <div class="editto_button_group">
-        <button class="editto_button" data-editto-format="bold"><img src="icons/bold.svg"/></button>
-        <button class="editto_button" data-editto-format="italic">Italic</button>
-        <button class="editto_button" data-editto-format="underline">Underline</button>
+      <div class="editto-button_group">
+        <button class="editto-button__icon" data-editto-format="bold"><img src="icons/bold.svg"/></button>
+        <button class="editto-button__text" data-editto-format="italic">Italic</button>
+        <button class="editto-button__text" data-editto-format="underline">Underline</button>
       </div>
     </editto-button-bar>
-    <editto-editor value="Teste de " id="meueditor">
+    <editto-editor id="meueditor">
       <h1> Title</h1>
-      <p>Some text should be written here.</p>
-      <editto-editor><p>asfsafs </p></editto-editor>  
+      <p>Some text should be written here.</p> 
     </editto-editor>
     
-<!--
-    <editto-editor>
-      <editto-button-bar>
-        <editto-button-group>
-          <editto-button></editto-button>
-        </editto-button-group>
-      </editto-button-bar>
-    </editto-editor>
--->
     <script src="editto.es6.js"></script>
   </body>
 </html>

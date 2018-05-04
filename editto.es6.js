@@ -1,16 +1,35 @@
 class eDitto extends HTMLElement {
     static get observedAttributes() {return ['w', 'l']; }
     
-    constructor(textarea, buttonBarTemplate) {
+    constructor() {
         super();
         this.shadow = this.attachShadow( {mode: 'open'} );
-        this.textarea = textarea;
         this.iframe = document.createElement('iframe');
+        this.iframe.style.height = '100%';
+        this.iframe.style.width = '100%';
+        this.iframe.style.border = '1px dotted';
         var style = document.createElement('style');
         this.shadow.appendChild(style);
         this.shadow.appendChild(this.iframe);
         var that = this;
         this.allowEdition();
+        let $this = this;
+        
+        // Avoid paste formatted HTML content on paste
+        this.iframeDocument.addEventListener("paste", function(e) {
+            e.preventDefault();
+
+            if (e.clipboardData) {
+                let content = (e.originalEvent || e).clipboardData.getData('text/plain');
+
+                $this.iframeDocument.execCommand('insertText', false, content);
+            }
+            else if (window.clipboardData) {
+                let content = window.clipboardData.getData('Text');
+
+                document.selection.createRange().pasteHTML(content);
+            }   
+        });
     }
     
     connectedCallback() {
@@ -30,6 +49,10 @@ class eDitto extends HTMLElement {
         }
     }
     
+    /**
+     * Get the document of editor's iframe
+     * @returns {document} 
+     */
     get iframeDocument() {
         if (this.iframe) {
             return this.iframe.contentWindow.document;
@@ -49,21 +72,26 @@ class eDitto extends HTMLElement {
           }
         }
     }
-    
-    // Buttons and button groups will be inserted as HTML templates
-    
-    get eDittoButtonGroups() {
         
-    }
-    
+    /**
+     * Get the HTML content of editor
+     * @returns {string} 
+     */
     get value() {
         return this.innerHTML = this.iframeDocument.body.innerHTML
     }
     
+    /**
+     * Set a new value to the editor, changing its content
+     */
     set value(newValue) {
         this.iframeDocument.body.innerHTML = newValue;
     }
     
+    /**
+     * Get the selection of editor
+     * @returns {Selection}
+     */
     get selection() {
         let txt = null;
         if (this.iframeDocument.getSelection) {
@@ -76,6 +104,10 @@ class eDitto extends HTMLElement {
         return txt;
     }
     
+    /**
+     * Get the range of the current selection
+     * @returns {Range} 
+     */
     get selectionRange() {
         let range = null;
         if (this.selection.getRangeAt) {
@@ -89,6 +121,10 @@ class eDitto extends HTMLElement {
         return range;
     }
     
+    /**
+     * Get the current selection in text format
+     * @returns {string}
+     */
     get selectedText() {
         let textoSelecionado = null;
         try {
@@ -101,6 +137,10 @@ class eDitto extends HTMLElement {
         return textoSelecionado.length > 0 ? textoSelecionado : null;
     }
     
+    /**
+     * Get the current selection with HTML tags
+     * @returns {string}
+     */
     get selectedHTML() {
         let elementoSelecionado = null;
         try {
@@ -117,37 +157,58 @@ class eDitto extends HTMLElement {
         return elementoSelecionado.length > 0 ? elementoSelecionado : null;
     }
     
+    /**
+     * Allow content edition for user
+     */
     allowEdition() {
         this.syncFromsyncFromInnerHTML();
         this.iframeDocument.designMode = 'On';
     }
     
+    /**
+     * Disallow content edition for users
+     */
     disallowEdition() {
         
     }
     
-    syncContent() {
-        
-    }
-    
+    /**
+     * Copy the content from innerHTML to the value of editor
+     */
     syncFromsyncFromInnerHTML() {
         this.value = this.innerHTML;
     }
     
+    /**
+     * Synch editor's innerHTML to editor's value
+     */
     startAutoSync() {
         
     }
     
+    /**
+     * Stop synch. Only the value property will return the current editor's value
+     */
     stopAutoSync() {
         
     }
     
+    /**
+     * Format the document givven some properties
+     * @param {String} name Property name eg:bold,italic,underline
+     * @param {String} value Optional property that change value for some format names
+     */
     format(name, value = null) {
         this.iframe.focus();
         this.iframeDocument.execCommand(name, false, value);
         this.iframe.focus();
     }
     
+    /**
+     * Insert an element to the current position
+     * @param {string} elem
+     * @param {object} options. Opções para templatização do conteúdo. Formato: {variable: value}
+     */
     insertElement(elem, options) {
         if (this.selection) {
             let a = this.iframeDocument.createElement('div');
@@ -163,15 +224,20 @@ class eDitto extends HTMLElement {
         };
     }
     
-    insertHTML(htmlText, options) {
-        let text = txt + '<br/>'; //A quebra de linha é para evitar que o documento após a personalização fique inalterável
-        this.insertElement(text, options);
-    }
-    
+    /**
+     * Insert an element to the current position
+     * @param {string} elem
+     * @param {object} options. Opções para templatização do conteúdo. Formato: {variable: value}
+     */
     insertText(text) {
         this.insertElement(eDittoHelpers.escapeHTML(text));
     }
     
+    /**
+     * Insert an element from a template
+     * @param {string} template
+     * @param {object} options. Opções para templatização do conteúdo. Formato: {variable: value}
+     */
     insertFromTemplate(template, options) {
         let xhttp = new XMLHttpRequest();
         let $this = this;
@@ -189,8 +255,11 @@ class eDitto extends HTMLElement {
         xhttp.send();
     }
     
+    /**
+     * Check if the selected content is formatted with some text format
+     */
     checkFormat(format) {
-        
+        return (this.iframeDocument.queryCommandState(format));
     }
     
     toggleBold() {
@@ -213,11 +282,12 @@ class eDittoButtonBar extends HTMLElement {
     
     constructor() {
         super();
-        var buttons = this.querySelectorAll('button');
+        this.buttons = this.querySelectorAll('button');
         var that  = this;
-        for (let i = 0; i < (buttons.length); i++) {
-            this.setButtonAction(buttons[i])
+        for (let i = 0; i < (this.buttons.length); i++) {
+            this.setButtonAction(this.buttons[i])
         }
+        this.startButtonsCheck();
         
     }
     
@@ -237,6 +307,36 @@ class eDittoButtonBar extends HTMLElement {
         if (attrName == 'editto') {
             this.eDitto = document.getElementById(newVal);  
         }
+    }
+    
+    startButtonsCheck() {
+        let $this = this;
+        let interval = setInterval(function() {
+            $this.checkButtonsFormat();
+        }, 500);
+    }
+    
+    checkButtonsFormat() {
+        for (let i = 0; i < (this.buttons.length); i++) {
+            this.checkButtomFormat(this.buttons[i]);
+        }
+    }
+    
+    /**
+     * Check a format for a specific button
+     */
+    checkButtomFormat(button) {
+        let action = button.dataset.edittoFormat,
+            that = this,
+            value = null;
+        if (action) {
+            if (that.eDitto.checkFormat(action)) {
+                button.classList.add("edito-button__active");
+                return that.eDitto.checkFormat(action);
+            }
+        }
+        button.classList.remove("edito-button__active");
+        return false;
     }
     
     

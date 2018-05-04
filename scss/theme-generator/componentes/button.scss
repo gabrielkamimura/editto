@@ -23,7 +23,7 @@
 
 // Definição de classes
 
-.editto_button__icon {
+.editto-button__icon {
 
     @extend %formato-itens;
     @extend %visual-botao;
@@ -36,7 +36,7 @@
         color: $color-active;
     }
 
-    &.editto_button__icon.ativo {
+    &.edito-button__active {
         background-color: $color-background-active;
         color: $color-active;
         svg, rect, circle, g {
@@ -50,10 +50,14 @@
             fill: $color-hover;
         }
     }
+    
+    img, svg {
+        max-width: 100%;
+    }
 
 }
 
-.editto_button__text {
+.editto-button__text {
 
     @extend %formato-itens;
     @extend %visual-botao;
@@ -63,7 +67,7 @@
         color: $color-active;
     }
 
-    &.editto_button__icon.ativo {
+    &.editto-button__icon.edito-button__activeedito-button__active {
         background-color: $color-background-active;
         color: $color-active;
     }
@@ -74,7 +78,7 @@
 
 }
 
-.editto_select {
+.editto-select {
     @extend %formato-itens;
     @extend %visual-select;
 }
@@ -82,7 +86,7 @@
 /**
  * O ícone dentro do bloco de botão
  */
-.editto_button__icon_icon {
+.editto-button__icon_icon {
     height: 100%;
     width: 100%;
     /*background-size: contain;
