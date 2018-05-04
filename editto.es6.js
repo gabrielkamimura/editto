@@ -342,8 +342,20 @@ class eDittoButtonBar extends HTMLElement {
     
 }
 
-customElements.define('editto-editor', eDitto);
-customElements.define('editto-button-bar', eDittoButtonBar);
+if (window.customElements) {
+    customElements.define('editto-editor', eDitto);
+    customElements.define('editto-button-bar', eDittoButtonBar);
+} else {
+    if (document.registerElement) {
+        customElements.define('editto-editor', eDitto);
+        document.registerElement('editto-button-bar', eDittoButtonBar);
+    }
+    else {
+        console.error("E-Ditto doesn't support your current browser");
+    }
+}
+
+
 
 /**
  * Funcionalidade gerais a serem utilizadas
