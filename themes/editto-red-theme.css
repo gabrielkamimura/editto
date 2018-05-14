@@ -1,5 +1,5 @@
 @charset "UTF-8";
-.editto_document {
+.editto-document {
   border: 2px #eee solid;
   border-radius: 20px; }
 
@@ -72,13 +72,13 @@ editto-buttom-bar {
   .editto-button__icon_icon text {
     font-family: sans-serif; }
 
-.editto_document {
+.editto-document {
   height: 30em;
   width: 95%;
   padding: 1em 1em;
   box-sizing: border-box; }
 
-.editto_document:active, .editto_document:focus {
+.editto-document:active, .editto-document:focus {
   border-color: #F44336; }
 
 .editto_group {

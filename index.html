@@ -5,6 +5,11 @@
     <title>Editto Test</title>
 <!--    <link href="themes/editto-cyan-theme.css" rel="stylesheet" type="text/css"/>-->
     <link type="text/css" rel="stylesheet" href="themes/editto-cyan-theme.css"/>
+    <style>
+      * {
+        font-family: sans-serif;
+      }
+    </style>
   </head>
   <body>
     <editto-button-bar editto="meueditor">
@@ -19,6 +24,10 @@
       <p>Some text should be written here.</p> 
     </editto-editor>
     
+    <p>Algum conteúdo fora do editor</p>
     <script src="editto.es6.js"></script>
+    <script>
+      let teste = document.querySelector("#meueditor");
+    </script>
   </body>
 </html>

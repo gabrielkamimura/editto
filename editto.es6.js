@@ -3,74 +3,14 @@ class eDitto extends HTMLElement {
     
     constructor() {
         super();
-        this.shadow = this.attachShadow( {mode: 'open'} );
-        this.iframe = document.createElement('iframe');
-        this.iframe.style.height = '100%';
-        this.iframe.style.width = '100%';
-        this.iframe.style.border = '1px dotted';
-        var style = document.createElement('style');
-        this.shadow.appendChild(style);
-        this.shadow.appendChild(this.iframe);
-        var that = this;
-        this.allowEdition();
-        let $this = this;
+        this._shadow = this.attachShadow( {mode: 'open'} );
         
-        // Avoid paste formatted HTML content on paste
-        this.iframeDocument.addEventListener("paste", function(e) {
-            e.preventDefault();
-
-            if (e.clipboardData) {
-                let content = (e.originalEvent || e).clipboardData.getData('text/plain');
-
-                $this.iframeDocument.execCommand('insertText', false, content);
-            }
-            else if (window.clipboardData) {
-                let content = window.clipboardData.getData('Text');
-
-                document.selection.createRange().pasteHTML(content);
-            }   
-        });
-    }
-    
-    connectedCallback() {
-      }
-
-      disconnectedCallback() {
-        console.log('Custom element removed from page.');
-      }
-
-      adoptedCallback() {
-        console.log('Custom element moved to new page.');
-      }
-    
-    attributeChangedCallback(attrName, oldVal, newVal) {
-        console.log("Atribute change")
-        if (attrName == 'value') {
-        }
-    }
-    
-    /**
-     * Get the document of editor's iframe
-     * @returns {document} 
-     */
-    get iframeDocument() {
-        if (this.iframe) {
-            return this.iframe.contentWindow.document;
-
-        } else {
-        // se contentDocument existe
-          if (this.iframe.contentDocument) {
-            return this.iframe.contentDocument;
-          } else {
-            if (this.iframe.document) {
-                // IE
-                return this.iframe.document;
-            }
-            else {
-                return null;
-            };
-          }
-        }
+        this._contentBox = document.createElement('article');
+        this._contentBox.className = "editto-document"
+        
+        this._shadow.appendChild(this._contentBox);
+        
+        this.allowEdition();
     }
         
     /**
@@ -78,14 +18,18 @@ class eDitto extends HTMLElement {
      * @returns {string} 
      */
     get value() {
-        return this.innerHTML = this.iframeDocument.body.innerHTML
+        return this.innerHTML = this._contentBox.innerHTML;
     }
     
     /**
      * Set a new value to the editor, changing its content
      */
-    set value(newValue) {
-        this.iframeDocument.body.innerHTML = newValue;
+    set value(newValue) {    
+        this._contentBox.innerHTML = newValue;
+    }
+    
+    get numberCharacters () {
+        return eDittoHelpers.countCharacters(this._contentBox.textContent);
     }
     
     /**
@@ -94,12 +38,12 @@ class eDitto extends HTMLElement {
      */
     get selection() {
         let txt = null;
-        if (this.iframeDocument.getSelection) {
-            txt = this.iframeDocument.getSelection();
-        } else if (this.iframeDocument.getSelection()) {
-            txt = this.iframeDocument.getSelection();
-        } else if (this.iframeDocument.selection) {
-            txt = this.iframeDocument.selection.createRange().text;
+        if (document.getSelection) {
+            txt = document.getSelection();
+        } else if (document.getSelection()) {
+            txt = document.getSelection();
+        } else if (document.selection) {
+            txt = document.selection.createRange().text;
         }
         return txt;
     }
@@ -162,7 +106,7 @@ class eDitto extends HTMLElement {
      */
     allowEdition() {
         this.syncFromsyncFromInnerHTML();
-        this.iframeDocument.designMode = 'On';
+        this._contentBox.contentEditable = true;
     }
     
     /**
@@ -199,9 +143,9 @@ class eDitto extends HTMLElement {
      * @param {String} value Optional property that change value for some format names
      */
     format(name, value = null) {
-        this.iframe.focus();
-        this.iframeDocument.execCommand(name, false, value);
-        this.iframe.focus();
+        this._contentBox.focus();
+        document.execCommand(name, null, value)
+//        this.insertElement('<b>' + this.selectedText + '</b>');
     }
     
     /**
@@ -210,18 +154,14 @@ class eDitto extends HTMLElement {
      * @param {object} options. Opções para templatização do conteúdo. Formato: {variable: value}
      */
     insertElement(elem, options) {
-        if (this.selection) {
-            let a = this.iframeDocument.createElement('div');
-            let range = this.selectionRange;
-            range.surroundContents(a);
+            
             if (options) {
                 for (let i in options) {
                     let aux = "{{ " + i + " }}";
                     elem = eDittoHelpers.replaceAll(elem, aux, eDittoHelpers.escapeHTML(options[i]));
                 };
             }
-            a.innerHTML = elem;
-        };
+            document.execCommand('insertHTML', false, elem);
     }
     
     /**
@@ -275,7 +215,7 @@ class eDitto extends HTMLElement {
     }
     
     querySelector(text) {
-        return this.iframeDocument.querySelector(text);
+        //return this.iframeDocument.querySelector(text);
     }
 }
 
@@ -299,6 +239,7 @@ class eDittoButtonBar extends HTMLElement {
             value = null;
         if (action) {
             button.onclick = function() {
+                this.blur();
                 that.eDitto.format(action, value);
             }
         }
@@ -413,5 +354,20 @@ window.eDittoHelpers = {
     escapeHTML: function(string = '') {
         string = this.replaceAll(this.replaceAll(string, "<", "&lt"), ">", "&gt");
         return string;
+    },
+    
+    countCharacters: function(text) {
+        let count = 0;
+        for (let i in text) {
+            if (text[i]) {
+                count++
+            }   
+        }
+        
+        return count;
+    },
+    
+    countWords: function() {
+    
     }
 }

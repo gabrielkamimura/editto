@@ -11,12 +11,12 @@
 
 // Definição de classe
 
-.editto_document {
+.editto-document {
     @extend %formato-documento;
     @extend %boxEffects;
 
 }
 
-.editto_document:active, .editto_document:focus {
+.editto-document:active, .editto-document:focus {
   border-color: $color-background-active;
 }
