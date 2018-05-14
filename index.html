@@ -2,6 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+
     <title>Editto Test</title>
 <!--    <link href="themes/editto-cyan-theme.css" rel="stylesheet" type="text/css"/>-->
     <link type="text/css" rel="stylesheet" href="themes/editto-cyan-theme.css"/>
@@ -12,11 +14,20 @@
     </style>
   </head>
   <body>
-    <editto-button-bar editto="meueditor">
-      <div class="editto-button_group">
+    <editto-button-bar class="editto-buttom-bar" editto="meueditor">
+      <div class="editto-button-group">
         <button class="editto-button__icon" data-editto-format="bold"><img src="icons/bold.svg"/></button>
-        <button class="editto-button__text" data-editto-format="italic">Italic</button>
-        <button class="editto-button__text" data-editto-format="underline">Underline</button>
+        <button class="editto-button__icon" data-editto-format="italic"><img src="icons/italic.svg "/></button>
+        <button class="editto-button__icon" data-editto-format="underline"><img src="icons/underline.svg "/></button>
+      </div>
+      <div class="editto-button-group">
+        <button class="editto-button__icon" data-editto-format="justifyleft"><img src="icons/align_left.png"/></button>
+        <button class="editto-button__icon" data-editto-format="justifycenter"><img src="icons/align_center.svg"/></button>
+        <button class="editto-button__icon" data-editto-format="justifyright"><img src="icons/align_right.svg"/></button>
+      </div>
+      <div class="editto-button-group">
+        <button class="editto-button__icon" data-editto-format="insertorderedlist"><img src="icons/list_ol.svg"/></button>
+        <button class="editto-button__icon" data-editto-format="insertunorderedlist"><img src="icons/list_ul.svg"/></button>
       </div>
     </editto-button-bar>
     <editto-editor id="meueditor">

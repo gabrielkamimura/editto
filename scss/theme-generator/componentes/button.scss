@@ -4,7 +4,7 @@
     border: none;
     margin: 1px;
     box-sizing: border-box;
-    height: 2.2em;
+    height: 30pt;
 }
 
 // Visual
@@ -28,7 +28,7 @@
     @extend %formato-itens;
     @extend %visual-botao;
     
-    width: 2.2em;
+    width: 30pt;
     border-radius: 50% 50%;
 
     &:active {

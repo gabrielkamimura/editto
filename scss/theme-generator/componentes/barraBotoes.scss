@@ -1,6 +1,9 @@
-editto-buttom-bar {
-    width: 100%;
-    margin: 1em 1em;
-    padding-bottom: 2em;
-    box-sizing: border-box;
+.editto-buttom-bar {
+  width: 100%;
+  margin-bottom: 1em;
+  box-sizing: border-box;
+  display: block;
+  overflow-x: auto;
+  width: 100%;
+  white-space: nowrap;
 }

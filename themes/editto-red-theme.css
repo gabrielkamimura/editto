@@ -3,17 +3,20 @@
   border: 2px #eee solid;
   border-radius: 20px; }
 
-editto-buttom-bar {
+.editto-buttom-bar {
   width: 100%;
-  margin: 1em 1em;
-  padding-bottom: 2em;
-  box-sizing: border-box; }
+  margin-bottom: 1em;
+  box-sizing: border-box;
+  display: block;
+  overflow-x: auto;
+  width: 100%;
+  white-space: nowrap; }
 
 .editto-button__icon, .editto-button__text, .editto-select {
   border: none;
   margin: 1px;
   box-sizing: border-box;
-  height: 2.2em; }
+  height: 30pt; }
 
 .editto-button__icon, .editto-button__text {
   background-color: transparent;
@@ -26,7 +29,7 @@ editto-buttom-bar {
   color: #323232; }
 
 .editto-button__icon {
-  width: 2.2em;
+  width: 30pt;
   border-radius: 50% 50%; }
   .editto-button__icon:active {
     background-color: #F44336;
@@ -80,12 +83,12 @@ editto-buttom-bar {
   border-color: #F44336;
   outline: none; }
 
-.editto_group {
+.editto-button-group {
   margin-left: 1em;
   margin-right: 1em;
-  float: left;
+  display: inline-block;
   padding-right: 1em;
   box-sizing: border-box; }
 
-.editto_group {
+.editto-button-group {
   border-right: #ddd solid 1px; }

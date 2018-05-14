@@ -3,7 +3,7 @@
 %formato-groupButton {
     margin-left: 1em;
     margin-right: 1em;
-    float: left;
+    display: inline-block;
     padding-right: 1em;
     box-sizing: border-box;
 }
@@ -16,7 +16,7 @@
 
 //
 
-.editto_group {
+.editto-button-group {
     @extend %formato-groupButton;
     @extend %visual-groupButton;
 }
