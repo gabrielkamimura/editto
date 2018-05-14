@@ -73,13 +73,12 @@ editto-buttom-bar {
     font-family: sans-serif; }
 
 .editto-document {
-  height: 30em;
-  width: 95%;
   padding: 1em 1em;
   box-sizing: border-box; }
 
 .editto-document:active, .editto-document:focus {
-  border-color: #3F51B5; }
+  border-color: #3F51B5;
+  outline: none; }
 
 .editto_group {
   margin-left: 1em;

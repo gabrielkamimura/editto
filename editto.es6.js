@@ -3,14 +3,20 @@ class eDitto extends HTMLElement {
     
     constructor() {
         super();
-        this._shadow = this.attachShadow( {mode: 'open'} );
+//        this._shadow = this.attachShadow( {mode: 'closed'} );
+        
+//        this._shadow.appendChild(this._contentBox);
+        console.log(this.innerHTML)
+        let initialContent = this.innerHTML;
+        this.innerHTML = "";
+        
         
         this._contentBox = document.createElement('article');
         this._contentBox.className = "editto-document"
         
-        this._shadow.appendChild(this._contentBox);
-        
+        this.appendChild(this._contentBox);
         this.allowEdition();
+        this.value = initialContent;
     }
         
     /**
@@ -18,7 +24,7 @@ class eDitto extends HTMLElement {
      * @returns {string} 
      */
     get value() {
-        return this.innerHTML = this._contentBox.innerHTML;
+        return this._contentBox.innerHTML;
     }
     
     /**
@@ -199,7 +205,7 @@ class eDitto extends HTMLElement {
      * Check if the selected content is formatted with some text format
      */
     checkFormat(format) {
-        return (this.iframeDocument.queryCommandState(format));
+        return (document.queryCommandState(format));
     }
     
     toggleBold() {
@@ -359,7 +365,7 @@ window.eDittoHelpers = {
     countCharacters: function(text) {
         let count = 0;
         for (let i in text) {
-            if (text[i]) {
+            if (text[i] != ' ') {
                 count++
             }   
         }

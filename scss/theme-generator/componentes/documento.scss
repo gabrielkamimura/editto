@@ -1,8 +1,8 @@
 // Formatação do documento
 
 %formato-documento {
-    height: 30em;
-    width: 95%;
+//    height: 30em;
+//    width: 95%;
     padding: 1em 1em;
     box-sizing: border-box;
 }
@@ -19,4 +19,5 @@
 
 .editto-document:active, .editto-document:focus {
   border-color: $color-background-active;
+  outline: none;
 }
