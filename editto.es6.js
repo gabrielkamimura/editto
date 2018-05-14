@@ -274,7 +274,9 @@ class eDitto extends HTMLElement {
         this.format('underline');
     }
     
-    
+    querySelector(text) {
+        return this.iframeDocument.querySelector(text);
+    }
 }
 
 class eDittoButtonBar extends HTMLElement {
