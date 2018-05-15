@@ -6,7 +6,6 @@ class eDitto extends HTMLElement {
 //        this._shadow = this.attachShadow( {mode: 'closed'} );
         
 //        this._shadow.appendChild(this._contentBox);
-        console.log(this.innerHTML)
         let initialContent = this.innerHTML;
         this.innerHTML = "";
         
@@ -25,7 +24,13 @@ class eDitto extends HTMLElement {
     /**
      * Set a new value to the editor, changing its content
      */
-    set value(newValue) {    
+    set value(newValue) {
+        while (newValue.indexOf('<script>') != -1) {
+            newValue = newValue.replace('<script>', '&ltscript&gt');
+        }
+        while (newValue.indexOf('</script>') != -1) {
+            newValue = newValue.replace('</script>', '&lt/script&gt');
+        }
         this.innerHTML = newValue;
     }
     
