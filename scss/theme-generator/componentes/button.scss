@@ -1,103 +1,100 @@
 //   Formatação
 
 %formato-itens {
-    border: none;
-    margin: 1px;
-    box-sizing: border-box;
-    height: 30pt;
+  border: none;
+  margin: 1px;
+  box-sizing: border-box;
+  height: 30pt;
 }
 
 // Visual
 
 %visual-botao {
-    background-color: transparent;
-    color: $color;
-    cursor: pointer;
+  background-color: transparent;
+  color: $color;
+  cursor: pointer;
 }
 
 %visual-select {
-    background: none;
-    border: none;
-    color: $color;
+  background: none;
+  border: none;
+  color: $color;
+}
+
+.editto-button {
+  @extend %formato-itens;
+  @extend %visual-botao;   
+}
+
+.edito-button__active {
+  @include animation(.5s bgColor);
+    background-color: $color-background-active;
+    color: $color-active;
+    svg, rect, circle, g {
+        fill: $color-active;
+    }
 }
 
 // Definição de classes
 
 .editto-button__icon {
+  width: 30pt;
+  border-radius: 50% 50%;
 
-    @extend %formato-itens;
-    @extend %visual-botao;
-    
-    width: 30pt;
-    border-radius: 50% 50%;
+  &:active {
+      background-color: $color-background-active;
+      color: $color-active;
+  }
+  &:hover {
+      color: $color-hover;
 
-    &:active {
-        background-color: $color-background-active;
-        color: $color-active;
-    }
+      svg, rect, circle, g {
+          fill: $color-hover;
+      }
+  }
 
-    &.edito-button__active {
-        background-color: $color-background-active;
-        color: $color-active;
-        svg, rect, circle, g {
-            fill: $color-active;
-        }
-    }
-    &:hover {
-        color: $color-hover;
-
-        svg, rect, circle, g {
-            fill: $color-hover;
-        }
-    }
-    
-    img, svg {
-        max-width: 100%;
-    }
+  img, svg {
+      max-width: 100%;
+  }
 
 }
 
 .editto-button__text {
 
-    @extend %formato-itens;
-    @extend %visual-botao;
+  @extend %formato-itens;
+  @extend %visual-botao;
 
-    &:active {
-        background-color: $color-background-active;
-        color: $color-active;
-    }
+  &:active {
+      background-color: $color-background-active;
+      color: $color-active;
+  }
 
-    &.editto-button__icon.edito-button__activeedito-button__active {
-        background-color: $color-background-active;
-        color: $color-active;
-    }
+  &.editto-button__icon.edito-button__activeedito-button__active {
+      background-color: $color-background-active;
+      color: $color-active;
+  }
 
-    &:hover {
-        color: $color-hover;
-    }
+  &:hover {
+      color: $color-hover;
+  }
 
-}
-
-.editto-select {
-    @extend %formato-itens;
-    @extend %visual-select;
 }
 
 /**
  * O ícone dentro do bloco de botão
  */
 .editto-button__icon_icon {
-    height: 100%;
-    width: 100%;
-    /*background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center center;*/
+  height: 100%;
+  width: 100%;
+  /*background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;*/
 
-    svg {
-        width: 100%;
-        height: 100%;
-        fill: $color;
-    }
+  svg {
+      width: 100%;
+      height: 100%;
+      fill: $color;
+  }
   
   svg, rect, circle, g {
     fill: $color;
@@ -106,4 +103,9 @@
   text {
     font-family: sans-serif;
   }
+}
+
+.editto-select {
+  @extend %formato-itens;
+  @extend %visual-select;
 }

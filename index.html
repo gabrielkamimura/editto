@@ -11,31 +11,42 @@
       * {
         font-family: sans-serif;
       }
+      
+      body {
+        margin: 0;
+      }
+      
+      .container {
+        max-width: 700px;
+        margin: 0 auto
+      }
+      
     </style>
   </head>
   <body>
-    <editto-button-bar class="editto-buttom-bar" editto="meueditor">
-      <div class="editto-button-group">
-        <button class="editto-button__icon" data-editto-format="bold"><img src="icons/bold.svg"/></button>
-        <button class="editto-button__icon" data-editto-format="italic"><img src="icons/italic.svg "/></button>
-        <button class="editto-button__icon" data-editto-format="underline"><img src="icons/underline.svg "/></button>
-      </div>
-      <div class="editto-button-group">
-        <button class="editto-button__icon" data-editto-format="justifyleft"><img src="icons/align_left.png"/></button>
-        <button class="editto-button__icon" data-editto-format="justifycenter"><img src="icons/align_center.svg"/></button>
-        <button class="editto-button__icon" data-editto-format="justifyright"><img src="icons/align_right.svg"/></button>
-      </div>
-      <div class="editto-button-group">
-        <button class="editto-button__icon" data-editto-format="insertorderedlist"><img src="icons/list_ol.svg"/></button>
-        <button class="editto-button__icon" data-editto-format="insertunorderedlist"><img src="icons/list_ul.svg"/></button>
-      </div>
-    </editto-button-bar>
-    <editto-editor id="meueditor">
-      <h1> Title</h1>
-      <p>Some text should be written here.</p> 
-    </editto-editor>
+    <section class="container">
+      <editto-button-bar class="editto-buttom-bar" editto="meueditor">
+        <div class="editto-button-group">
+          <button class="editto-button editto-button__icon" data-editto-format="bold"><img src="icons/bold.svg"/></button>
+          <button class="editto-button editto-button__icon" data-editto-format="italic"><img src="icons/italic.svg "/></button>
+          <button class="editto-button editto-button__icon" data-editto-format="underline"><img src="icons/underline.svg "/></button>
+        </div>
+        <div class="editto-button-group">
+          <button class="editto-button editto-button__icon" data-editto-format="justifyleft"><img src="icons/align_left.png"/></button>
+          <button class="editto-button editto-button__icon" data-editto-format="justifycenter"><img src="icons/align_center.svg"/></button>
+          <button class="editto-button editto-button__icon" data-editto-format="justifyright"><img src="icons/align_right.svg"/></button>
+        </div>
+        <div class="editto-button-group">
+          <button class="editto-button editto-button__icon" data-editto-format="insertorderedlist"><img src="icons/list_ol.svg"/></button>
+          <button class="editto-button editto-button__icon" data-editto-format="insertunorderedlist"><img src="icons/list_ul.svg"/></button>
+        </div>
+      </editto-button-bar>
+      <editto-editor class="editto-editor" id="meueditor">
+        <h1> Hello World!</h1>
+        <p>Some text should be written here.</p> 
+      </editto-editor>
+    </section>
     
-    <p>Algum conteúdo fora do editor</p>
     <script src="editto.es6.js"></script>
     <script>
       let teste = document.querySelector("#meueditor");

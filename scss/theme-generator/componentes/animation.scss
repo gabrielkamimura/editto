@@ -1,0 +1,52 @@
+/** ------------------------------
+ *  Keyframe para animação de fade
+ */
+@include keyframes (fade) {
+  from {
+ 		opacity: 0;
+ 	}
+ 	to {
+ 		opacity: 1;
+ 	}
+}
+
+
+/** --------------------------------
+ *  KeyFrame para animação com slide
+ */ 
+@include keyframes (slideDown) {
+  from {
+ 		max-height: 0;
+ 	}
+ 	to {
+ 		max-height: 1000px;
+ 	}
+}
+
+@include keyframes (bgColor) {
+  from {
+    background-color: rgba(0, 0, 0, 0.0);
+  }
+  to {
+    background-color: $color-background-active;
+  }
+}
+
+
+/**
+ * Keyframe para animação de aparecer de baixo para cima
+ * Usado para animar os cards
+ */
+@include keyframes (goUp) {
+  from {
+    opacity: 0;
+    margin-top: 2em;
+  }
+  to {
+    opacity: 1;
+    /* 
+      8px por ser a margem padrão dos cards
+    */
+    margin-top: 8px;
+  }
+}

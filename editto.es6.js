@@ -10,11 +10,6 @@ class eDitto extends HTMLElement {
         let initialContent = this.innerHTML;
         this.innerHTML = "";
         
-        
-        this._contentBox = document.createElement('article');
-        this._contentBox.className = "editto-document"
-        
-        this.appendChild(this._contentBox);
         this.allowEdition();
         this.value = initialContent;
     }
@@ -24,18 +19,18 @@ class eDitto extends HTMLElement {
      * @returns {string} 
      */
     get value() {
-        return this._contentBox.innerHTML;
+        return this.innerHTML;
     }
     
     /**
      * Set a new value to the editor, changing its content
      */
     set value(newValue) {    
-        this._contentBox.innerHTML = newValue;
+        this.innerHTML = newValue;
     }
     
     get numberCharacters () {
-        return eDittoHelpers.countCharacters(this._contentBox.textContent);
+        return eDittoHelpers.countCharacters(this.textContent);
     }
     
     /**
@@ -112,7 +107,7 @@ class eDitto extends HTMLElement {
      */
     allowEdition() {
         this.syncFromsyncFromInnerHTML();
-        this._contentBox.contentEditable = true;
+        this.contentEditable = true;
     }
     
     /**
@@ -149,7 +144,7 @@ class eDitto extends HTMLElement {
      * @param {String} value Optional property that change value for some format names
      */
     format(name, value = null) {
-        this._contentBox.focus();
+        this.focus();
         document.execCommand(name, null, value)
 //        this.insertElement('<b>' + this.selectedText + '</b>');
     }
@@ -237,6 +232,9 @@ class eDittoButtonBar extends HTMLElement {
         }
         this.startButtonsCheck();
         
+        this.addEventListener('mousedown', (event) => {
+            event.preventDefault();
+        })
     }
     
     setButtonAction(button) {
@@ -254,7 +252,15 @@ class eDittoButtonBar extends HTMLElement {
     attributeChangedCallback(attrName, oldVal, newVal) {
         console.log("Atribute change")
         if (attrName == 'editto') {
-            this.eDitto = document.getElementById(newVal);  
+            this.eDitto = document.getElementById(newVal);
+            let $this = this;
+            this.eDitto.addEventListener('focus', () => {
+                $this.classList.add('editto-button-bar__editor-focus')
+            });
+            
+            this.eDitto.addEventListener('blur', () => {
+                $this.classList.remove('editto-button-bar__editor-focus')
+            });
         }
     }
     
@@ -287,7 +293,6 @@ class eDittoButtonBar extends HTMLElement {
         button.classList.remove("edito-button__active");
         return false;
     }
-    
     
 }
 

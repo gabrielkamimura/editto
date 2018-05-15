@@ -1,0 +1,85 @@
+/**
+ * Mixin que recebe cores e retorna propriedades com tais atributos
+ * @atribute {color} $color Cor do texto do elemento
+ * @atribute {color} $bg-color Cor de fundo do elemento
+ */
+@mixin colors-atributes ($color, $bg-color) {
+  color: $color;
+  background-color: $bg-color;
+}
+
+/**
+ * Mixin que recebe uma sombra e adiciona atributo box-shadow
+ * @atribute {list} $shadow Valor da propriedade de sombra a ser aplicada
+ */
+@mixin box-shadow ($shadow) {
+  -webkit-box-shadow: $shadow;
+     -moz-box-shadow: $shadow;
+      -ms-box-shadow: $shadow;
+          box-shadow: $shadow;
+}
+
+/**
+ * Mixin que recebe uma sombra e adiciona atributo text-shadow
+ * @atribute {list} $shadow Valor da propriedade de sombra a ser aplicada
+ */
+@mixin text-shadow ($shadow) {
+  -webkit-text-shadow: $shadow;
+     -moz-text-shadow: $shadow;
+      -ms-text-shadow: $shadow;
+          text-shadow: $shadow;
+}
+
+/**
+ * Mixin que recebe medidas de curvatura de borda e aplica a propriedade border-radius
+ * @atribute {number} $radius1
+ * @atribute {number} $radius2
+ */
+@mixin border-radius($radius1, $radius2) {
+  -webkit-border-radius: $radius1 $radius2;
+     -moz-border-radius: $radius1 $radius2;
+      -ms-border-radius: $radius1 $radius2;
+          border-radius: $radius1 $radius2;
+}
+
+/**
+ * Mixin que recebe propriedades de box-sizing e aplica 
+ * @atribute {list} $properties 
+ */
+@mixin box-sizing ($properties) {
+  -webkit-box-sizing: $properties;
+     -moz-box-sizing: $properties;
+      -ms-box-sizing: $properties;
+          box-sizing: $properties;
+}
+
+/**
+ *  Mixin que recebe a animação a ser aplicada e aplica atributos para tal.
+ *  @param {list} valor a ser aplicado na propriedade animation
+ */
+@mixin animation($animation) {
+  -webkit-animation: $animation;
+     -moz-animation: $animation;
+      -ms-animation: $animation;
+          animation: $animation;
+}
+
+/**
+ *  Mixin que prepara um keyframe compatível com diferentes navegadores
+ *  @param {list} $nome da keyframe a ser utilizada
+ *  @content animações com keyframes a serem aplicados
+ */
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content; 
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  } 
+}

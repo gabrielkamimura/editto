@@ -1,24 +1,201 @@
 @charset "UTF-8";
-.editto-document {
+/**
+ * Mixin que recebe cores e retorna propriedades com tais atributos
+ * @atribute {color} $color Cor do texto do elemento
+ * @atribute {color} $bg-color Cor de fundo do elemento
+ */
+/**
+ * Mixin que recebe uma sombra e adiciona atributo box-shadow
+ * @atribute {list} $shadow Valor da propriedade de sombra a ser aplicada
+ */
+/**
+ * Mixin que recebe uma sombra e adiciona atributo text-shadow
+ * @atribute {list} $shadow Valor da propriedade de sombra a ser aplicada
+ */
+/**
+ * Mixin que recebe medidas de curvatura de borda e aplica a propriedade border-radius
+ * @atribute {number} $radius1
+ * @atribute {number} $radius2
+ */
+/**
+ * Mixin que recebe propriedades de box-sizing e aplica 
+ * @atribute {list} $properties 
+ */
+/**
+ *  Mixin que recebe a animação a ser aplicada e aplica atributos para tal.
+ *  @param {list} valor a ser aplicado na propriedade animation
+ */
+/**
+ *  Mixin que prepara um keyframe compatível com diferentes navegadores
+ *  @param {list} $nome da keyframe a ser utilizada
+ *  @content animações com keyframes a serem aplicados
+ */
+/** ------------------------------
+ *  Keyframe para animação de fade
+ */
+@-webkit-keyframes fade {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+
+@-moz-keyframes fade {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+
+@-ms-keyframes fade {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+
+@keyframes fade {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+
+/** --------------------------------
+ *  KeyFrame para animação com slide
+ */
+@-webkit-keyframes slideDown {
+  from {
+    max-height: 0; }
+  to {
+    max-height: 1000px; } }
+
+@-moz-keyframes slideDown {
+  from {
+    max-height: 0; }
+  to {
+    max-height: 1000px; } }
+
+@-ms-keyframes slideDown {
+  from {
+    max-height: 0; }
+  to {
+    max-height: 1000px; } }
+
+@keyframes slideDown {
+  from {
+    max-height: 0; }
+  to {
+    max-height: 1000px; } }
+
+@-webkit-keyframes bgColor {
+  from {
+    background-color: rgba(0, 0, 0, 0); }
+  to {
+    background-color: #00BCD4; } }
+
+@-moz-keyframes bgColor {
+  from {
+    background-color: rgba(0, 0, 0, 0); }
+  to {
+    background-color: #00BCD4; } }
+
+@-ms-keyframes bgColor {
+  from {
+    background-color: rgba(0, 0, 0, 0); }
+  to {
+    background-color: #00BCD4; } }
+
+@keyframes bgColor {
+  from {
+    background-color: rgba(0, 0, 0, 0); }
+  to {
+    background-color: #00BCD4; } }
+
+/**
+ * Keyframe para animação de aparecer de baixo para cima
+ * Usado para animar os cards
+ */
+@-webkit-keyframes goUp {
+  from {
+    opacity: 0;
+    margin-top: 2em; }
+  to {
+    opacity: 1;
+    /* 
+      8px por ser a margem padrão dos cards
+    */
+    margin-top: 8px; } }
+
+@-moz-keyframes goUp {
+  from {
+    opacity: 0;
+    margin-top: 2em; }
+  to {
+    opacity: 1;
+    /* 
+      8px por ser a margem padrão dos cards
+    */
+    margin-top: 8px; } }
+
+@-ms-keyframes goUp {
+  from {
+    opacity: 0;
+    margin-top: 2em; }
+  to {
+    opacity: 1;
+    /* 
+      8px por ser a margem padrão dos cards
+    */
+    margin-top: 8px; } }
+
+@keyframes goUp {
+  from {
+    opacity: 0;
+    margin-top: 2em; }
+  to {
+    opacity: 1;
+    /* 
+      8px por ser a margem padrão dos cards
+    */
+    margin-top: 8px; } }
+
+.editto-editor {
   border: 2px #eee solid;
   border-radius: 20px; }
 
 .editto-buttom-bar {
   width: 100%;
-  margin-bottom: 1em;
+  padding-top: .5em;
+  padding-bottom: .5em;
   box-sizing: border-box;
   display: block;
   overflow-x: auto;
   width: 100%;
-  white-space: nowrap; }
+  white-space: nowrap;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  max-height: 0;
+  visibility: hidden;
+  background-color: #fff;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
 
-.editto-button__icon, .editto-button__text, .editto-select {
+.editto-button-bar__editor-focus {
+  -webkit-animation: 5s slideDown;
+  -moz-animation: 5s slideDown;
+  -ms-animation: 5s slideDown;
+  animation: 5s slideDown;
+  max-height: 1000px;
+  visibility: visible; }
+
+.editto-button, .editto-button__text, .editto-select {
   border: none;
   margin: 1px;
   box-sizing: border-box;
   height: 30pt; }
 
-.editto-button__icon, .editto-button__text {
+.editto-button, .editto-button__text {
   background-color: transparent;
   color: #323232;
   cursor: pointer; }
@@ -28,17 +205,22 @@
   border: none;
   color: #323232; }
 
+.edito-button__active {
+  -webkit-animation: 0.5s bgColor;
+  -moz-animation: 0.5s bgColor;
+  -ms-animation: 0.5s bgColor;
+  animation: 0.5s bgColor;
+  background-color: #00BCD4;
+  color: #fff; }
+  .edito-button__active svg, .edito-button__active rect, .edito-button__active circle, .edito-button__active g {
+    fill: #fff; }
+
 .editto-button__icon {
   width: 30pt;
   border-radius: 50% 50%; }
   .editto-button__icon:active {
     background-color: #00BCD4;
     color: #fff; }
-  .editto-button__icon.edito-button__active {
-    background-color: #00BCD4;
-    color: #fff; }
-    .editto-button__icon.edito-button__active svg, .editto-button__icon.edito-button__active rect, .editto-button__icon.edito-button__active circle, .editto-button__icon.edito-button__active g {
-      fill: #fff; }
   .editto-button__icon:hover {
     color: #aaa; }
     .editto-button__icon:hover svg, .editto-button__icon:hover rect, .editto-button__icon:hover circle, .editto-button__icon:hover g {
@@ -64,8 +246,8 @@
   height: 100%;
   width: 100%;
   /*background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center center;*/ }
+  background-repeat: no-repeat;
+  background-position: center center;*/ }
   .editto-button__icon_icon svg {
     width: 100%;
     height: 100%;
@@ -75,11 +257,12 @@
   .editto-button__icon_icon text {
     font-family: sans-serif; }
 
-.editto-document {
+.editto-editor {
   padding: 1em 1em;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  display: block; }
 
-.editto-document:active, .editto-document:focus {
+.editto-editor :active, .editto-editor:focus {
   border-color: #00BCD4;
   outline: none; }
 

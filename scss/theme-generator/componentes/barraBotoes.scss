@@ -1,9 +1,24 @@
 .editto-buttom-bar {
   width: 100%;
-  margin-bottom: 1em;
+  padding-top: .5em;
+  padding-bottom: .5em;
   box-sizing: border-box;
   display: block;
   overflow-x: auto;
   width: 100%;
   white-space: nowrap;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  max-height: 0;
+  visibility: hidden;
+  background-color: #fff;
+  @include box-shadow($shadow);
+}
+
+.editto-button-bar__editor-focus {
+  @include animation(5s slideDown);
+  max-height: 1000px;
+  visibility: visible;
 }
