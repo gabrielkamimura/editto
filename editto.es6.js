@@ -7,10 +7,20 @@ class eDitto extends HTMLElement {
         
 //        this._shadow.appendChild(this._contentBox);
         let initialContent = this.innerHTML;
-        this.innerHTML = "";
         
         this.allowEdition();
-        this.value = initialContent;
+        this._lastSelection = null;// Save the old selection when blur
+        
+        let $this = this;
+        this.addEventListener('focus', (event) => {
+            $this._interval = setInterval(() => {
+                $this._lastSelection = $this.selection || $this._lastSelection;
+            }, 100);   
+        });
+        this.addEventListener('blur', (event) => {
+            clearInterval($this._interval);
+            console.log($this._lastSelection);
+        });
     }
         
     /**
@@ -44,12 +54,21 @@ class eDitto extends HTMLElement {
      */
     get selection() {
         let txt = null;
-        if (document.getSelection) {
-            txt = document.getSelection();
-        } else if (document.getSelection()) {
-            txt = document.getSelection();
-        } else if (document.selection) {
-            txt = document.selection.createRange().text;
+        
+        if (this === document.activeElement) {
+            if (document.getSelection) {
+                txt = document.getSelection();
+            } else if (document.getSelection()) {
+                txt = document.getSelection();
+            } else if (document.selection) {
+                txt = document.selection.createRange().text;
+            }
+        } else {
+            console.log("Entrou no else", this._lastSelection)
+            //Vamos tentar recuperar a seleção anteriormente feita
+            if (this._lastSelection) {
+                txt = this._lastSelection;
+            }
         }
         return txt;
     }
@@ -107,6 +126,10 @@ class eDitto extends HTMLElement {
         return elementoSelecionado.length > 0 ? elementoSelecionado : null;
     }
     
+    isEditable() {
+        return this.isContentEditable;
+    }
+    
     /**
      * Allow content edition for user
      */
@@ -119,7 +142,7 @@ class eDitto extends HTMLElement {
      * Disallow content edition for users
      */
     disallowEdition() {
-        
+        this.contentEditable = false;
     }
     
     /**
@@ -150,7 +173,13 @@ class eDitto extends HTMLElement {
      */
     format(name, value = null) {
         this.focus();
-        document.execCommand(name, null, value)
+        // A way to clean the format if a user select two times the same action to be performed
+        if (value && this.checkFormat(name, value)) {
+            document.execCommand("removeFormat", false, name);
+        } else {
+            document.execCommand(name, null, value)
+            
+        }
 //        this.insertElement('<b>' + this.selectedText + '</b>');
     }
     
@@ -161,13 +190,16 @@ class eDitto extends HTMLElement {
      */
     insertElement(elem, options) {
             
-            if (options) {
-                for (let i in options) {
-                    let aux = "{{ " + i + " }}";
-                    elem = eDittoHelpers.replaceAll(elem, aux, eDittoHelpers.escapeHTML(options[i]));
-                };
-            }
-            document.execCommand('insertHTML', false, elem);
+        if (options) {
+            for (let i in options) {
+                let aux = "{{ " + i + " }}";
+                elem = eDittoHelpers.replaceAll(elem, aux, eDittoHelpers.escapeHTML(options[i]));
+            };
+        }
+        
+        this.focus();
+        
+        document.execCommand('insertHTML', false, elem);
     }
     
     /**
@@ -204,7 +236,10 @@ class eDitto extends HTMLElement {
     /**
      * Check if the selected content is formatted with some text format
      */
-    checkFormat(format) {
+    checkFormat(format, value) {
+        if (value) {
+            return document.queryCommandValue(format) == value;
+        }
         return (document.queryCommandState(format));
     }
     
@@ -245,17 +280,17 @@ class eDittoButtonBar extends HTMLElement {
     setButtonAction(button) {
         let that = this,
             action = button.dataset.edittoFormat,
-            value = null;
+            value = button.dataset.edittoFormatValue || null;
+        
         if (action) {
-            button.onclick = function() {
+            button.addEventListener('click', () => {
                 this.blur();
                 that.eDitto.format(action, value);
-            }
+            });
         }
     }
     
     attributeChangedCallback(attrName, oldVal, newVal) {
-        console.log("Atribute change")
         if (attrName == 'editto') {
             this.eDitto = document.getElementById(newVal);
             let $this = this;
@@ -385,5 +420,12 @@ window.eDittoHelpers = {
     
     countWords: function() {
     
+    },
+    
+    /**
+     * Check if a certain element is inside en editto and is editable
+     */
+    elementIsInEditto: (el) => {
+        
     }
 }

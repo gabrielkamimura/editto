@@ -39,15 +39,24 @@
         <div class="editto-button-group">
           <button class="editto-button editto-button__icon" data-editto-format="insertorderedlist"><img src="icons/list_ol.svg"/></button>
           <button class="editto-button editto-button__icon" data-editto-format="insertunorderedlist"><img src="icons/list_ul.svg"/></button>
+          <button class="editto-button editto-button__icon" onclick="teste.insertElement(`<img src=${ prompt('Informe um endereço')} />`)"><img src="icons/insert_image.svg"/></button>
+          <button class="editto-button editto-button__icon" data-editto-format="backColor" data-editto-format-value="rgb(254, 211, 48)"><img src="icons/border_color.svg"/></button>
+
         </div>
       </editto-button-bar>
       <editto-editor class="editto-editor" id="meueditor">
         <h1> Hello World!</h1>
-        <p>Some text should be written here.</p> 
+        <p>Some text should be written here.</p>
+        <youtube-video id="teste-interno"></youtube-video>
       </editto-editor>
+      
+      <h1>Texto fora do editor</h1>
+      <p>Mais um texto fora do editor</p>
+      <youtube-video src="https://www.youtube.com/watch?v=BymRfqi4U5A" id="video-teste"></youtube-video>
     </section>
     
     <script src="editto.es6.js"></script>
+    <script src="youtube-video.js"></script>
     <script>
       let teste = document.querySelector("#meueditor");
     </script>
