@@ -1,13 +1,18 @@
 {
-    "name": "eDitto",
-    "description": "Editor de Texto",
+    "name": "editto",
+    "description": "A easy to use and adaptable text editor",
     "dependencies": {
-        "http-server": "^0.6.1",
-        "gulp": "*",
-        "gulp-sass": "*",
-        "gulp-minify-css": "*",
-        "gulp-concat": "*",
-        "gulp-uglify": "*"
+        "@webcomponents/webcomponentsjs": "*"
     },
-    "engine": "node >= 0.4.1"
+    "devDependencies": {
+        "babel": "^6.23.0",
+        "babel-cli": "^6.26.0",
+        "babel-preset-env": "^1.7.0",
+        "gulp": "*",
+        "gulp-concat": "*",
+        "gulp-minify-css": "*",
+        "gulp-sass": "*",
+        "gulp-uglify": "*",
+        "http-server": "^0.6.1"
+    }
 }

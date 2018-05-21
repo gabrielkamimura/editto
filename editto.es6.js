@@ -19,7 +19,6 @@ class eDitto extends HTMLElement {
         });
         this.addEventListener('blur', (event) => {
             clearInterval($this._interval);
-            console.log($this._lastSelection);
         });
     }
         
@@ -64,7 +63,6 @@ class eDitto extends HTMLElement {
                 txt = document.selection.createRange().text;
             }
         } else {
-            console.log("Entrou no else", this._lastSelection)
             //Vamos tentar recuperar a seleção anteriormente feita
             if (this._lastSelection) {
                 txt = this._lastSelection;

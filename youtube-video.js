@@ -5,15 +5,42 @@ class YoutubeVideo extends HTMLElement {
     constructor() {
         super();
         let shadow = this.attachShadow({mode: 'open'});
-        this._inputUrl = document.createElement('input');
-        this._iframe = document.createElement('iframe');
         
-        this._inputUrl.addEventListener('change', (event) => {
-            this._updateAttributes();
-        });
         
-        shadow.append(this._inputUrl);
-        shadow.append(this._iframe);
+        this._updateView = () => {
+            shadow.innerHTML = this._template();
+            shadow.contenteditable = true;
+            this._inputUrl = shadow.querySelector('#fsrc');
+            this._iframe = shadow.querySelector('#youtubeiframe');
+
+            if (this._inputUrl) {
+                this._inputUrl.addEventListener('change', (event) => {
+                    this._updateAttributes();
+                });
+            }
+        };
+        this._updateView();
+    }
+    
+    _template() {
+        return `
+            <style>
+                #fsrc {
+                    width: 100%;
+                    border: none;
+                }
+            </style>
+            ${!this.src ? `
+                <div>
+                    <input value="${this.src || ''}" type="text" id="fsrc" placeholder="Insira o endereço do seu vídeo"/>
+                </div>
+            ` : ''}
+            
+            ${this._embedUrl ? `
+                <iframe src="${this._embedUrl}" id="youtubeiframe"></iframe>
+            ` : ''}
+            
+        `;
     }
     
     get src() {
@@ -26,7 +53,6 @@ class YoutubeVideo extends HTMLElement {
         } else {
           this.removeAttribute('src');
         }
-        console.log(this.src)
     }
     
     get _embedUrl() {
@@ -42,37 +68,15 @@ class YoutubeVideo extends HTMLElement {
     
     _updateAttributes() {
         this.src = this._inputUrl.value;
-        this._updateVideo();
-    }
-    
-    _updateVideo() {
-        this._iframe.src = this._embedUrl;
+        this._updateView();
     }
     
     attributeChangedCallback(attrName, oldVal, newVal) {
         if (attrName == 'src') {
-            this._updateVideo();
+            this._updateView();
         }
     }
 }
 if (window.customElements) {
     customElements.define('youtube-video', YoutubeVideo);
-}
-
-class YoutubeVideoView {
-    template(model) {
-        return `
-            <style>
-            </style>
-            <div>
-                <label>Video url</label>
-                <input />
-            </div>
-            <iframe src='model._embedUrl'></iframe>
-        `
-    }
-    
-    update() {
-        
-    }
 }
