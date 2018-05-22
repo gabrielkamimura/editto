@@ -8,6 +8,8 @@
         "babel": "^6.23.0",
         "babel-cli": "^6.26.0",
         "babel-preset-env": "^1.7.0",
+        "gulp-babel": "*",
+        "babel-core": "*",
         "gulp": "*",
         "gulp-concat": "*",
         "gulp-minify-css": "*",

@@ -11,14 +11,28 @@ import concat from "gulp-concat";
 import uglify from "gulp-uglify";
 
 const baseJsFile = "./editto.es6.js",
+      babel = require('gulp-babel'),
       destfile = "./editto.min.js";
 
 
 gulp.task('scripts', () => {
-  return gulp.src('./componentes/*.js')
-    .pipe(concat('editto.js'))
+  return gulp.src(baseJsFile)
+    .pipe(concat('editto.min.js'))
+    .pipe(babel({
+        presets: ['env']
+    }))
     .pipe(uglify())
-    .pipe(gulp.dest('./dist'));
+    .pipe(gulp.dest('./'));
+});
+
+gulp.task('components', () => {
+  return gulp.src('./components-es6-example/*.js')
+    .pipe(concat('example-components.js'))
+    .pipe(babel({
+        presets: ['env']
+    }))
+    .pipe(uglify())
+    .pipe(gulp.dest('./'));
 });
 
 gulp.task('theme-compiler', () => {

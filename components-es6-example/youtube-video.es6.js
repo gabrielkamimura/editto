@@ -9,7 +9,9 @@ class YoutubeVideo extends HTMLElement {
         
         this._updateView = () => {
             shadow.innerHTML = this._template();
-            shadow.contenteditable = true;
+            if (!shadow.querySelector) {
+                shadow.querySelector = shadow.host.querySelector;
+            }
             this._inputUrl = shadow.querySelector('#fsrc');
             this._iframe = shadow.querySelector('#youtubeiframe');
 

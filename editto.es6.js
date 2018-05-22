@@ -132,7 +132,6 @@ class eDitto extends HTMLElement {
      * Allow content edition for user
      */
     allowEdition() {
-        this.syncFromsyncFromInnerHTML();
         this.contentEditable = true;
     }
     
@@ -141,13 +140,6 @@ class eDitto extends HTMLElement {
      */
     disallowEdition() {
         this.contentEditable = false;
-    }
-    
-    /**
-     * Copy the content from innerHTML to the value of editor
-     */
-    syncFromsyncFromInnerHTML() {
-        this.value = this.innerHTML;
     }
     
     /**
@@ -196,8 +188,11 @@ class eDitto extends HTMLElement {
         }
         
         this.focus();
-        
-        document.execCommand('insertHTML', false, elem);
+        let div = document.createElement("div");
+        div.innerHTML = elem; // For firefox to work with custom web components, we have to create an element here. It doesnt work with execcommand propertly
+        this.selectionRange.collapse(false);
+        this.selectionRange.insertNode(div);
+//        document.execCommand('insertHTML', false, div.innerHTML);
     }
     
     /**
@@ -334,18 +329,9 @@ class eDittoButtonBar extends HTMLElement {
     
 }
 
-if (window.customElements) {
-    customElements.define('editto-editor', eDitto);
-    customElements.define('editto-button-bar', eDittoButtonBar);
-} else {
-    if (document.registerElement) {
-        customElements.define('editto-editor', eDitto);
-        document.registerElement('editto-button-bar', eDittoButtonBar);
-    }
-    else {
-        console.error("E-Ditto doesn't support your current browser");
-    }
-}
+customElements.define('editto-editor', eDitto);
+customElements.define('editto-button-bar', eDittoButtonBar);
+
 
 
 
