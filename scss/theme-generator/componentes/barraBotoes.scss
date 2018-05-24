@@ -11,8 +11,8 @@
   bottom: 0;
   left: 0;
   z-index: 999;
-//  max-height: 0;
-//  visibility: hidden;
+  max-height: 0;
+  visibility: hidden;
   background-color: #fff;
   @include box-shadow($shadow);
 }
@@ -21,4 +21,4 @@
   @include animation(5s slideDown);
   max-height: 1000px;
   visibility: visible;
-}
+}   

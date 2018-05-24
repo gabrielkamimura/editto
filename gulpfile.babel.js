@@ -10,19 +10,26 @@ import cssMinifier from "gulp-minify-css";
 import concat from "gulp-concat";
 import uglify from "gulp-uglify";
 
-const baseJsFile = "./editto.es6.js",
+const baseJsFile = "./*.js",
       babel = require('gulp-babel'),
       destfile = "./editto.min.js";
 
 
 gulp.task('scripts', () => {
-  return gulp.src(baseJsFile)
-    .pipe(concat('editto.min.js'))
-    .pipe(babel({
-        presets: ['env']
-    }))
-    .pipe(uglify())
-    .pipe(gulp.dest('./'));
+    gulp.src('./components/*.js')
+        .pipe(concat('editto-bundle.js'))
+        .pipe(babel({
+            presets: ['env']
+        }))
+        .pipe(uglify())
+        .pipe(gulp.dest('./dist'));
+    
+    return gulp.src('./components/*.js')
+        .pipe(babel({
+            presets: ['env']
+        }))
+        .pipe(uglify())
+        .pipe(gulp.dest('./dist/'));
 });
 
 gulp.task('components', () => {
