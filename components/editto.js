@@ -9,18 +9,24 @@ class eDitto extends HTMLElement {
         let initialContent = this.innerHTML;
         
         this.allowEdition();
-        this._lastSelection = null;// Save the old selection when blur
+        this._lastSelectionRange = null;// Save the old selection when blur
         
         let $this = this;
         this.addEventListener('focus', (event) => {
             $this._interval = setInterval(() => {
-                $this._lastSelection = $this.selection || $this._lastSelection;
-            }, 100);   
-        });
+                $this._lastSelectionRange = $this.selectionRange || $this._lastSelectionRange;
+            }, 100);
+            
+            if ($this._lastSelectionRange) {
+                $this.restoreSelection($this._lastSelectionRange)
+            }
+        }, false);
         this.addEventListener('blur', (event) => {
             clearInterval($this._interval);
         });
     }
+    
+    
         
     /**
      * Get the HTML content of editor
@@ -62,11 +68,6 @@ class eDitto extends HTMLElement {
             } else if (document.selection) {
                 txt = document.selection.createRange().text;
             }
-        } else {
-            //Vamos tentar recuperar a seleção anteriormente feita
-            if (this._lastSelection) {
-                txt = this._lastSelection;
-            }
         }
         return txt;
     }
@@ -77,12 +78,16 @@ class eDitto extends HTMLElement {
      */
     get selectionRange() {
         let range = null;
-        if (this.selection.getRangeAt) {
-          range = this.selection.getRangeAt(0);
+        if (this === document.activeElement) {
+            if (this.selection.getRangeAt) {
+              range = this.selection.getRangeAt(0);
+            } else {
+              range = document.createRange();
+              range.setStart (userSelection.anchorNode, userSelection.anchorOffset);
+              range.setEnd (userSelection.focusNode, userSelection.focusOffset);
+            }
         } else {
-          range = document.createRange();
-          range.setStart (userSelection.anchorNode, userSelection.anchorOffset);
-          range.setEnd (userSelection.focusNode, userSelection.focusOffset);
+            range = this._lastSelectionRange;
         }
 
         return range;
@@ -179,7 +184,7 @@ class eDitto extends HTMLElement {
      * @param {object} options. Opções para templatização do conteúdo. Formato: {variable: value}
      */
     insertElement(elem, options) {
-            
+        this.focus(); 
         if (options) {
             for (let i in options) {
                 let aux = "{{ " + i + " }}";
@@ -187,7 +192,7 @@ class eDitto extends HTMLElement {
             };
         }
         
-        this.focus();
+        
         let div = document.createElement("div");
         div.innerHTML = elem; // For firefox to work with custom web components, we have to create an element here. It doesnt work with execcommand propertly
         this.selectionRange.collapse(false);
@@ -235,7 +240,22 @@ class eDitto extends HTMLElement {
         }
         return (document.queryCommandState(format));
     }
-    
+
+    restoreSelection(rangeToRestore) {
+        if (rangeToRestore) {
+            if (window.getSelection) {
+                let selection = window.getSelection();
+                selection.removeAllRanges();
+                selection.addRange(rangeToRestore);
+            }
+            else if (document.selection && rangeToRestore.select) {
+                rangeToRestore.select();
+            }
+
+            return rangeToRestore;
+        }
+    }
+
     toggleBold() {
         this.format('bold');
     }
