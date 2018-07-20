@@ -1,4 +1,4 @@
-.editto-buttom-bar {
+.editto-button-bar {
   width: 100%;
   padding-top: .5em;
   padding-bottom: .5em;
@@ -7,18 +7,25 @@
   overflow-x: auto;
   width: 100%;
   white-space: nowrap;
-  position: fixed;
-  bottom: 0;
-  left: 0;
+//  position: fixed;
+//  bottom: 0;
+//  left: 0;
   z-index: 999;
   max-height: 0;
   visibility: hidden;
   background-color: #fff;
+  margin-bottom: .5em;
   @include box-shadow($shadow);
 }
 
-.editto-button-bar__editor-focus {
-  @include animation(5s slideDown);
+.editto-button-bar--focus {
+  @include animation(5s slideDown ease-out);
   max-height: 1000px;
   visibility: visible;
-}   
+}
+
+
+.editto-button-bar--lost-focus {
+  @include animation(1s slideDown reverse);
+//  max-height: 0;
+}

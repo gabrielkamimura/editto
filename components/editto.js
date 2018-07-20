@@ -3,9 +3,6 @@ class eDitto extends HTMLElement {
     
     constructor() {
         super();
-//        this._shadow = this.attachShadow( {mode: 'closed'} );
-        
-//        this._shadow.appendChild(this._contentBox);
         let initialContent = this.innerHTML;
         
         this.allowEdition();
@@ -25,8 +22,6 @@ class eDitto extends HTMLElement {
             clearInterval($this._interval);
         });
     }
-    
-    
         
     /**
      * Get the HTML content of editor
@@ -148,20 +143,6 @@ class eDitto extends HTMLElement {
     }
     
     /**
-     * Synch editor's innerHTML to editor's value
-     */
-    startAutoSync() {
-        
-    }
-    
-    /**
-     * Stop synch. Only the value property will return the current editor's value
-     */
-    stopAutoSync() {
-        
-    }
-    
-    /**
      * Format the document givven some properties
      * @param {String} name Property name eg:bold,italic,underline
      * @param {String} value Optional property that change value for some format names
@@ -278,11 +259,11 @@ customElements.define('editto-editor', eDitto);
 /**
  * Funcionalidade gerais a serem utilizadas
  */
-window.eDittoHelpers = {
+class eDittoHelpers  {
     /**
      * Insere um elemtno anteriormente a outro. Utilizado para inserir componentes como a barra de botões e o documento
      */
-    insertAfter: function(newElement,targetElement) {
+    insertAfter(newElement,targetElement) {
         var parent = targetElement.parentNode;
 
         //if the parents lastchild is the targetElement...
@@ -293,12 +274,12 @@ window.eDittoHelpers = {
             // else the target has siblings, insert the new element between the target and it's next sibling.
             parent.insertBefore(newElement, targetElement.nextSibling);
         }
-    },
+    }
 
     /**
      * Obtém a localização da pasta do arquivo do eDitto(editto.js ou editto.min.js)
      */
-    getFileLocation: function() {
+    getFileLocation() {
         var scriptElements = document.getElementsByTagName('script');
         for (var i = 0; i < scriptElements.length; i++) {
             var source = scriptElements[i].src;
@@ -309,7 +290,7 @@ window.eDittoHelpers = {
             }
         }
       return false;
-    },
+    }
     
     /**
      * Recebe uma string e um determinado caractere a ser alterado e retorna string com caracteres alterados
@@ -318,20 +299,20 @@ window.eDittoHelpers = {
      * @param  {string} newtoken Texto a reposicionar token
      * @return {string}
      */
-    replaceAll: function(string, token, newtoken) {
+    replaceAll(string, token, newtoken) {
         var string = string || "";
         while (string.indexOf(token) != -1) {
           string = string.replace(token, newtoken);
         }
         return string;
-    },
+    }
         
-    escapeHTML: function(string = '') {
+    escapeHTML(string = '') {
         string = this.replaceAll(this.replaceAll(string, "<", "&lt"), ">", "&gt");
         return string;
-    },
+    }
     
-    countCharacters: function(text) {
+    countCharacters(text) {
         let count = 0;
         for (let i in text) {
             if (text[i] != ' ') {
@@ -340,16 +321,9 @@ window.eDittoHelpers = {
         }
         
         return count;
-    },
+    }
     
-    countWords: function() {
+    countWords() {
     
-    },
-    
-    /**
-     * Check if a certain element is inside en editto and is editable
-     */
-    elementIsInEditto: (el) => {
-        
     }
 }

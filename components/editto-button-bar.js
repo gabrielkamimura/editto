@@ -33,11 +33,14 @@ class eDittoButtonBar extends HTMLElement {
             this.eDitto = document.getElementById(newVal);
             let $this = this;
             this.eDitto.addEventListener('focus', () => {
-                $this.classList.add('editto-button-bar__editor-focus')
+                $this.classList.remove('editto-button-bar--lost-focus');
+                $this.classList.add('editto-button-bar--focus');
             });
             
             this.eDitto.addEventListener('blur', () => {
-                $this.classList.remove('editto-button-bar__editor-focus')
+                $this.classList.remove('editto-button-bar--focus');
+                $this.classList.add('editto-button-bar--lost-focus');
+                setTimeout(e => $this.classList.remove('editto-button-bar--lost-focus'), 1000);
             });
         }
     }
