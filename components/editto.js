@@ -248,10 +248,6 @@ class eDitto extends HTMLElement {
     toggleUnderline() {
         this.format('underline');
     }
-    
-    querySelector(text) {
-        //return this.iframeDocument.querySelector(text);
-    }
 }
 
 customElements.define('editto-editor', eDitto);
@@ -263,7 +259,7 @@ class eDittoHelpers  {
     /**
      * Insere um elemtno anteriormente a outro. Utilizado para inserir componentes como a barra de botões e o documento
      */
-    insertAfter(newElement,targetElement) {
+    static insertAfter(newElement,targetElement) {
         var parent = targetElement.parentNode;
 
         //if the parents lastchild is the targetElement...
@@ -279,7 +275,7 @@ class eDittoHelpers  {
     /**
      * Obtém a localização da pasta do arquivo do eDitto(editto.js ou editto.min.js)
      */
-    getFileLocation() {
+    static getFileLocation() {
         var scriptElements = document.getElementsByTagName('script');
         for (var i = 0; i < scriptElements.length; i++) {
             var source = scriptElements[i].src;
@@ -299,7 +295,7 @@ class eDittoHelpers  {
      * @param  {string} newtoken Texto a reposicionar token
      * @return {string}
      */
-    replaceAll(string, token, newtoken) {
+    static replaceAll(string, token, newtoken) {
         var string = string || "";
         while (string.indexOf(token) != -1) {
           string = string.replace(token, newtoken);
@@ -307,7 +303,7 @@ class eDittoHelpers  {
         return string;
     }
         
-    escapeHTML(string = '') {
+    static escapeHTML(string = '') {
         string = this.replaceAll(this.replaceAll(string, "<", "&lt"), ">", "&gt");
         return string;
     }

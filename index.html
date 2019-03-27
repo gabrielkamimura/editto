@@ -20,16 +20,11 @@
         margin: 0 auto
       }
       
-      /* the custom elements inside edito must be display block to avoid some problems like making it impossible to change */
-      youtube-video {
-        display: block;
-      }
-      
     </style>
   </head>
   <body>
     <section class="container">
-      <editto-button-bar class="editto-button-bar" editto="meueditor">
+      <editto-button-bar class="editto-button-bar" editto="myEditor">
         <div class="editto-button-group">
           <button class="editto-button editto-button__icon" data-editto-format="bold"><img src="icons/bold.svg"/></button>
           <button class="editto-button editto-button__icon" data-editto-format="italic"><img src="icons/italic.svg "/></button>
@@ -45,36 +40,30 @@
           <button class="editto-button editto-button__icon" data-editto-format="insertunorderedlist"><img src="icons/list_ul.svg"/></button>
 
           <button class="editto-button editto-button__icon" data-editto-format="backColor" data-editto-format-value="rgb(254, 211, 48)"><img src="icons/border_color.svg"/></button>
-          <button class="editto-button editto-button__icon" onclick="teste.insertElement('<youtube-video></youtube-video>')"><img src="icons/file.svg"></button>
-          <button class="editto-button editto-button__icon" onclick="teste.insertElement(`<academico-questao idquestao='${prompt('Insira o ID da questão')}'></academico-questao>`)"><img src="icons/file.svg"></button>
+<!--          <button class="editto-button editto-button__icon" onclick="test.insertElement('<youtube-video></youtube-video>')"><img src="icons/file.svg"></button>-->
+          <button class="editto-button editto-button__icon" onclick="test.insertElement('<section><h1>Title</h1><p>Content</p></section>')"><img src="icons/file.svg"></button>
+          <button class="editto-button editto-button__icon" onclick="test.insertFromTemplate('/models-example/testeExterno.html')"><img src="icons/file.svg"></button>
+          <button class="editto-button editto-button__icon" onclick="insertImage()"><img src="icons/file.svg"></button>
         </div>
       </editto-button-bar>
       
-      <editto-editor class="editto-editor" id="meueditor">
+      <editto-editor class="editto-editor" id="myEditor">
         <h1> Hello World!</h1>
         <p>Some text should be written here.</p>
       </editto-editor>
-<!--
-      <h1>Texto fora do editor</h1>
-      <p>Mais um texto fora do editor</p>
--->
-<!--      <youtube-video src="https://www.youtube.com/watch?v=BymRfqi4U5A" id="video-teste"></youtube-video>-->
-<!--      <academico-questao id="questaoTeste" idquestao="2"></academico-questao>-->
     </section>
     
 
-<!--    <script src="./node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js"></script>-->
-<!--    <script src="./node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>-->
-    
-<!--    <script src="./node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>-->
-    
+    <script src="./node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js"></script>
+    <script src="./node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+        
+<!--
     <script src="components/editto.js" type="module"></script>
     <script src="components/editto-button-bar.js"></script>
-    <script src="components-example/youtube-video.es6.js" type="module"></script>
-    <script src="components-example/questao-academico.es6.js"></script>
+-->
 <!--    <script src="example-components.js"></script>-->
     
-<!--    <script src="dist/editto-bundle.js"></script>-->
+    <script src="dist/editto-bundle.js"></script>
 <!--
     <script src="dist/editto.js"></script>
     <script src="dist/editto-button-bar.js"></script>
@@ -82,7 +71,12 @@
 <!--    <script src="youtube-video.js"></script>-->
     
     <script>
-      let teste = document.querySelector("#meueditor");
+      let test = document.querySelector("#myEditor");
+      
+      function insertImage() {
+        test.insertFromTemplate('/models-example/imageInsert.html', { src: prompt('Insira a URL da imagem')});
+      } 
+      
     </script>
   </body>
 </html>
