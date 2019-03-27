@@ -26,24 +26,38 @@
     <section class="container">
       <editto-button-bar class="editto-button-bar" editto="myEditor">
         <div class="editto-button-group">
-          <button class="editto-button editto-button__icon" data-editto-format="bold"><img src="icons/bold.svg"/></button>
-          <button class="editto-button editto-button__icon" data-editto-format="italic"><img src="icons/italic.svg "/></button>
-          <button class="editto-button editto-button__icon" data-editto-format="underline"><img src="icons/underline.svg "/></button>
+          <button class="editto-button editto-button__icon" data-editto-format="bold" title="bold"><img src="icons/bold.svg" alt="bold"/></button>
+          <button class="editto-button editto-button__icon" data-editto-format="italic" title="italic"><img src="icons/italic.svg " alt="italic"/></button>
+          <button class="editto-button editto-button__icon" data-editto-format="underline" title="underline"><img src="icons/underline.svg " alt="underline"/></button>
         </div>
         <div class="editto-button-group">
-          <button class="editto-button editto-button__icon" data-editto-format="justifyleft"><img src="icons/align_left.png"/></button>
-          <button class="editto-button editto-button__icon" data-editto-format="justifycenter"><img src="icons/align_center.svg"/></button>
-          <button class="editto-button editto-button__icon" data-editto-format="justifyright"><img src="icons/align_right.svg"/></button>
+          <button class="editto-button editto-button__icon" data-editto-format="justifyleft" title="align left"><img src="icons/align_left.png" alt="align left"/></button>
+          <button class="editto-button editto-button__icon" data-editto-format="justifycenter" title="align center"><img src="icons/align_center.svg" alt="align center"/></button>
+          <button class="editto-button editto-button__icon" data-editto-format="justifyright" title="align right"><img src="icons/align_right.svg" alt="align right"/></button>
         </div>
         <div class="editto-button-group">
-          <button class="editto-button editto-button__icon" data-editto-format="insertorderedlist"><img src="icons/list_ol.svg"/></button>
-          <button class="editto-button editto-button__icon" data-editto-format="insertunorderedlist"><img src="icons/list_ul.svg"/></button>
+          <button class="editto-button editto-button__icon" data-editto-format="insertorderedlist" title="ordered list"><img src="icons/list_ol.svg" alt="ordered list"/></button>
+          <button class="editto-button editto-button__icon" data-editto-format="insertunorderedlist" title="unordered list"><img src="icons/list_ul.svg" alt="unordered list"/></button>
 
-          <button class="editto-button editto-button__icon" data-editto-format="backColor" data-editto-format-value="rgb(254, 211, 48)"><img src="icons/border_color.svg"/></button>
+          <button class="editto-button editto-button__icon" data-editto-format="backColor" data-editto-format-value="rgb(254, 211, 48)" title="Highlight text"><img src="icons/border_color.svg" alt="Highlight text"/></button>
+        </div>
+        <div class="editto-button-group">
 <!--          <button class="editto-button editto-button__icon" onclick="test.insertElement('<youtube-video></youtube-video>')"><img src="icons/file.svg"></button>-->
-          <button class="editto-button editto-button__icon" onclick="test.insertElement('<section><h1>Title</h1><p>Content</p></section>')"><img src="icons/file.svg"></button>
-          <button class="editto-button editto-button__icon" onclick="test.insertFromTemplate('/models-example/testeExterno.html')"><img src="icons/file.svg"></button>
-          <button class="editto-button editto-button__icon" onclick="insertImage()"><img src="icons/file.svg"></button>
+          <button class="editto-button editto-button__icon" 
+                  onclick="test.insertElement('<section><h1>Title</h1><p>Content</p></section>')" 
+                  title="Element insert">
+                <img src="icons/file.svg" alt="Element insert"/>
+          </button>
+          <button class="editto-button editto-button__icon" 
+                  onclick="test.insertFromTemplate('/models-example/testeExterno.html')" 
+                  title="">
+            <img src="icons/file.svg" />
+          </button>
+          <button class="editto-button editto-button__icon" 
+                  onclick="insertImage()"
+                  title="">
+            <img src="icons/file.svg" alt="" />
+          </button>
         </div>
       </editto-button-bar>
       

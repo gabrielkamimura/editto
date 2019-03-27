@@ -12,16 +12,16 @@
 //  left: 0;
   z-index: 999;
   max-height: 0;
-  visibility: hidden;
+  display: none;
   background-color: #fff;
   margin-bottom: .5em;
   @include box-shadow($shadow);
 }
 
 .editto-button-bar--focus {
+  display: block;
   @include animation(5s slideDown ease-out);
   max-height: 1000px;
-  visibility: visible;
 }
 
 
