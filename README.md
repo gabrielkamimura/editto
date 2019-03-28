@@ -1,122 +1,55 @@
-# e-Ditto
-O e-Ditto é um editor wysiwyg modular que permite fáceis alterações para adequações a necessidades específicas.
+# Editto
 
-## Utilização Básica
+Editto is an wysiwyg editor that allows the developers to easily customize everything since buttons style to the available functionality through HTML, CSS and JavaScript.
 
-Antes de utilizar, certifique-se de que a JQuery e o  font-Awesome estão devidamente carregados em sua página. 
+## Dependencies
 
-Com essas dependências devidamente carregadas, carregue os arquivos necessários. Esses arquivos encontram-se dentro do diretório src do projeto.
+None. But web components polyfills are highly recommended for better browser compatibility.
+``` html
+<script src="./node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js"></script>
+<script src=“./node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+```
+## Get Started
 
+After downloading Editto, insert the CSS file you would like to use. Choose between some of the available themes or create a custom editto theme by reading the custom theme section.
+``` html
+<link type="text/css" rel="stylesheet" href="themes/editto-cyan-theme.css"/>
+```
+Add the script as well. The editto-bundle.js is the easiest way since It adds editor and button bar components
 ```html
-
-<link href="editor.css" rel="stylesheet" type="text/css"/>
-<script src="editto.js"></script>
-
+<script src=“dist/editto-bundle.js"></script>
 ```
-No seu documento HTML, insira um textarea especificando um id.
+Note: In order to the scripts in dist directory to work, you have to add the polyfills in your page. If you don’t add the polyfills you can add the scripts inside components directory
 
-```html
-<textarea id="meuEditor"></textarea>
-
+After this, you can add the editor component:
+``` html
+<editto-editor class="editto-editor" id="myEditor">
+  <h1> Hello World!</h1>
+  <p>Some text should be written here.</p>
+</editto-editor> 
 ```
+Inside this component, you should insert your editor content. After inserting this, your text editor must display an text editor without options, something like an textarea.
 
-Com isso, basta criar uma instância do editor. Passando o id do textarea criado.
+To add the buttons, add the following HTML
+``` html
+<editto-button-bar class="editto-button-bar" editto="myEditor">
+        <div class="editto-button-group">
+          <button class="editto-button editto-button__icon" data-editto-format="bold" title="bold"><img src="icons/bold.svg" alt="bold"/></button>
+          <button class="editto-button editto-button__icon" data-editto-format="italic" title="italic"><img src="icons/italic.svg " alt="italic"/></button>
+          <button class="editto-button editto-button__icon" data-editto-format="underline" title="underline"><img src="icons/underline.svg " alt="underline"/></button>
+        </div>
+        <div class="editto-button-group">
+          <button class="editto-button editto-button__icon" data-editto-format="justifyleft" title="align left"><img src="icons/align_left.png" alt="align left"/></button>
+          <button class="editto-button editto-button__icon" data-editto-format="justifycenter" title="align center"><img src="icons/align_center.svg" alt="align center"/></button>
+          <button class="editto-button editto-button__icon" data-editto-format="justifyright" title="align right"><img src="icons/align_right.svg" alt="align right"/></button>
+        </div>
+        <div class="editto-button-group">
+          <button class="editto-button editto-button__icon" data-editto-format="insertorderedlist" title="ordered list"><img src="icons/list_ol.svg" alt="ordered list"/></button>
+          <button class="editto-button editto-button__icon" data-editto-format="insertunorderedlist" title="unordered list"><img src="icons/list_ul.svg" alt="unordered list"/></button>
 
-```javascript
-var demo = new eDitto("meuEditor");
+          <button class="editto-button editto-button__icon" data-editto-format="backColor" data-editto-format-value="rgb(254, 211, 48)" title="Highlight text"><img src="icons/border_color.svg" alt="Highlight text"/></button>
+        </div>
+      </editto-button-bar>
 ```
-E pronto. O seu editor básico já deve estar funcionando :)
+It should add the button bar for your text editor. Please check if the editto parameter on your editto-button-bar is filled correctly with your editto-editor’s ID
 
-## Personalizando o seu e-Ditto
-
-O e-Ditto tem como objetivo ser capaz de se adequar a uma grande diversidade de projetos e necessidades. Para tal, ele permite a inserção de funcionalidades personalizadas. A personalização é tanta que você pode até mesmo reconstruir ou adaptar as funcionalidades disponíveis por padrão para que elas se adequem a suas necessidades.Veja nessa seção como utilizá-las
-
-Obs.: A personalização é muito importante. Logo, se você quiser utilizar apenas seus módulos personalizados (ou quer alterar os componentes padrão) e não usar os elementos padrão do editor, utilize:
-```javascript
-var demo = new eDitto("meuEditor", {disableDefaultComponents: true});
-```
-### Personalização com inserção de Textos
-```javascript
-var buttonGroupCustom = new eDittoButtonGroup(demo.obterBarraBotoes());// Definindo um grupode botões para a inserção da personalização
-
-var smile = new eDittoButton(buttonGroupCustom, 'smile-o', "Elemento personalizado");
-smile.getButtonDOM().onclick = function() {
-  demo.obterDocumento().inserirTexto(":)");
-};
-```
-
-### Personalização com Inserção de Arquivo Externo
-Pode ser que sua página necessite de recursos que incluam html na página. Para isso, utilize o carregamneto de arquivos externos.
-Para testar as personalizações com carregamento externo, lembre-se de subir um servidor local na sua máquina
-```javascript
-// demo.js
-
-var carregamento = new eDittoButton(buttonGroupCustom, 'random', "Modelo externo");
-carregamento.getButtonDOM().onclick = function() {
-  demo.obterDocumento().carregar('modelos/testeExterno.html')
-};
-```
-```html
-<!-- demoExterno.html -->
-<h2>Este é um arquivo externo de modelo para o editor</h2>
-<ul>
-    <li>Teste de carregamento de arquivo</li>
-</ul>
-
-```
-
-### Personalização com Inserção de Arquivo Externo com partes variáveis
-
-Às vezes a inserção de HTML externo não é suficiente. Às vezes, é preciso alterar partes desse código para que ele se adeque a determinada situação, por exemplo no carregamento de uma imagem em que o endereço dessa imagem não é sempre o mesmo.
-Para testar as personalizações com carregamento externo, lembre-se de subir um servidor local na sua máquina
-```javascript
-// demo.js
-var tpl = new eDittoButton(buttonGroupCustom, 'random', "Carregamento de template");
-tpl.getButtonDOM().onclick = function() {
-  var opcoes = [
-    {
-      variavel: 'titulo',
-      valor: prompt("Insira um título")
-    }
-  ];
-  demo.obterDocumento().carregar('modelos/testeTemplate.html', opcoes);
-};
-```
-```html
-<!-- demoExterno.html -->
-<h2>{{ titulo }}</h2>
-<ul>
-    <li>Teste de carregamento de arquivo com conteúdo personalizado</li>
-</ul>
-
-```
-
-## Desenvolvimento
-### Primeiros Passos
-Com o projeto baixado, navegue até o diretório src e digite o comando.
-```
-npm install
-```
-Com isso, os pacotes necessários serão instalados. Após isso, digite o comando:
-```
-bower install
-```
-Ao final, as dependências do projeto serão instalados.
-
-No caso de o editor utilizar o carregamento de arquivos externos, certifique-se de que tenha subido um servidor local na máquina por meio de http-server ou php -S
-
-### Desenvolvendo
-O projeto para desenvolvimento está estruturado no diretório componentes/src. Lá, há diversos arquivos referentes à manipulação de elementos específicos do editor. Faça as alterações nesses arquivos e ao final das alterações, navegue até o diretório src e execute o comando:
-```
-gulp scripts
-```
-Este comando concatenará todos os arquivos em src/componentes em um único arquivo: src/editto.js
-
-```
-gulp minify-js
-```
-Este comando minificará o arquivo editto.js
-
-## Observação
-
-O projeto está em desenvolvimento, não sendo recomendado ainda o seu uso em aplicações. Ainda não há devidas considerações de compatibilidade, tendo sido testado apenas no Google Chrome versão 38.0.2125.104.
