@@ -33,23 +33,25 @@ Inside this component, you should insert your editor content. After inserting th
 To add the buttons, add the following HTML
 ``` html
 <editto-button-bar class="editto-button-bar" editto="myEditor">
-        <div class="editto-button-group">
-          <button class="editto-button editto-button__icon" data-editto-format="bold" title="bold"><img src="icons/bold.svg" alt="bold"/></button>
-          <button class="editto-button editto-button__icon" data-editto-format="italic" title="italic"><img src="icons/italic.svg " alt="italic"/></button>
-          <button class="editto-button editto-button__icon" data-editto-format="underline" title="underline"><img src="icons/underline.svg " alt="underline"/></button>
-        </div>
-        <div class="editto-button-group">
-          <button class="editto-button editto-button__icon" data-editto-format="justifyleft" title="align left"><img src="icons/align_left.png" alt="align left"/></button>
-          <button class="editto-button editto-button__icon" data-editto-format="justifycenter" title="align center"><img src="icons/align_center.svg" alt="align center"/></button>
-          <button class="editto-button editto-button__icon" data-editto-format="justifyright" title="align right"><img src="icons/align_right.svg" alt="align right"/></button>
-        </div>
-        <div class="editto-button-group">
-          <button class="editto-button editto-button__icon" data-editto-format="insertorderedlist" title="ordered list"><img src="icons/list_ol.svg" alt="ordered list"/></button>
-          <button class="editto-button editto-button__icon" data-editto-format="insertunorderedlist" title="unordered list"><img src="icons/list_ul.svg" alt="unordered list"/></button>
+  <div class="editto-button-group">
+    <button class="editto-button editto-button__icon" data-editto-format="bold" title="bold"><img src="icons/bold.svg" alt="bold"/></button>
+    <button class="editto-button editto-button__icon" data-editto-format="italic" title="italic"><img src="icons/italic.svg " alt="italic"/></button>
+    <button class="editto-button editto-button__icon" data-editto-format="underline" title="underline"><img src="icons/underline.svg " alt="underline"/></button>
+  </div>
+  <div class="editto-button-group">
+    <button class="editto-button editto-button__icon" data-editto-format="justifyleft" title="align left"><img src="icons/align_left.png" alt="align left"/></button>
+    <button class="editto-button editto-button__icon" data-editto-format="justifycenter" title="align center"><img src="icons/align_center.svg" alt="align center"/></button>
+    <button class="editto-button editto-button__icon" data-editto-format="justifyright" title="align right"><img src="icons/align_right.svg" alt="align right"/></button>
+  </div>
+  <div class="editto-button-group">
+    <button class="editto-button editto-button__icon" data-editto-format="insertorderedlist" title="ordered list"><img src="icons/list_ol.svg" alt="ordered list"/></button>
+    <button class="editto-button editto-button__icon" data-editto-format="insertunorderedlist" title="unordered list"><img src="icons/list_ul.svg" alt="unordered list"/></button>
 
-          <button class="editto-button editto-button__icon" data-editto-format="backColor" data-editto-format-value="rgb(254, 211, 48)" title="Highlight text"><img src="icons/border_color.svg" alt="Highlight text"/></button>
-        </div>
-      </editto-button-bar>
+    <button class="editto-button editto-button__icon" data-editto-format="backColor" data-editto-format-value="rgb(254, 211, 48)" title="Highlight text"><img src="icons/border_color.svg" alt="Highlight text"/></button>
+  </div>
+</editto-button-bar>
 ```
-It should add the button bar for your text editor. Please check if the editto parameter on your editto-button-bar is filled correctly with your editto-editor’s ID
+It should add the button bar for your text editor. Please check if the editto-button-bar's editto parameter is filled correctly with your editto-editor’s ID
+
+
 
