@@ -151,3 +151,5 @@ After this, use gulp to generate the css file
 ```
 gulp theme-compiler
 ```
+
+This must have generated a css file in themes directory
