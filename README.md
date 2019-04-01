@@ -132,5 +132,22 @@ function insertImage() {
 
 ```
 ## Theming
+You can customize the default themes available by adding a file in scss/theme-generator directory
+``` scss
+$color: #323232;
 
-## Notes
+$color-active: #fff;
+
+$color-background-active: #00bcd4;
+
+$color-hover: #aaa;
+
+$divider-color: #ddd;
+
+@import 'componentes/base';
+```
+
+After this, use gulp to generate the css file
+```
+gulp theme-compiler
+```
