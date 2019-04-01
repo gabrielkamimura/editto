@@ -60,8 +60,8 @@ Inside the default Editto’s button bar, you can insert default features such a
 In order to add some features to your editor, you must add some JavaScript customizations. To do it, get your editto element by using document.getElementById, document.querySelector or similars. Once you get the element, you can access all the editor’s possible features
 ``` js
 function bold() {
-	let test = document.querySelector("#myEditor");
-        test.toggleBold();
+    let test = document.querySelector("#myEditor");
+    test.toggleBold();
 }
 ```
 ### List of editto’s personalization methods:
