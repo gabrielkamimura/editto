@@ -64,7 +64,7 @@ function bold() {
     test.toggleBold();
 }
 ```
-### List of editto’s personalization methods:
+## List of editto’s personalization methods:
 - isEditable() - Check if edition mode is on
 - allowEdition() - allows the user to change the editor's content
 - disableEdition() - disable the edition mode
@@ -78,8 +78,7 @@ function bold() {
 - toggleUnderline()
 
 
-
-### List of editto’s properties
+## List of editto’s properties
 - value
 - innerHTML
 - innerText
@@ -87,5 +86,15 @@ function bold() {
 - selectedHTML
 
 
+## Insert element
+### Insert Text
 
+### Insert with string
 
+### Variables
+
+### Insert with template
+
+## Theming
+
+## Notes
