@@ -1,6 +1,6 @@
 # Editto
 
-Editto is an wysiwyg editor that allows the developers to easily customize everything since buttons style to the available functionality through HTML, CSS and JavaScript.
+Editto is a wysiwyg editor that allows the developers to easily customize everything since buttons style to the available features through HTML, CSS and JavaScript.
 
 ## Dependencies
 
@@ -53,5 +53,103 @@ To add the buttons, add the following HTML
 ```
 It should add the button bar for your text editor. Please check if the editto-button-bar's editto parameter is filled correctly with your editto-editor’s ID
 
+Editto respects your application visual identity - it’s actually easy to personalize just about everything thru HTML, CSS and JavaScript. The editor and its features are independent, you can add the button bar and then select the features that best fit in your application goals. Bold, italic, underline, lists, or even images, videos, custom components or whatever you want. You can, and we recommend you to do so, use third-party icons such as font-awesome.
+
+Inside the default Editto’s button bar, you can insert default features such as bold, italic, underline and lists. These features are the same ones on document.execcomand’s command name parameter. To do it, insert the command name in data-editto-format parameter inside the buttons. If the command requires a value (backColor, foreColor, fontName), you must insert it in data-editto-format-value.
+
+In order to add some features to your editor, you must add some JavaScript customizations. To do it, get your editto element by using document.getElementById, document.querySelector or similars. Once you get the element, you can access all the editor’s possible features
+``` js
+function bold() {
+    let test = document.querySelector("#myEditor");
+    test.toggleBold();
+}
+```
+## List of editto’s personalization methods:
+- isEditable() - Check if edition mode is on
+- allowEdition() - allows the user to change the editor's content
+- disableEdition() - disable the edition mode
+- format(command, value) - formats the text with document.execCommand
+- insertElement(HTMLString, options) - Inserts an HTML element with soma variables
+- insertText(text) - Insert a text
+- insertFromTemplate(path, options) - Inserts an content given a path to a template
+- checkFormat(format, value) - Checks if some property is activated. Example: check if the current text is bold
+- toggleBold()
+- toggleItalic()
+- toggleUnderline()
 
 
+## List of editto’s properties
+- value
+- innerHTML
+- innerText
+- selectedText
+- selectedHTML
+
+
+## Insert element
+### Insert Text
+You can insert some text in your editor
+``` js
+function example() {
+    let test = document.querySelector("#myEditor");
+    test.insertText("Your text");
+}
+```
+
+### Elements
+``` js
+function example() {
+    let test = document.querySelector("#myEditor");
+    test.insertElement('<section><h1>Title</h1><p>Content</p></section>');
+}
+```
+### Variables
+You can insert simple variables to replace some of the text
+``` js
+function example() {
+    let test = document.querySelector("#myEditor"),
+        promptedName = prompt("What's your name?");
+        test.insertElement(
+            '<section><h1>Hello {{ name }}</h1><p>Have a nice day</p></section>', 
+            {
+                name: promptedName || 'Anonymous'   
+            });
+}
+```
+
+### Insert with template
+You can as well insert with a path to an external file
+``` js
+function insertImage() {
+    let test = document.querySelector("#myEditor");
+    test.insertFromTemplate('/models-example/imageInsert.html', { src: prompt('Insira a URL da imagem')});
+} 
+```
+
+``` html
+<!-- imageInsert.html -->
+<img src="{{ src }}" style="width: 100%;"/>
+
+```
+## Theming
+You can customize the default themes available by adding a file in scss/theme-generator directory
+``` scss
+$color: #323232;
+
+$color-active: #fff;
+
+$color-background-active: #00bcd4;
+
+$color-hover: #aaa;
+
+$divider-color: #ddd;
+
+@import 'componentes/base';
+```
+
+After this, use gulp to generate the css file
+```
+gulp theme-compiler
+```
+
+This must have generated a css file in themes directory
