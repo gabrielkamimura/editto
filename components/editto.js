@@ -44,9 +44,9 @@ class eDitto extends HTMLElement {
         this.innerHTML = newValue;
     }
     
-    get numberCharacters () {
-        return eDittoHelpers.countCharacters(this.textContent);
-    }
+//    get countCharacters () {
+//        return eDittoHelpers.countCharacters(this.textContent);
+//    }
     
     /**
      * Get the selection of editor
@@ -138,7 +138,7 @@ class eDitto extends HTMLElement {
     /**
      * Disallow content edition for users
      */
-    disallowEdition() {
+    disableEdition() {
         this.contentEditable = false;
     }
     
