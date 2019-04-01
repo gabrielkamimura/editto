@@ -88,13 +88,43 @@ function bold() {
 
 ## Insert element
 ### Insert Text
+You can insert some text in your editor
+``` js
+function example() {
+    let test = document.querySelector("#myEditor");
+    test.insertText("Your text");
+}
+```
 
-### Insert with string
-
+### Elements
+``` js
+function example() {
+    let test = document.querySelector("#myEditor");
+    test.insertElement('<section><h1>Title</h1><p>Content</p></section>');
+}
+```
 ### Variables
+You can insert simple variables to replace some of the text
+``` js
+function example() {
+    let test = document.querySelector("#myEditor"),
+        promptedName = prompt("What's your name?");
+        test.insertElement(
+            '<section><h1>Hello {{ name }}</h1><p>Have a nice day</p></section>', 
+            {
+                name: promptedName || 'Anonymous'   
+            });
+}
+```
 
 ### Insert with template
-
+You can as well insert with a path to an external file
+``` js
+function insertImage() {
+    let test = document.querySelector("#myEditor");
+    test.insertFromTemplate('/models-example/imageInsert.html', { src: prompt('Insira a URL da imagem')});
+} 
+```
 ## Theming
 
 ## Notes
