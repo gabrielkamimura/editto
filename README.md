@@ -1,6 +1,6 @@
 # Editto
 
-Editto is an wysiwyg editor that allows the developers to easily customize everything since buttons style to the available functionality through HTML, CSS and JavaScript.
+Editto is a wysiwyg editor that allows the developers to easily customize everything since buttons style to the available functionality through HTML, CSS and JavaScript.
 
 ## Dependencies
 
