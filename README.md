@@ -53,5 +53,39 @@ To add the buttons, add the following HTML
 ```
 It should add the button bar for your text editor. Please check if the editto-button-bar's editto parameter is filled correctly with your editto-editor’s ID
 
+Editto respects your application visual identity - it’s actually easy to personalize just about everything thru HTML, CSS and JavaScript. The editor and its features are independent, you can add the button bar and then select the features that best fit in your application goals. Bold, italic, underline, lists, or even images, videos, custom components or whatever you want. You can, and we recommend you to do so, use third-party icons such as font-awesome.
+
+Inside the default Editto’s button bar, you can insert default features such as bold, italic, underline and lists. These features are the same ones on document.execcomand’s command name parameter. To do it, insert the command name in data-editto-format parameter inside the buttons. If the command requires a value (backColor, foreColor, fontName), you must insert it in data-editto-format-value.
+
+In order to add some features to your editor, you must add some JavaScript customizations. To do it, get your editto element by using document.getElementById, document.querySelector or similars. Once you get the element, you can access all the editor’s possible features
+``` js
+function bold() {
+	let test = document.querySelector("#myEditor");
+        test.toggleBold();
+}
+```
+### List of editto’s personalization methods:
+- isEditable() - Check if edition mode is on
+- allowEdition() - allows the user to change the editor's content
+- disableEdition() - disable the edition mode
+- format(command, value) - formats the text with document.execCommand
+- insertElement(HTMLString, options) - Inserts an HTML element with soma variables
+- insertText(text) - Insert a text
+- insertFromTemplate(path, options) - Inserts an content given a path to a template
+- checkFormat(format, value) - Checks if some property is activated. Example: check if the current text is bold
+- toggleBold()
+- toggleItalic()
+- toggleUnderline()
+
+
+
+### List of editto’s properties
+- value
+- innerHTML
+- innerText
+- selectedText
+- selectedHTML
+
+
 
 
