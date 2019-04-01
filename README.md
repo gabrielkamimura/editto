@@ -125,6 +125,12 @@ function insertImage() {
     test.insertFromTemplate('/models-example/imageInsert.html', { src: prompt('Insira a URL da imagem')});
 } 
 ```
+
+``` html
+<!-- imageInsert.html -->
+<img src="{{ src }}" style="width: 100%;"/>
+
+```
 ## Theming
 
 ## Notes
